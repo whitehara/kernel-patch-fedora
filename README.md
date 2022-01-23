@@ -1,4 +1,4 @@
-# kernel patches which can compiled with fedora kernel
+# kernel patches which can compile with fedora kernel
 ## Overview
 - You can create custom rpm from fedora custom kernel.
 - Download srpm from fedora repository and modify kernel.
@@ -6,7 +6,8 @@
 ## How to use
 - Download source kernel-*.fc*.srpm
 
-      dnf downloadsource kernel
+      dnf download --source kernel
+      or
       koji download-build -a src kernel-*
 
 - Extract source to somewhere
@@ -24,11 +25,11 @@
 
 - Modify kernel config ( You can modify config-patch.sh if you want to custom your kernel. )
 
-     cd /tmp/rpm/SOURCES &&  ./config-patch.sh
+      cd /tmp/rpm/SOURCES &&  ./config-patch.sh
 
 - Modify kernel.spec(add these patch lines like below)
 
-     vi /tmp/rpm/SPEC/kernel.spec
+      vi /tmp/rpm/SPEC/kernel.spec
 
       # recommend to modify .buildid tag
       %define buildid _CUSTOM
