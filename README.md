@@ -37,7 +37,7 @@ You can check where it is like this.
 
       cd rpm/SOURCES &&  ./config-patch.sh
 ### Modify kernel.spec(add these patch lines like below)
-The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-vsersion_custom_kernel_tag.fc35.x86_64.rpm"
+The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
 
       cd rpm/SOURCES && ./spec-mod.sh _custom_kernel_tag
 ### Check if paches are appliciable.
@@ -47,3 +47,6 @@ The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-
 ### Compile
 
       rpmbild -bb kernel.spec
+### Install
+      cd RPMS/
+      dnf install kernel-*
