@@ -32,8 +32,9 @@ You can check where it is like this.
 
       cp kernel-patch-fedora/5.16/* rpm/SOURCES/
 
-### Modify kernel config ( You can modify config-patch.sh if you want to custom your kernel. )
-**WARNING: original config-patch is optimized for AMD Zen2 architecture. you should change it.**
+### Modify kernel config
+The config-path.sh adds minimal config into .config files.
+if you want to custom your kernel, you can add kerne-local file in SOURCES directory.
 
       cd rpm/SOURCES &&  ./config-patch.sh
 ### Modify kernel.spec(add these patch lines like below)
