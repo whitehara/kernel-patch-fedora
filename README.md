@@ -2,7 +2,7 @@
 ## Overview
 - You can create custom rpm from fedora custom kernel.
 - Download srpm from fedora repository and modify kernel.
-- Most of these patches are from https://github.com/Frogging-Family/linux-tkg
+- These patches are from https://github.com/Frogging-Family/linux-tkg and https://github.com/graysky2/kernel_compiler_patch
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
