@@ -8,7 +8,7 @@ If you aleady have one, you can skip this step.
 
       dnf install rpmdevtools
       rpmdev-setuptree
-The rpmdev-setuptree command setups build tree automaticaly.
+The rpmdev-setuptree command creates build tree automaticaly.
 You can check where it is like this.
 
       rpmbuild --showrc | grep _topdir
@@ -16,7 +16,8 @@ You can check where it is like this.
 ### Download source kernel-*.fc*.srpm
 
       dnf download --source kernel
-      or
+If you want to use the newest developing kernel, you can use koji.
+
       koji download-build -a src kernel-*
 
 ### Extract source to rpm build tree
@@ -26,7 +27,7 @@ You can check where it is like this.
 ### Clone repository to local folder
 
       mkdir kernel-patch-fedora && cd kernel-patch-fedora
-      git clone https://github.com/whitehara/kernel-patch-fedora .
+      git clone https://github.com/whitehara/kernel-patch-fedora.git .
 
 ### Copy files to SOURCES directory
 
@@ -34,7 +35,7 @@ You can check where it is like this.
 
 ### Modify kernel config
 The config-path.sh adds minimal config into .config files.
-if you want to custom your kernel, you can add kerne-local file in SOURCES directory.
+If you want to custom your kernel, you can add kerne-local file in SOURCES directory.
 
       cd rpm/SOURCES &&  ./config-patch.sh
 ### Modify kernel.spec(add these patch lines like below)
