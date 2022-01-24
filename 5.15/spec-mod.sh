@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BASEVERSION=5.16
+BASEVERSION=5.15
 SPEC=kernel.spec
 CUSTOMTAG=$1
 
@@ -26,10 +26,8 @@ patch_insert "9002" "0002-clear-patches.patch"
 patch_insert "9003" "0002-mm-Support-soft-dirty-flag-read-with-reset.patch"
 patch_insert "9004" "0003-glitched-base.patch"
 patch_insert "9005" "0003-glitched-cfs.patch"
-patch_insert "9006" "0003-glitched-cfs-additions.patch"
 patch_insert "9007" "0006-add-acs-overrides_iommu.patch"
 patch_insert "9008" "0007-v$BASEVERSION-fsync.patch"
-patch_insert "9009" "0007-v$BASEVERSION-fsync1_via_futex_waitv.patch"
 patch_insert "9010" "0007-v$BASEVERSION-winesync.patch"
-patch_insert "9012" "0009-prjc_v$BASEVERSION-r0.patch"
+patch_insert "9012" "prjc_v$BASEVERSION-r1.patch"
 patch_insert "9013" "0012-misc-additions.patch"
