@@ -1,10 +1,10 @@
-# kernel patches which can compile with fedora kernel
+# Linux kernel patches (compilable with the fedora kernel)
 ## Overview
-- You can create custom rpm from fedora custom kernel.
-- Download srpm from fedora repository and modify kernel.
-- These patches are from https://github.com/Frogging-Family/linux-tkg and https://github.com/graysky2/kernel_compiler_patch
-- 5.15 patches are tested with fedora [kernel-5.15.16-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1887371)
-- 5.16 patches are tested with fedora [kernel-5.16.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1888031)
+- You can create custom rpm from the fedora kernel.
+- Download srpm from fedora repository and apply patches to the kernel source.
+- These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
+- 5.15 patches are tested("test" means just "comiplable") with fedora [kernel-5.15.16-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1887371)
+- 5.16 patches are tested("test" means just "compilable") with fedora [kernel-5.16.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1888031)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
@@ -14,6 +14,7 @@ The rpmdev-setuptree command creates build tree automaticaly.
 You can check where it is like this.
 
       rpmbuild --showrc | grep _topdir
+In this document, the _topdir is just "rpm".
 ## How to use
 ### Download source kernel-*.fc*.srpm
 
@@ -48,9 +49,14 @@ The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-
 
       rpmbuild -bp kernel.spec
 
+"-bp" option means doing until applying patches(does not doing compile).
+
 ### Compile
 
       rpmbild -bb kernel.spec
+"-bb" is just compile binary only. If you want the srpm, use "-ba"(with binary) or "-bs"(without binary) option. See manpages of rpmbuild to find the other rpmbuild option.
+
+You can also use options like "--without debug --without debuginfo". Creating debug rpms needs the longer time to compile. So if you don't need them, I recommend to set these options. See kernel.spec file to find the other "--without" option.
 ### Install
-      cd RPMS/
+      cd rpm/RPMS/
       dnf install kernel-*
