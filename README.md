@@ -3,8 +3,8 @@
 - You can create custom rpm from the fedora kernel.
 - Download srpm from fedora repository and apply patches to the kernel source.
 - These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
-- 5.15 patches are tested("test" means just "comiplable") with fedora [kernel-5.15.16-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1887371)
-- 5.16 patches are tested("test" means just "compilable") with fedora [kernel-5.16.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1888031)
+- 5.15 patches are tested("test" means just "comiplable") with fedora [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
+- 5.16 patches are tested("test" means just "compilable") with fedora [kernel-5.16.3-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909308)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
