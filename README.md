@@ -7,11 +7,11 @@
 ## Tested version
 "test" means just "compilable"
 - 5.15 patches
-  -  prjc patch changed after 5.15.17. See this https://github.com/whitehara/kernel-patch-fedora/commit/70d3603eac1756d536b83e35c9ae9e9c26e4d509.
+  -  prjc patch changed after 5.15.17. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/70d3603eac1756d536b83e35c9ae9e9c26e4d509).
   -  [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
 - 5.16 patches
-  -  prjc patch changed after 5.16.3. See this https://github.com/whitehara/kernel-patch-fedora/commit/fce41824e6e3b11a32a2a2dcd94aa2073d749cdb.
+  -  prjc patch changed after 5.16.3. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/fce41824e6e3b11a32a2a2dcd94aa2073d749cdb).
   -  [kernel-5.16.3-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909308)
   -  [kernel-5.16.4-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909995)
 
