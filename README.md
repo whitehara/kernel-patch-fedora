@@ -17,6 +17,7 @@
   -  [kernel-5.16.5-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1911125)
   -  [kernel-5.16.6-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1913374)
   -  [kernel-5.16.7-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1914138)
+  -  [kernel-5.16.8-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1915041)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
