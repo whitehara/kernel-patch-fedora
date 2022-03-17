@@ -13,6 +13,8 @@
 - 5.16 patches
   -  prjc patch changed since 5.16.13. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/95532792ce4546d5e7721f5cea152df90f55692b)
   -  [kernel-5.16.13-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1931130)
+  -  [kernel-5.16.14-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1932632)
+  -  [kernel-5.16.15-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1934820)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
