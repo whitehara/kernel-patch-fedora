@@ -5,7 +5,7 @@
 - These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
 
 ## Tested version
-"test" means just "compilable"
+"tested" means just "compilable"
 - 5.15 patches
   -  prjc patch changed since 5.15.17. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/70d3603eac1756d536b83e35c9ae9e9c26e4d509).
   -  [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
@@ -18,6 +18,8 @@
   -  [kernel-5.16.16-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1936201)
   -  [kernel-5.16.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1937906)
   -  [kernel-5.16.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1939738)
+- 5.17 patches
+  -  [kernel-5.17.1-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1941849)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
