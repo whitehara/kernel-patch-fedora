@@ -11,15 +11,11 @@
   -  [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
 - 5.16 patches
-  -  prjc patch changed since 5.16.13. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/95532792ce4546d5e7721f5cea152df90f55692b)
-  -  [kernel-5.16.13-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1931130)
-  -  [kernel-5.16.14-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1932632)
-  -  [kernel-5.16.15-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1934820)
-  -  [kernel-5.16.16-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1936201)
-  -  [kernel-5.16.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1937906)
-  -  [kernel-5.16.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1939738)
+  -  prjc patch changed since 5.16.19.
+  -  [kernel-5.16.19-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944282)
 - 5.17 patches
-  -  [kernel-5.17.1-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1941849)
+  -  prjc patch changed since 5.17.2.
+  -  [kernel-5.17.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944304)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
