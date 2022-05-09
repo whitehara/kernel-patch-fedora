@@ -18,6 +18,7 @@
   -  prjc patch changed since 5.17.2. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/7d12a293c08f33ae931f88dfc7cd49019351baca)
   -  [kernel-5.17.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944304)
   -  [kernel-5.17.4-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1953626)
+  -  [kernel-5.17.5-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1957442) (Add Bluetooth fix)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
