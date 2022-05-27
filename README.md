@@ -1,11 +1,12 @@
 # Linux kernel patches (compilable with the fedora kernel)
 ## Overview
-- You can create custom rpm from the fedora kernel.
-- Download srpm from fedora repository and apply patches to the kernel source.
-- These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
+- You can create custom rpm with these patches for the fedora.
+  - Download srpm from fedora repository and apply patches to the kernel source.
+- Most of these patches are suitable for gaming on Linux.
+  - These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
 
 ## Tested version
-"tested" means just "compilable"
+"tested" means just "compilable", not means "It completely works for your environment"
 - 5.15 patches
   -  prjc patch changed since 5.15.17. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/70d3603eac1756d536b83e35c9ae9e9c26e4d509).
   -  [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
@@ -19,6 +20,13 @@
   -  [kernel-5.17.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944304)
   -  [kernel-5.17.4-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1953626)
   -  [kernel-5.17.5-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1957442) (Add Bluetooth fix)
+  -  [kernel-5.17.6-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1964169) (Remove Bluetooth fix)
+  -  [kernel-5.17.7-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1965517)
+  -  [kernel-5.17.7-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1965519)
+  -  [kernel-5.17.8-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1966665)
+  -  [kernel-5.17.9-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1968153)
+  -  [kernel-5.17.11-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1970749)
+
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
