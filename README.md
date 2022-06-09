@@ -26,7 +26,10 @@
   -  [kernel-5.17.8-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1966665)
   -  [kernel-5.17.9-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1968153)
   -  [kernel-5.17.11-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1970749)
-
+  -  [kernel-5.17.12-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1972299)
+- 5.18 patches
+  -  The versions before 5.18.2-201 have bugs and not recommend for using.
+  -  [kernel-5.18.2-201.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1977454)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
