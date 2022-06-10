@@ -2177,9 +2177,9 @@ diff --git a/tools/testing/selftests/Makefile b/tools/testing/selftests/Makefile
 index c852eb40c4f7..a366016d6254 100644
 --- a/tools/testing/selftests/Makefile
 +++ b/tools/testing/selftests/Makefile
-@@ -9,6 +9,7 @@ TARGETS += core
- TARGETS += cpufreq
+@@ -11,6 +11,7 @@
  TARGETS += cpu-hotplug
+ TARGETS += damon
  TARGETS += drivers/dma-buf
 +TARGETS += drivers/winesync
  TARGETS += efivarfs
