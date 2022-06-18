@@ -30,6 +30,7 @@
 - 5.18 patches
   -  0007-v5.18-winesync.patch is modified since 5.18.3.
   -  [kernel-5.18.3-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1980286)
+  -  [kernel-5.18.5-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1985934)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
