@@ -188,45 +188,45 @@ index f449584..c994d24 100644
  		.enter = &intel_idle,
  		.enter_s2idle = intel_idle_s2idle, },
  	{
-@@ -684,7 +684,7 @@ static struct cpuidle_state skl_cstates[] __initdata = {
+@@ -708,7 +708,7 @@
  		.desc = "MWAIT 0x20",
- 		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED,
+ 		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
  		.exit_latency = 85,
 -		.target_residency = 200,
 +		.target_residency = 600,
  		.enter = &intel_idle,
  		.enter_s2idle = intel_idle_s2idle, },
  	{
-@@ -692,7 +692,7 @@ static struct cpuidle_state skl_cstates[] __initdata = {
+@@ -716,7 +716,7 @@
  		.desc = "MWAIT 0x33",
- 		.flags = MWAIT2flg(0x33) | CPUIDLE_FLAG_TLB_FLUSHED,
+ 		.flags = MWAIT2flg(0x33) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
  		.exit_latency = 124,
 -		.target_residency = 800,
-+		.target_residency = 3000,
++		.target_residency = 300,
  		.enter = &intel_idle,
  		.enter_s2idle = intel_idle_s2idle, },
  	{
-@@ -700,7 +700,7 @@ static struct cpuidle_state skl_cstates[] __initdata = {
+@@ -724,7 +724,7 @@
  		.desc = "MWAIT 0x40",
- 		.flags = MWAIT2flg(0x40) | CPUIDLE_FLAG_TLB_FLUSHED,
+ 		.flags = MWAIT2flg(0x40) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
  		.exit_latency = 200,
 -		.target_residency = 800,
-+		.target_residency = 3200,
++		.target_residency = 320,
  		.enter = &intel_idle,
  		.enter_s2idle = intel_idle_s2idle, },
  	{
-@@ -708,7 +708,7 @@ static struct cpuidle_state skl_cstates[] __initdata = {
+@@ -732,7 +732,7 @@
  		.desc = "MWAIT 0x50",
- 		.flags = MWAIT2flg(0x50) | CPUIDLE_FLAG_TLB_FLUSHED,
+ 		.flags = MWAIT2flg(0x50) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
  		.exit_latency = 480,
 -		.target_residency = 5000,
 +		.target_residency = 9000,
  		.enter = &intel_idle,
  		.enter_s2idle = intel_idle_s2idle, },
  	{
-@@ -716,7 +716,7 @@ static struct cpuidle_state skl_cstates[] __initdata = {
+@@ -740,7 +740,7 @@
  		.desc = "MWAIT 0x60",
- 		.flags = MWAIT2flg(0x60) | CPUIDLE_FLAG_TLB_FLUSHED,
+ 		.flags = MWAIT2flg(0x60) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
  		.exit_latency = 890,
 -		.target_residency = 5000,
 +		.target_residency = 9000,
