@@ -30,6 +30,9 @@
 - 5.18 patches
   -  0002-clear-patces.patch is modified since 5.18.11.
   -  [kernel-5.18.11-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2000811)
+  -  [kernel-5.18.13-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2020962)
+  -  [kernel-5.18.15-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2039594)
+  -  [kernel-5.18.16-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2041552)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
