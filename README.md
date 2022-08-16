@@ -34,6 +34,8 @@
   -  [kernel-5.18.15-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2039594)
   -  [kernel-5.18.16-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2041552)
   -  [kernel-5.18.17-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2044648) (Add MGLRU patch. MGLRU is not enabled by defaut. add CONFIG_LRU_GEN etc. to config)
+- 5.19 patches
+  -  [kernel-5.19.1-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2044709)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
