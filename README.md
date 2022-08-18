@@ -28,14 +28,11 @@
   -  [kernel-5.17.11-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1970749)
   -  [kernel-5.17.12-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1972299)
 - 5.18 patches
-  -  0002-clear-patces.patch is modified since 5.18.11.
-  -  [kernel-5.18.11-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2000811)
-  -  [kernel-5.18.13-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2020962)
-  -  [kernel-5.18.15-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2039594)
-  -  [kernel-5.18.16-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2041552)
-  -  [kernel-5.18.17-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2044648) (Add MGLRU patch. MGLRU is not enabled by defaut. add CONFIG_LRU_GEN etc. to config)
+  -  0009-prjc-v5.18-r2.patch is modified since 5.18.18.
+  -  [kernel-5.18.18-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047494)
 - 5.19 patches
-  -  [kernel-5.19.1-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2044709)
+  -  0009-prjc-v5.19-r0.patch is modified since 5.19.2.
+  -  [kernel-5.19.2-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047485)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
