@@ -33,6 +33,8 @@
 - 5.19 patches
   -  0009-prjc-v5.19-r0.patch is modified since 5.19.2.
   -  [kernel-5.19.2-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047485)
+  -  [kernel-5.19.3-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2051605)
+  -  [kernel-5.19.4-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2052778)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
