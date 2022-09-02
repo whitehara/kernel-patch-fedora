@@ -35,6 +35,7 @@
   -  [kernel-5.19.2-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047485)
   -  [kernel-5.19.3-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2051605)
   -  [kernel-5.19.4-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2052778)
+  -  [kernel-5.19.6-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2055668)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
