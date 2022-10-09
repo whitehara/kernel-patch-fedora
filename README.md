@@ -31,16 +31,8 @@
   -  0009-prjc-v5.18-r2.patch is modified since 5.18.18.
   -  [kernel-5.18.18-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047494)
 - 5.19 patches
-  -  0009-prjc-v5.19-r0.patch is modified since 5.19.2.
-  -  [kernel-5.19.2-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047485)
-  -  [kernel-5.19.3-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2051605)
-  -  [kernel-5.19.4-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2052778)
-  -  [kernel-5.19.6-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2055668)
-  -  [kernel-5.19.8-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2060668)
-  -  [kernel-5.19.9-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2063048)
-  -  [kernel-5.19.10-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2065200)
-  -  [kernel-5.19.11-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2066663)
-  -  [kernel-5.19.12-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2068393)
+  -  0009-prjc-v5.19-r0.patch is unstable ... Now it is changed to https://gitlab.com/torvic9/linux519-vd/-/blob/master/prjc-519-r1-vd-test.patch
+  -  [kernel-5.19.14-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2071616)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
 
