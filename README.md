@@ -12,6 +12,8 @@
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
   -  [kernel-6.0.15-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2103037)
   -  [kernel-6.0.16-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2105441)
+  -  [kernel-6.0.17-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2106701)
+  -  [kernel-6.0.18-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2107932)
 - 5.19 patches
   -  0009-prjc-v5.19-r0.patch is unstable ... Now it is changed to [torvic9's patch](https://gitlab.com/torvic9/linux519-vd/-/blob/master/prjc-519-r1-vd-test.patch)
   -  [kernel-5.19.14-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2071616)
