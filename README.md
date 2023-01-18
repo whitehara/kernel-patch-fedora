@@ -7,8 +7,10 @@
 
 ## Tested version
 "tested" means just "compilable", not means "It completely works for your environment"
+- 6.1 patches
+  -  [kernel-6.1.6-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2110908)
 - 6.0 patches
-- - prjc patch was changed.
+  - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
   -  [kernel-6.0.15-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2103037)
   -  [kernel-6.0.16-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2105441)
@@ -91,7 +93,7 @@ The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-
       rpmbild -bb kernel.spec
 "-bb" is just compile binary only. If you want the srpm, use "-ba"(with binary) or "-bs"(without binary) option. See manpages of rpmbuild to find the other rpmbuild option.
 
-You can also use options like "--without debug --without debuginfo". Creating debug rpms needs the longer time to compile. So if you don't need them, I recommend to set these options. See kernel.spec file to find the other "--without" option.
+You can also use options like "--without debug --without debuginfo". Creating debug rpms needs the longer time to compile. So if you don't need them, I recommend to set these options. See kernel.spec file to find the other "--without" option. **You may need to add "--without configchecks" to avoid config check errors since 6.0.**
 ### Install
       cd rpm/RPMS/
       dnf install kernel-*

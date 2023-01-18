@@ -294,7 +294,7 @@ index f11b9bd..1bbfcc1 100644
 +	int i = 0;
  
  	lockdep_assert_preemption_disabled();
- 
+
 @@ -750,7 +751,8 @@ rwsem_spin_on_owner(struct rw_semaphore *sem, unsigned long nonspinnable)
  			break;
  		}
@@ -305,7 +305,6 @@ index f11b9bd..1bbfcc1 100644
  	}
 
  	return state;
- 
 -- 
 https://clearlinux.org
 
