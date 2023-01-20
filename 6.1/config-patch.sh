@@ -6,14 +6,19 @@ for i in kernel-*.config
 do
 cat << EOF >> $i
 ## for tkg
+CONFIG_ZENIFY=y
 CONFIG_SCHED_ALT=y
 CONFIG_SCHED_BMQ=y
 # CONFIG_SCHED_PDS is not set
+CONFIG_USER_NS_UNPRIVILEGED=y
 # CONFIG_HZ_750 is not set
 CONFIG_WINESYNC=y
-CONFIG_ZENIFY=y
-CONFIG_USER_NS_UNPRIVILEGED=y
-# CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3 is not set
+EOF
+done
+
+for i in kernel-x86_64-*.config
+do
+cat << EOF >> $i
 ## for march
 # CONFIG_MK8SSE3 is not set
 # CONFIG_MK10 is not set

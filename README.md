@@ -8,7 +8,7 @@
 ## Tested version
 "tested" means just "compilable", not means "It completely works for your environment"
 - 6.1 patches
-  -  [kernel-6.1.6-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2110908)
+  -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
 - 6.0 patches
   - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
