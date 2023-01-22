@@ -54,8 +54,6 @@ CONFIG_USER_NS_UNPRIVILEGED=y
 # CONFIG_GENERIC_CPU4 is not set
 EOF
 
-sed -e "s/CONFIG_CRYPTO_XXHASH=.$/CONFIG_CRYPTO_XXHASH=y/g" $i > $i.tmp
-mv $i.tmp $i
-sed -e "s/CONFIG_CRYPTO_BLAKE2B=.$/CONFIG_CRYPTO_BLAKE2B=y/g" $i > $i.tmp
-mv $i.tmp $i
+sed -i -e "s/CONFIG_CRYPTO_XXHASH=.$/CONFIG_CRYPTO_XXHASH=y/g" $i
+sed -i -e "s/CONFIG_CRYPTO_BLAKE2B=.$/CONFIG_CRYPTO_BLAKE2B=y/g" $i
 done
