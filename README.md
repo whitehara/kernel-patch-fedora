@@ -2,11 +2,18 @@
 ## Overview
 - You can create custom rpm with these patches for the fedora.
   - Download srpm from fedora repository and apply patches to the kernel source.
+  - RPM is available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
 - Most of these patches are suitable for gaming on Linux.
   - These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
-
+## How to install patched kernel RPM
+Quick start.
+```
+sudo dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/repo/fedora-37/whitehara-kernel-tkg-fedora-37.repo
+sudo dnf install kernel-6.1.7-200_tkg.fc37
+```
+See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 ## Tested version
-"tested" means just "compilable", not means "It completely works for your environment"
+**BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.1 patches
   -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
 - 6.0 patches
