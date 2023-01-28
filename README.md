@@ -8,14 +8,22 @@
 ## How to install patched kernel RPM
 Quick start.
 ```
-sudo dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/repo/fedora-37/whitehara-kernel-tkg-fedora-37.repo
+sudo dnf copr whitehara/kernel-tkg
 sudo dnf install kernel-6.1.7-200_tkg.fc37
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
+
+If you want to try some custom kernels, you may also check my other project.
+- Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
+- Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
+
+Files in the kernel-local folder are used in these custom kernel projects.
+
 ## Tested version
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.1 patches
   -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
+  -  [kernel-6.1.8-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2138377)
 - 6.0 patches
   - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)

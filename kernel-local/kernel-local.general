@@ -1,0 +1,6 @@
+# For adding schedulers
+CONFIG_MQ_IOSCHED_KYBER=y
+CONFIG_IOSCHED_BFQ=y
+# For getting the kernel config
+CONFIG_IKCONFIG=y
+CONFIG_IKCONFIG_PROC=y
