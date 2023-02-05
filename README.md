@@ -4,7 +4,7 @@
   - Download srpm from fedora repository and apply patches to the kernel source.
   - RPM is available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
 - Most of these patches are suitable for gaming on Linux.
-  - These patches are from https://github.com/graysky2/kernel_compiler_patch and https://github.com/Frogging-Family/linux-tkg (some of them are little modified from linux-tkg.)
+  - These patches are from https://github.com/graysky2/kernel_compiler_patch https://github.com/Frogging-Family/community-patches and https://github.com/Frogging-Family/linux-tkg (Some of them are little modified from linux-tkg.)
 ## How to install patched kernel RPM
 Quick start.
 ```
@@ -24,6 +24,7 @@ Files in the kernel-local folder are used in these custom kernel projects.
 - 6.1 patches
   -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
   -  [kernel-6.1.8-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2138377)
+  -  [kernel-6.1.9-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2145352)
 - 6.0 patches
   - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
