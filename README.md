@@ -25,6 +25,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
   -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
   -  [kernel-6.1.8-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2138377)
   -  [kernel-6.1.9-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2145352)
+  -  [kernel-6.1.10-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
+  -  [kernel-6.1.11-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
 - 6.0 patches
   - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
