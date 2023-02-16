@@ -13,9 +13,10 @@ sudo dnf install kernel-6.1.7-200_tkg.fc37
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
-If you want to try some custom kernels, you may also check my other project.
+If you want to try some custom kernels, you may also check my other projects.
 - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
+- Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
@@ -27,6 +28,7 @@ Files in the kernel-local folder are used in these custom kernel projects.
   -  [kernel-6.1.9-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2145352)
   -  [kernel-6.1.10-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
   -  [kernel-6.1.11-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
+  -  [kernel-6.1.12-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2151137)
 - 6.0 patches
   - prjc patch was changed.
   -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
