@@ -75,7 +75,7 @@ diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
 index 4700d24e5d55..8f7a3d7fd9c1 100644
 --- a/drivers/pci/quirks.c
 +++ b/drivers/pci/quirks.c
-@@ -3372,6 +3372,106 @@ static void quirk_no_bus_reset(struct pci_dev *dev)
+@@ -3612,6 +3612,106 @@
  	dev->dev_flags |= PCI_DEV_FLAGS_NO_BUS_RESET;
  }
  
@@ -182,11 +182,11 @@ index 4700d24e5d55..8f7a3d7fd9c1 100644
  /*
   * Some NVIDIA GPU devices do not work with bus reset, SBR needs to be
   * prevented for those affected devices.
-@@ -5126,6 +5126,7 @@
+@@ -5026,6 +5126,7 @@
  	{ PCI_VENDOR_ID_ZHAOXIN, PCI_ANY_ID, pci_quirk_zhaoxin_pcie_ports_acs },
  	/* Wangxun nics */
  	{ PCI_VENDOR_ID_WANGXUN, PCI_ANY_ID, pci_quirk_wangxun_nic_acs },
-+	{ PCI_ANY_ID, PCI_ANY_ID, pcie_acs_overrides },
++ 	{ PCI_ANY_ID, PCI_ANY_ID, pcie_acs_overrides },
  	{ 0 }
  };
  

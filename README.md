@@ -16,51 +16,28 @@ See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for de
 If you want to try some custom kernels, you may also check my other projects.
 - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
+- Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-ice-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ice-preempt)
 - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
-## Tested version
+## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.2 patches
+  -  [kernel-6.2.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2171723)
 - 6.1 patches
-  -  [kernel-6.1.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2112328)
-  -  [kernel-6.1.8-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2138377)
-  -  [kernel-6.1.9-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2145352)
-  -  [kernel-6.1.10-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
-  -  [kernel-6.1.11-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2147488)
-  -  [kernel-6.1.12-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2151137)
+  -  [kernel-6.1.18-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2168432)
 - 6.0 patches
-  - prjc patch was changed.
-  -  [kernel-6.0.14-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2102102)
-  -  [kernel-6.0.15-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2103037)
-  -  [kernel-6.0.16-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2105441)
-  -  [kernel-6.0.17-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2106701)
   -  [kernel-6.0.18-300.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2107932)
 - 5.19 patches
-  -  0009-prjc-v5.19-r0.patch is unstable ... Now it is changed to [torvic9's patch](https://gitlab.com/torvic9/linux519-vd/-/blob/master/prjc-519-r1-vd-test.patch)
   -  [kernel-5.19.14-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2071616)
 - 5.18 patches
-  -  0009-prjc-v5.18-r2.patch is modified since 5.18.18.
   -  [kernel-5.18.18-200.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2047494)
 - 5.17 patches
-  -  prjc patch was changed since 5.17.2. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/7d12a293c08f33ae931f88dfc7cd49019351baca)
-  -  [kernel-5.17.2-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944304)
-  -  [kernel-5.17.4-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1953626)
-  -  [kernel-5.17.5-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1957442) (Add Bluetooth fix)
-  -  [kernel-5.17.6-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1964169) (Remove Bluetooth fix)
-  -  [kernel-5.17.7-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1965517)
-  -  [kernel-5.17.7-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1965519)
-  -  [kernel-5.17.8-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1966665)
-  -  [kernel-5.17.9-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1968153)
-  -  [kernel-5.17.11-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1970749)
   -  [kernel-5.17.12-300.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=1972299)
 - 5.16 patches
-  -  prjc patch was changed since 5.16.19. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/7d12a293c08f33ae931f88dfc7cd49019351baca)
-  -  [kernel-5.16.19-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1944282)
   -  [kernel-5.16.20-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1948783)
 - 5.15 patches
-  -  prjc patch was changed since 5.15.17. See this [commit](https://github.com/whitehara/kernel-patch-fedora/commit/70d3603eac1756d536b83e35c9ae9e9c26e4d509).
-  -  [kernel-5.15.17-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909364)
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
 ## Setup rpm build tree
 If you aleady have one, you can skip this step.
