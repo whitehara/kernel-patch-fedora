@@ -9,11 +9,11 @@
 Quick start.
 ```
 sudo dnf copr whitehara/kernel-tkg
-sudo dnf install kernel-6.1.7-200_tkg.fc37
+sudo dnf install kernel-6.3.1-200_tkg.fc38
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
-If you want to try some custom kernels, you may also check my other projects.
+If you want to try other custom kernels, you may also check my other projects.
 - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
 - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-ice-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ice-preempt)
@@ -23,8 +23,12 @@ Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.3 patches
+  -  [kernel-6.3.1-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2196477) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.2 patches
-  -  [kernel-6.2.7-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2171723)
+  -  [kernel-6.2.14-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194403)
+  -  [kernel-6.2.14-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194404)
+  -  [kernel-6.2.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194405)
 - 6.1 patches
   -  [kernel-6.1.18-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2168432)
 - 6.0 patches
@@ -39,7 +43,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
   -  [kernel-5.16.20-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1948783)
 - 5.15 patches
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
-## Setup rpm build tree
+## How to build your custom kernel
+### Setup rpm build tree
 If you aleady have one, you can skip this step.
 
       dnf install rpmdevtools
@@ -49,7 +54,6 @@ You can check where it is like this.
 
       rpmbuild --showrc | grep _topdir
 In this document, the _topdir is just "rpm".
-## How to use
 ### Download source kernel-*.fc*.srpm
 
       dnf download --source kernel
