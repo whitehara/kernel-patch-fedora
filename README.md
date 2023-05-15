@@ -2,14 +2,19 @@
 ## Overview
 - You can create custom rpm with these patches for the fedora.
   - Download srpm from fedora repository and apply patches to the kernel source.
+    - https://koji.fedoraproject.org/koji/packageinfo?packageID=8
   - RPM is available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
 - Most of these patches are suitable for gaming on Linux.
-  - These patches are from https://github.com/graysky2/kernel_compiler_patch https://github.com/Frogging-Family/community-patches and https://github.com/Frogging-Family/linux-tkg (Some of them are little modified from linux-tkg.)
+  - These patches are from:
+   - https://github.com/graysky2/kernel_compiler_patch
+   - https://github.com/Frogging-Family/community-patches
+   - https://github.com/Frogging-Family/linux-tkg
+   (Some of them are little modified from linux-tkg.)
 ## How to install patched kernel RPM
 Quick start.
 ```
 sudo dnf copr whitehara/kernel-tkg
-sudo dnf install kernel-6.3.1-200_tkg.fc38
+sudo dnf install kernel-6.3.2-200_tkg.fc38
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
@@ -24,11 +29,11 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.3 patches
-  -  [kernel-6.3.1-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2196477) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.3.2-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199126) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.2 patches
-  -  [kernel-6.2.14-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194403)
-  -  [kernel-6.2.14-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194404)
-  -  [kernel-6.2.14-100.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2194405)
+  -  [kernel-6.2.15-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199143)
+  -  [kernel-6.2.15-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199132)
+  -  [kernel-6.2.15-100.fc36](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199134)
 - 6.1 patches
   -  [kernel-6.1.18-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2168432)
 - 6.0 patches

@@ -1,9 +1,19 @@
 #!/bin/sh
 
+# Usage:
+# ./spec-mod.sh <CUSTOM TAG> [cfs|pds|bmq]
+#   CUSTOMTAG: Add CUSTOM TAG for the package
+#  cfs|pds|bmq: Select scheduler for Project-C patch
+
 BASEVERSION=6.3
 SPEC=kernel.spec
 CUSTOMTAG=$1
+SCHED=$2
 
+if [ -z $SCHED ]; then
+	# Default scheduler is "bmq"
+	SCHED="bmq"
+fi
 # add custom tag
 if [ -n $CUSTOMTAG ]; then
     sed -i -e "s/^# define buildid .local$/%define buildid $CUSTOMTAG/g" $SPEC
@@ -24,8 +34,11 @@ patch_insert "9001" "0001-mm-Support-soft-dirty-flag-reset-for-VA-range.patch"
 patch_insert "9002" "0002-clear-patches.patch"
 patch_insert "9003" "0002-mm-Support-soft-dirty-flag-read-with-reset.patch"
 patch_insert "9004" "0003-glitched-base.patch"
-patch_insert "9005" "0003-glitched-cfs.patch"
-patch_insert "9006" "0003-glitched-cfs-additions.patch"
+[ $SCHED = "cfs" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
+	patch_insert "9006" "0003-glitched-cfs-additions.patch"
+[ $SCHED = "pds" ] && patch_insert "9005" "0005-glitched-pds.patch"
+[ $SCHED = "bmq" ] && patch_insert "9005" "0009-glitched-bmq.patch" && \
+	patch_insert "9006" "0009-glitched-ondemand-bmq.patch"
 patch_insert "9007" "0006-add-acs-overrides_iommu.patch"
 patch_insert "9009" "0007-v$BASEVERSION-fsync1_via_futex_waitv.patch"
 patch_insert "9010" "0007-v$BASEVERSION-winesync.patch"
