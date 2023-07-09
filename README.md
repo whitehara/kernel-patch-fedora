@@ -23,8 +23,9 @@ See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for de
 If you want to try other custom kernels, you may also check my other projects.
 - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
-- Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-ice-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ice-preempt)
+- Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
 - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
+- Tkg patches, Intel IvyBridge+ optimized and pds kernel:  [kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds)
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
