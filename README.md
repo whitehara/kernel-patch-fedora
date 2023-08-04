@@ -16,7 +16,7 @@
 Quick start.
 ```
 sudo dnf copr whitehara/kernel-tkg
-sudo dnf install kernel-6.4.2-200_tkg.fc38
+sudo dnf install kernel-6.4.8-200_tkg.fc38
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
@@ -32,11 +32,11 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.4 patches
-  -  [kernel-6.4.6-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2260328) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.4.6-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2260322) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.4.8-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2268973) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.4.8-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2268974) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.3 patches
-  -  [kernel-6.3.12-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2226968) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.3.12-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2226973) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.3.13-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231054) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.3.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231053) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.2 patches
   -  [kernel-6.2.15-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199143)
   -  [kernel-6.2.15-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199132)
