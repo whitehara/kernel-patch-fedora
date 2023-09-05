@@ -16,7 +16,7 @@
 Quick start.
 ```
 sudo dnf copr whitehara/kernel-tkg
-sudo dnf install kernel-6.4.8-200_tkg.fc38
+sudo dnf install kernel-6.4.14-200_tkg.fc38
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
@@ -32,8 +32,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.4 patches
-  -  [kernel-6.4.8-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2268973) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.4.8-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2268974) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.4.14-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2283049) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.4.14-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2283050) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.3 patches
   -  [kernel-6.3.13-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231054) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.3.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231053) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
@@ -95,6 +95,13 @@ If you want to custom your kernel, you can add kerne-local file in SOURCES direc
 The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
 
       cd rpm/SOURCES && ./spec-mod.sh _custom_kernel_tag
+
+You can use other options like below:
+
+      ./spec-mod.sh <CUSTOM TAG> [cfs|pds|bmq]
+      CUSTOMTAG: Add CUSTOM TAG for the package
+      cfs|pds|bmq: Select scheduler for Project-C patch
+
 ### Check if paches are appliciable.
 
       rpmbuild -bp kernel.spec
