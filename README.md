@@ -30,7 +30,10 @@ If you want to try other custom kernels, you may also check my other projects.
 Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Newest version only)
-**BEWARE: "tested" means just "compilable", does not mean "It completely works for your environment". Please use it at your own risk.**
+**BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.5 patches
+  -  [kernel-6.5.2-301.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2287875) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.2-301.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2287879) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.4 patches
   -  [kernel-6.4.14-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2283049) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.4.14-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2283050) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
