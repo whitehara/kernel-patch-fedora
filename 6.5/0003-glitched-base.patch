@@ -56,18 +56,15 @@ diff --git a/kernel/sched/rt.c b/kernel/sched/rt.c
 index f788cd61df21..2bfbb4213707 100644
 --- a/kernel/sched/rt.c
 +++ b/kernel/sched/rt.c
-@@ -15,9 +15,9 @@ __read_mostly int scheduler_running;
- 
- /*
+@@ -22,7 +22,7 @@
   * part of the period that we allow rt tasks to run in us.
-- * default: 0.95s
-+ * XanMod default: 0.98s
+  * default: 0.95s
   */
 -int sysctl_sched_rt_runtime = 950000;
 +int sysctl_sched_rt_runtime = 980000;
  
  #ifdef CONFIG_SYSCTL
- static int sysctl_sched_rr_timeslice = (MSEC_PER_SEC / HZ) * RR_TIMESLICE;
+ static int sysctl_sched_rr_timeslice = (MSEC_PER_SEC * RR_TIMESLICE) / HZ;
 -- 
 2.28.0
 

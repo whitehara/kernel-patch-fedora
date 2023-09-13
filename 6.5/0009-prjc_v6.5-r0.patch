@@ -355,14 +355,14 @@ diff --git a/init/Kconfig b/init/Kconfig
 index f7f65af4ee12..ad79a542a624 100644
 --- a/init/Kconfig
 +++ b/init/Kconfig
-@@ -629,6 +629,7 @@ config TASK_IO_ACCOUNTING
+@@ -661,6 +661,7 @@
  
  config PSI
  	bool "Pressure stall information tracking"
 +	depends on !SCHED_ALT
+ 	select KERNFS
  	help
  	  Collect metrics that indicate how overcommitted the CPU, memory,
- 	  and IO capacity are in the system.
 @@ -793,6 +794,7 @@ menu "Scheduler features"
  config UCLAMP_TASK
  	bool "Enable utilization clamping for RT/FAIR tasks"
