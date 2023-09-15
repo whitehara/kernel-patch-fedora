@@ -56,7 +56,7 @@ diff --git a/kernel/sched/rt.c b/kernel/sched/rt.c
 index f788cd61df21..2bfbb4213707 100644
 --- a/kernel/sched/rt.c
 +++ b/kernel/sched/rt.c
-@@ -15,9 +15,9 @@ __read_mostly int scheduler_running;
+@@ -20,9 +20,9 @@
  
  /*
   * part of the period that we allow rt tasks to run in us.
@@ -67,7 +67,7 @@ index f788cd61df21..2bfbb4213707 100644
 +int sysctl_sched_rt_runtime = 980000;
  
  #ifdef CONFIG_SYSCTL
- static int sysctl_sched_rr_timeslice = (MSEC_PER_SEC / HZ) * RR_TIMESLICE;
+ static int sysctl_sched_rr_timeslice = (MSEC_PER_SEC * RR_TIMESLICE) / HZ;
 -- 
 2.28.0
 
@@ -785,7 +785,7 @@ index a0b0397e29ee4c..87a983a356530c 100644
  	unsigned long flags;
 -	int i;
 +	const bool can_resched = !preempt_count() && !irqs_disabled();
-+	int i, allocated = 0, last_mod = 0;
++	int i, last_mod = 0;
  
  	spin_lock_irqsave(&zone->lock, flags);
  	for (i = 0; i < count; ++i) {

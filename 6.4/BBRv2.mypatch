@@ -3280,3 +3280,32 @@ index cb79127f45c3..70e4de876a7f 100644
  	tcp_mstamp_refresh(tcp_sk(sk));
  	event = icsk->icsk_pending;
  
+--- a/net/ipv4/tcp_input.c
++++ b/net/ipv4/tcp_input.c
+@@ -287,7 +287,7 @@
+ 		icsk->icsk_ack.quick = quickacks;
+ }
+ 
++void tcp_enter_quickack_mode(struct sock *sk, unsigned int max_quickacks)
+-static void tcp_enter_quickack_mode(struct sock *sk, unsigned int max_quickacks)
+ {
+ 	struct inet_connection_sock *icsk = inet_csk(sk);
+ 
+@@ -295,6 +299,7 @@
+ 	inet_csk_exit_pingpong_mode(sk);
+ 	icsk->icsk_ack.ato = TCP_ATO_MIN;
+ }
++EXPORT_SYMBOL(tcp_enter_quickack_mode);
+ 
+ /* Send ACKs quickly, if "quick" count is not exhausted
+  * and the session is not interactive.
+--- a/include/net/tcp.h
++++ b/include/net/tcp.h
+@@ -355,6 +355,7 @@
+ struct sk_buff *tcp_stream_alloc_skb(struct sock *sk, int size, gfp_t gfp,
+ 				     bool force_schedule);
+ 
++void tcp_enter_quickack_mode(struct sock *sk, unsigned int max_quickacks);
+ static inline void tcp_dec_quickack_mode(struct sock *sk,
+ 					 const unsigned int pkts)
+ {
