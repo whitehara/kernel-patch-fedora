@@ -32,8 +32,9 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.5 patches
-  -  [kernel-6.5.3-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2288853) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.3-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2288854) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.4-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2292002) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.4-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2292003) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.4-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2292007) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.4 patches
   -  [kernel-6.4.16-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289005) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.4.16-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289004) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
@@ -59,7 +60,43 @@ Files in the kernel-local folder are used in these custom kernel projects.
 - 5.15 patches
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
 ## How to build your custom kernel
-### Setup rpm build tree
+
+There are 2 ways. One is build with the script in "build-script" dir, another is without the script. 
+###  Build with the script
+In build-script dir, you see "kernel-mock.sh". This script is used for building my projects, you can use and modify as you like.
+
+#### Preparation
+- Install mock, copr-cli.
+- Modify "support-vers". It contains Original fedora project kernel versions for building.
+If you want to build new versions, you need to add it to this file. 
+- Modify "support-features". It contains Project ID for copr, Custom tag for the package name, Features like bmq,pds,cpu-arch which are used in spec-mod.sh
+
+
+**Each features are built with all versions. E.g. If you have 3 features and 2 versions, Results wll be 3 projects and each projects have 2 versions.**
+
+**If you want to add CPU-arch, you also need to add kernel-local.CPU-arch files.**
+
+#### Run script
+In build-script dir, you can run like below:
+
+     ./kernel-mock.sh
+
+It builds rpms on your local machine, then copy results to "../results" dir.
+
+If you want to see detail messages and run rpmbuild commands by yourself in the mock environment,
+
+     ./kernel-moch.sh -d
+
+This will extract your package and stop when patches are applied, then open the mock's shell. So you can check the patches are applied correctly or not, modify patches if you need, then run "rpmbuild" manually. In this mode, only first line of support-vers, support-features are used. And **Your results are not moved to reults dir. Please move it manually before you exit this mode's shell.**
+
+If you want to build on Copr,
+
+    ./kernel-mock.sh -c
+
+You must setup your copr account and make projects before you run.
+
+### Build without the script
+#### Setup rpm build tree
 If you aleady have one, you can skip this step.
 
       dnf install rpmdevtools
@@ -69,32 +106,32 @@ You can check where it is like this.
 
       rpmbuild --showrc | grep _topdir
 In this document, the _topdir is just "rpm".
-### Download source kernel-*.fc*.srpm
+#### Download source kernel-*.fc*.srpm
 
       dnf download --source kernel
 If you want to use the newest developing kernel, you can use koji.
 
       koji download-build -a src kernel-*
 
-### Extract source to rpm build tree
+#### Extract source to rpm build tree
 
       rpm -Uvh kernel-*.fc*.srpm
 
-### Clone repository to local folder
+#### Clone repository to local folder
 
       mkdir kernel-patch-fedora && cd kernel-patch-fedora
       git clone https://github.com/whitehara/kernel-patch-fedora.git .
 
-### Copy files to SOURCES directory
+#### Copy files to SOURCES directory
 
       cp kernel-patch-fedora/5.16/* rpm/SOURCES/
 
-### Modify kernel config
+#### Modify kernel config
 The config-path.sh adds minimal config into .config files.
 If you want to custom your kernel, you can add kerne-local file in SOURCES directory.
 
       cd rpm/SOURCES &&  ./config-patch.sh
-### Modify kernel.spec(add these patch lines like below)
+#### Modify kernel.spec(add these patch lines like below)
 The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
 
       cd rpm/SOURCES && ./spec-mod.sh _custom_kernel_tag
@@ -105,18 +142,18 @@ You can use other options like below:
       CUSTOMTAG: Add CUSTOM TAG for the package
       cfs|pds|bmq: Select scheduler for Project-C patch
 
-### Check if paches are appliciable.
+#### Check if paches are appliciable.
 
       rpmbuild -bp kernel.spec
 
 "-bp" option means doing until applying patches(does not doing compile).
 
-### Compile
+#### Compile
 
       rpmbild -bb kernel.spec
 "-bb" is just compile binary only. If you want the srpm, use "-ba"(with binary) or "-bs"(without binary) option. See manpages of rpmbuild to find the other rpmbuild option.
 
 You can also use options like "--without debug --without debuginfo". Creating debug rpms needs the longer time to compile. So if you don't need them, I recommend to set these options. See kernel.spec file to find the other "--without" option. **You may need to add "--without configchecks" to avoid config check errors since 6.0.**
-### Install
+#### Install
       cd rpm/RPMS/
       dnf install kernel-*
