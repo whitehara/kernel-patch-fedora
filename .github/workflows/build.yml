@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  COPR_CONFIG_FILE: /tmp/copr
+  COPR_CONFIG_FILE: ${{ github.workspace }}/copr
 
 jobs:
   container-test-job:
@@ -35,12 +35,21 @@ jobs:
             dnf -y install koji copr-cli mock
             echo "Run script"
             cd /build/build-script
-            ./kernel-mock.sh -c -f $COPR_CONFIG_FILE
+            ./kernel-mock.sh -c -f /build/copr
       
       - name: Remove Copr config
         run: rm -f $COPR_CONFIG_FILE
 
-      - name: Check results
-        run: |
-            ls -l ${{ github.workspace }}/results
-            find ${{ github.workspace }} -name "*.log" -ls -exec cat {} \;
+      - name: Archive .src.rpm artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: source rpm
+          path: |
+            results/*.src.rpm
+
+      - name: Archive .log artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: log
+          path: |
+            results/*.log
