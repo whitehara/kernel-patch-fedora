@@ -18,7 +18,7 @@ jobs:
         run: |
           touch $COPR_CONFIG_FILE
           chmod 600 $COPR_CONFIG_FILE
-          envsubst < copr-config.template > $COPR_CONFIG_FILE
+          envsubst < ${{ github.workspace }}/build-scripts/copr-config.template > $COPR_CONFIG_FILE
         env:
           COPR_LOGIN: ${{ secrets.COPR_LOGIN }}
           COPR_USERNAME: ${{ secrets.COPR_USERNAME }}
