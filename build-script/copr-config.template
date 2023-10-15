@@ -1,5 +1,5 @@
 [copr-cli]
-login = "$COPR_CONFIG"
-username = "$COPR_USERNAME"
-token = "$COPR_TOKEN"
-copr_url = "$COPR_URL"
+login = $COPR_LOGIN
+username = $COPR_USERNAME
+token = $COPR_TOKEN
+copr_url = $COPR_URL
