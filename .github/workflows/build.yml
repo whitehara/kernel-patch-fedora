@@ -19,6 +19,7 @@ jobs:
           touch $COPR_CONFIG_FILE
           chmod 600 $COPR_CONFIG_FILE
           envsubst < ${{ github.workspace }}/build-script/copr-config.template > $COPR_CONFIG_FILE
+          ls -l $COPR_CONFIG_FILE
         env:
           COPR_LOGIN: ${{ secrets.COPR_LOGIN }}
           COPR_USERNAME: ${{ secrets.COPR_USERNAME }}
@@ -35,6 +36,8 @@ jobs:
             dnf -y install koji copr-cli mock
             echo "Run script"
             cd /build/build-script
+            ls -l /build/copr
+            whoami
             ./kernel-mock.sh -c -f /build/copr
       
       - name: Remove Copr config
