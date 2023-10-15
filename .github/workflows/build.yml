@@ -35,7 +35,8 @@ jobs:
             dnf -y install koji copr-cli mock
             echo "Run script"
             cd /build/build-script
-            ./kernel-mock.sh -c -f /build/copr
+            copr-cli --config /build/copr get kernel-tkg
+            echo ./kernel-mock.sh -c -f /build/copr
       
       - name: Remove Copr config
         run: rm -f $COPR_CONFIG_FILE
