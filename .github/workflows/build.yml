@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 jobs:
   container-test-job:
-  environment:
-    COPR_CONFIG_FILE: /tmp/copr
+    environment:
+      COPR_CONFIG_FILE: /tmp/copr
 
     runs-on: ubuntu-latest
     steps:
