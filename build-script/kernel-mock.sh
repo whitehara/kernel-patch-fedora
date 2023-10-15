@@ -78,8 +78,7 @@ function make_srpm () {
 	    # Clean chroot environments
 	    $MOCK --scrub=chroot --scrub=bootstrap
     fi
-
-    # If only make SRPM, just return
+# If only make SRPM, just return
     if $SRPMONLY ; then
 	    return 0
     fi
@@ -87,7 +86,11 @@ function make_srpm () {
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-	    nice -19 copr-cli build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+	    if [ -z "$COPR_CONFIG" ]; then
+			nice -19 copr-cli build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		else
+			nice -19 copr-cli --config $COPRCONFIG build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		fi
     else
 	    # Build local without debug packages
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
@@ -110,16 +113,19 @@ export -f make_srpm
 DEBUG=false
 USECOPR=false
 SRPMONLY=false
-while getopts cdhs OPT
+while getopts cdf:hs OPT
 do
     case $OPT in
         c) USECOPR=true ;;
         d) DEBUG=true ;;
-        h) echo "Usage: $0 [-c] [-d] [-h]"
+		f) USECOPR=true
+		   COPRCONFIG="$OPTARG" ;;
+        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-h]"
             echo "-c: Build on Copr.\
 		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
 		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
             echo "-d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
+            echo "-f: Specify Copr config file path. This option also enable '-c' " 
             echo "-s: Don't build but just make srpms to the results dir." 
             echo "-h: Show this help." 
             exit 0
@@ -130,6 +136,7 @@ do
 done
 export DEBUG
 export USECOPR
+export COPRCONFIG
 export SRPMONLY
 
 # Make $RESULTDIR if it doesn't exist.
