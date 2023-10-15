@@ -3306,6 +3306,6 @@ index cb79127f45c3..70e4de876a7f 100644
  				     bool force_schedule);
  
 +void tcp_enter_quickack_mode(struct sock *sk, unsigned int max_quickacks);
- static inline void tcp_dec_quickack_mode(struct sock *sk,
- 					 const unsigned int pkts)
+ static inline void tcp_dec_quickack_mode(struct sock *sk)
  {
+ 	struct inet_connection_sock *icsk = inet_csk(sk);

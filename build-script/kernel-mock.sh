@@ -22,55 +22,69 @@ function make_srpm () {
     local OS="fedora-${VER##*fc}-x86_64"
     local SRPM=kernel-$VER.src.rpm
 
+    # New SRPM name with custom tags
+    local NEWSRPM=kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm
+
     local MOCK="mock -r $OS --uniqueext=$PROJECTID "
     $DEBUG || MOCK="ionice -c3 $MOCK -q "
 
-    if [ ! -d $PATCHDIR/${VER%.*-*} ]; then
-	    echo "ERROR: $PATCHDIR/${VER%.*-*} is not found."
-	    return 1
+    # If $NEWSRPM is already there, reuse it
+    if [ ! $DEBUG ] && [ -f $RESULTDIR/$NEWSRPM ]; then
+	    echo $NEWSRPM is already there. Reuse it.
+    else
+
+	    if [ ! -d $PATCHDIR/${VER%.*-*} ]; then
+		    echo "ERROR: $PATCHDIR/${VER%.*-*} is not found."
+		    return 1
+	    fi
+	    # Setup an environment
+	    $MOCK --init
+	    $MOCK --copyin $RESULTDIR/$SRPM /
+	    $MOCK --shell rpm -Uvh /$SRPM
+	    $MOCK --copyin $PATCHDIR/${VER%.*-*}/* $PATCHDIR/kernel-local/* /builddir/build/SOURCES
+
+	    # Custom files
+	    $MOCK --shell "(cat /builddir/build/SOURCES/kernel-local.general ; echo ) >> /builddir/build/SOURCES/kernel-local; (cd /builddir/build/SOURCES && ./config-patch.sh)"
+
+	    local PARAM=${@:4}
+	    for i in ${PARAM[@]}
+	    do
+		echo Feature: $i
+		$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
+		$DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
+
+		if [ $i = "bmq" -o $i = "pds" -o $i = "cfs" ]; then
+		    echo CustomTag: $CUSTOMTAG
+		    echo Scheduler: $i
+		    $MOCK --shell "cd /builddir/build/SPECS && /builddir/build/SOURCES/spec-mod.sh $CUSTOMTAG $i"
+		fi
+	    done
+	    
+	    # Debug shell
+	    if $DEBUG ; then
+		$MOCK --installdeps $RESULTDIR/$SRPM
+		$MOCK --install pxz vi less
+		$MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
+		$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
+		echo "$MOCK --shell"
+		$MOCK --shell
+		exit 0
+	    fi
+	    
+	    # Make srpm
+	    $MOCK --shell "rpmbuild -bs /builddir/build/SPECS/kernel.spec"
+	    # Copy srpm to $RESULTDIR
+	    $MOCK --copyout /builddir/build/SRPMS/$NEWSRPM $RESULTDIR
+	    # Clean chroot environments
+	    $MOCK --scrub=chroot --scrub=bootstrap
     fi
-    # Setup an environment
-    $MOCK --init
-    $MOCK --copyin $RESULTDIR/$SRPM /
-    $MOCK --shell rpm -Uvh /$SRPM
-    $MOCK --copyin $PATCHDIR/${VER%.*-*}/* $PATCHDIR/kernel-local/* /builddir/build/SOURCES
 
-    # Custom files
-    $MOCK --shell "(cat /builddir/build/SOURCES/kernel-local.general ; echo ) >> /builddir/build/SOURCES/kernel-local; (cd /builddir/build/SOURCES && ./config-patch.sh)"
-
-    local PARAM=${@:4}
-    for i in ${PARAM[@]}
-    do
-        echo Feature: $i
-        $MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
-        $DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
-
-        if [ $i = "bmq" -o $i = "pds" -o $i = "cfs" ]; then
-            echo CustomTag: $CUSTOMTAG
-            echo Scheduler: $i
-            $MOCK --shell "cd /builddir/build/SPECS && /builddir/build/SOURCES/spec-mod.sh $CUSTOMTAG $i"
-        fi
-    done
-    
-    # Debug shell
-    if $DEBUG ; then
-        $MOCK --installdeps $RESULTDIR/$SRPM
-        $MOCK --install pxz vi less
-        $MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
-        $MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
-        echo "$MOCK --shell"
-        $MOCK --shell
-        exit 0
+    # If only make SRPM, just return
+    if $SRPMONLY ; then
+	    return 0
     fi
-    
-    # New SRPM name with custom tags
-    local NEWSRPM=kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm
-    # Make srpm
-    $MOCK --shell "rpmbuild -bs /builddir/build/SPECS/kernel.spec"
-    # Copy srpm to $RESULTDIR
-    $MOCK --copyout /builddir/build/SRPMS/$NEWSRPM $RESULTDIR
 
-    # Upload to Copr
+    # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
 	    nice -19 copr-cli build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
@@ -85,37 +99,41 @@ function make_srpm () {
 		    return 1
 	    else
 		    echo "Local build finished."
+		    $MOCK --scrub=chroot --scrub=bootstrap
 	    fi
     fi
 
-    $MOCK --scrub=chroot --scrub=bootstrap
 }
 export -f make_srpm
 
 # Main
 DEBUG=false
 USECOPR=false
-while getopts cdh OPT
+SRPMONLY=false
+while getopts cdhs OPT
 do
     case $OPT in
         c) USECOPR=true ;;
         d) DEBUG=true ;;
         h) echo "Usage: $0 [-c] [-d] [-h]"
             echo "-c: Build on Copr.\
-		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your account.\
-		    Without this option, rpms are built on this machine and put them into the results dir." 
-            echo "-d: DEBUG mode. Enter the shell after the first kernel setup." 
+		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
+		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
+            echo "-d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
+            echo "-s: Don't build but just make srpms to the results dir." 
             echo "-h: Show this help." 
             exit 0
             ;;
+        s) SRPMONLY=true ;;
         *) DEBUG=false ;;
     esac
 done
 export DEBUG
 export USECOPR
+export SRPMONLY
 
 # Make $RESULTDIR if it doesn't exist.
-[ ! -d $RESULTDIR ] && mkdir $RESULTDIR
+mkdir -p $RESULTDIR
 
 while read VER
 do

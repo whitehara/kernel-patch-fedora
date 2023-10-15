@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run kernel-mock.sh in docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: fedora:latest
+          options: -v ${{ github.workspace }}:/build
+          run: |
+            echo "Install packages"
+            dnf -y install koji copr-cli mock
+            echo "Run Script"
+            cd /build/build-script
+            ./kernel-mock.sh
+      - name: Check results
+        run: |
+            ls -l /build/results
+            cat /build/results/build.log
