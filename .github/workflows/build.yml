@@ -8,7 +8,7 @@ env:
   COPR_CONFIG_FILE: ${{ github.workspace }}/copr
 
 jobs:
-  container-test-job:
+  feodora-kernel-build-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -35,7 +35,6 @@ jobs:
             dnf -y install koji copr-cli mock
             echo "Run script"
             cd /build/build-script
-            copr-cli --config /build/copr get kernel-tkg
             echo ./kernel-mock.sh -c -f /build/copr
       
       - name: Remove Copr config

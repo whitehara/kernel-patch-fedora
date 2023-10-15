@@ -26,7 +26,7 @@ function make_srpm () {
     local NEWSRPM=kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm
 
     local MOCK="mock -r $OS --uniqueext=$PROJECTID "
-    $DEBUG || MOCK="ionice -c3 $MOCK -q "
+    $SHOWMESSAGE || MOCK="$MOCK -q "
 
     # If $NEWSRPM is already there, reuse it
     if [ ! $DEBUG ] && [ -f $RESULTDIR/$NEWSRPM ]; then
@@ -86,7 +86,7 @@ function make_srpm () {
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-	    if [ -z "$COPR_CONFIG" ]; then
+	    if [ -z "$COPRCONFIG" ]; then
 			nice -19 copr-cli build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
 		else
 			nice -19 copr-cli --config $COPRCONFIG build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
@@ -111,21 +111,25 @@ export -f make_srpm
 
 # Main
 DEBUG=false
+SHOWMESSAGE=false
 USECOPR=false
 SRPMONLY=false
-while getopts cdf:hs OPT
+while getopts cdf:hms OPT
 do
     case $OPT in
         c) USECOPR=true ;;
-        d) DEBUG=true ;;
+        d) SHOWMESSAGE=true
+	       DEBUG=true ;;
 		f) USECOPR=true
 		   COPRCONFIG="$OPTARG" ;;
+	    m) SHOWMESSAGE=true ;;
         h) echo "Usage: $0 [-c] [-f config file path] [-d] [-h]"
             echo "-c: Build on Copr.\
 		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
 		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
             echo "-d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
             echo "-f: Specify Copr config file path. This option also enable '-c' " 
+            echo "-m: Show mock messages. This is default, unless -d is not used." 
             echo "-s: Don't build but just make srpms to the results dir." 
             echo "-h: Show this help." 
             exit 0
@@ -138,6 +142,7 @@ export DEBUG
 export USECOPR
 export COPRCONFIG
 export SRPMONLY
+export SHOWMESSAGE
 
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
