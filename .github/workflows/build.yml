@@ -5,11 +5,11 @@ on:
     branches: [ main ]
 jobs:
   container-test-job:
+  environment:
+    COPR_CONFIG_FILE: /tmp/copr
+
     runs-on: ubuntu-latest
     steps:
-      - env:
-        COPR_CONFIG_FILE: /tmp/copr
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
