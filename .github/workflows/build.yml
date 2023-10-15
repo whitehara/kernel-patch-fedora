@@ -3,11 +3,12 @@ name: Build kernel
 on:
   push:
     branches: [ main ]
+
+env:
+  COPR_CONFIG_FILE: /tmp/copr
+
 jobs:
   container-test-job:
-    environment:
-      COPR_CONFIG_FILE: /tmp/copr
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
