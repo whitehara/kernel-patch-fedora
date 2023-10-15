@@ -12,7 +12,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: fedora:latest
-          options: -v ${{ github.workspace }}:/build --pirivileged
+          options: -v ${{ github.workspace }}:/build --privileged
           run: |
             echo "Install packages"
             dnf -y install koji copr-cli mock
