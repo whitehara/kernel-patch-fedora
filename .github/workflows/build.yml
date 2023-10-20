@@ -1,4 +1,4 @@
-name: Build kernel
+name: Build kernel .src.rpm
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         run: |
           touch $COPR_CONFIG_FILE
           chmod 600 $COPR_CONFIG_FILE
-          envsubst < ${{ github.workspace }}/build-script/copr-config.template > $COPR_CONFIG_FILE
+          envsubst < build-script/copr-config.template > $COPR_CONFIG_FILE
         env:
           COPR_LOGIN: ${{ secrets.COPR_LOGIN }}
           COPR_USERNAME: ${{ secrets.COPR_USERNAME }}
@@ -32,24 +32,25 @@ jobs:
           options: -v ${{ github.workspace }}:/build --privileged
           run: |
             echo "Install packages"
-            dnf -y install koji copr-cli mock
-            echo "Run script"
+            dnf -q -y install koji copr-cli mock
+            echo "Run build"
             cd /build/build-script
             ./kernel-mock.sh -c -f /build/copr
+            echo "Write BUILD.md"
+            ./build-status.sh -f /build/copr > /build/results/BUILD.md
       
       - name: Remove Copr config
         run: rm -f $COPR_CONFIG_FILE
 
-      - name: Archive .src.rpm artifacts
+      - name: Archive BUILD.md artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: source rpm
+          name: BUILD.md
           path: |
-            results/*.src.rpm
+            results/BUILD.md
 
-      - name: Archive .log artifacts
-        uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: log
-          path: |
-            results/*.log
+          body_path: results/BUILD.md

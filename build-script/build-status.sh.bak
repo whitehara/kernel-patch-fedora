@@ -1,0 +1,8 @@
+#!/bin/sh
+RESULTDIR=../results
+OUTFILE=$RESULTDIR/BUILD.md
+mkdir -p $RESULTDIR
+
+echo "|Build|Chroot|" > $OUTFILE
+echo "|---|---|" >> $OUTFILE
+./kernel-mock.sh -l $@ | awk '{ print "|[" $2 "](" $3 ")|"i $1 "|" }' >> $OUTFILE

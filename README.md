@@ -1,4 +1,14 @@
 # Linux kernel patches (compilable with the fedora kernel)
+## Latest Build Status
+|Copr Project Name|Copr Build Status|
+|---|---|
+|[kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/package/kernel/status_image/last_build.png)|
+
 ## Overview
 - You can create custom rpm with these patches for the fedora.
   - Download srpm from fedora repository and apply patches to the kernel source.
@@ -32,9 +42,9 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.5 patches
-  -  [kernel-6.5.7-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2304595) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.7-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2304594) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.7-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2304593) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.8-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2309726) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.8-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2309724) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.8-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2309725) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.4 patches
   -  [kernel-6.4.16-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289005) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.4.16-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289004) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*

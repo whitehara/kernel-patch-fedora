@@ -7,7 +7,7 @@ export RESULTDIR=../results
 function download_srpm () {
     [[ $@ =~ ^# ]] && return 1
 
-    (cd $RESULTDIR && ionice -c3 koji download-build --rpm kernel-$1.src.rpm)
+    (cd $RESULTDIR && ionice -c3 koji -q download-build --rpm kernel-$1.src.rpm)
 }
 
 function make_srpm () {
@@ -86,11 +86,7 @@ function make_srpm () {
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-	    if [ -z "$COPRCONFIG" ]; then
-			nice -19 copr-cli build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
-		else
-			nice -19 copr-cli --config $COPRCONFIG build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
-		fi
+		nice -19 $COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
     else
 	    # Build local without debug packages
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
@@ -110,25 +106,29 @@ function make_srpm () {
 export -f make_srpm
 
 # Main
+COPR="copr-cli"
 DEBUG=false
+SHOWCOPRBUILDS=false
 SHOWMESSAGE=false
 USECOPR=false
 SRPMONLY=false
-while getopts cdf:hms OPT
+while getopts cdf:hlms OPT
 do
     case $OPT in
         c) USECOPR=true ;;
         d) SHOWMESSAGE=true
 	       DEBUG=true ;;
 		f) USECOPR=true
-		   COPRCONFIG="$OPTARG" ;;
+		   COPR="copr-cli --config $OPTARG" ;;
+	    l) SHOWCOPRBUILDS=true ;;
 	    m) SHOWMESSAGE=true ;;
-        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-h]"
+        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
             echo "-c: Build on Copr.\
 		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
 		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
             echo "-d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
             echo "-f: Specify Copr config file path. This option also enable '-c' " 
+            echo "-l: Show Copr running builds and exit." 
             echo "-m: Show mock messages. This is default, unless -d is not used." 
             echo "-s: Don't build but just make srpms to the results dir." 
             echo "-h: Show this help." 
@@ -140,12 +140,23 @@ do
 done
 export DEBUG
 export USECOPR
-export COPRCONFIG
+export COPR
 export SRPMONLY
+export SHOWCOPRBUILDS
 export SHOWMESSAGE
 
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
+
+if $SHOWCOPRBUILDS ; then
+	while read FEAT
+	do
+        [[ $FEAT =~ ^# ]] && continue
+		PRJ=`echo $FEAT | awk '{ print $1 }'`
+		$COPR monitor --output-format text-row --fields chroot,pkg_version,url_build,state kernel$PRJ
+	done < support-features
+	exit 0
+fi
 
 while read VER
 do
