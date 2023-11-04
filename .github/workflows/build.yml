@@ -2,7 +2,8 @@ name: Build kernel .src.rpm
 
 on:
   push:
-    branches: [ main ]
+    branches-ignore: [ '*'' ]
+    tags: [ '*' ]
 
 env:
   COPR_CONFIG_FILE: ${{ github.workspace }}/copr
@@ -51,6 +52,5 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: results/BUILD.md
