@@ -2,7 +2,7 @@ name: Build kernel .src.rpm
 
 on:
   push:
-    branches-ignore: [ '*'' ]
+    branches-ignore: [ '*' ]
     tags: [ '*' ]
 
 env:
