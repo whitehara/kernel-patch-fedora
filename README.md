@@ -42,9 +42,9 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.5 patches
-  -  [kernel-6.5.10-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2315279) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.10-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2315280) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.10-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2315337) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.11-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2317730) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.11-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2317729) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.11-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2317728) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.4 patches
   -  [kernel-6.4.16-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289005) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.4.16-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289004) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
