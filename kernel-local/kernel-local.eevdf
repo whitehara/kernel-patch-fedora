@@ -1,0 +1,3 @@
+# For CFS (Linux default scheduler)
+# CONFIG_SCHED_ALT is not set
+# CONFIG_SCHED_BMQ is not set

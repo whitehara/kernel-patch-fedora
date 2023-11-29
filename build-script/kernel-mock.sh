@@ -53,7 +53,7 @@ function make_srpm () {
 		$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
 		$DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
 
-		if [ $i = "bmq" -o $i = "pds" -o $i = "cfs" ]; then
+		if [ $i = "eevdf" -o $i = "bmq" -o $i = "pds" -o $i = "cfs" ]; then
 		    echo CustomTag: $CUSTOMTAG
 		    echo Scheduler: $i
 		    $MOCK --shell "cd /builddir/build/SPECS && /builddir/build/SOURCES/spec-mod.sh $CUSTOMTAG $i"

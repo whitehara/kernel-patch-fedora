@@ -1,7 +1,7 @@
 # <ProjectID suffix> <CustomTag> [Features...]
--tkg _tkg bmq
--tkg-zen2 _tkg_zen2 zen2 bmq
--tkg-zen2-preempt _tkg_zen2_preempt zen2 preempt bmq
--tkg-icelake-preempt _tkg_icelake_preempt icelake preempt bmq
--tkg-alderlake-preempt _tkg_alderlake_preempt alderlake preempt bmq
--tkg-ivybridge-pds _tkg_ivybridge_pds ivybridge pds
+-tkg _tkg eevdf
+-tkg-zen2 _tkg_zen2 zen2 eevdf
+-tkg-zen2-preempt _tkg_zen2_preempt zen2 preempt eevdf
+-tkg-icelake-preempt _tkg_icelake_preempt icelake preempt eevdf
+-tkg-alderlake-preempt _tkg_alderlake_preempt alderlake preempt eevdf
+#-tkg-ivybridge-pds _tkg_ivybridge_pds ivybridge pds
