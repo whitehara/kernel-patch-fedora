@@ -96663,14 +96663,6 @@ diff --git a/include/linux/generic-radix-tree.h b/include/linux/generic-radix-tr
 index 107613f7d..c74b73769 100644
 --- a/include/linux/generic-radix-tree.h
 +++ b/include/linux/generic-radix-tree.h
-@@ -38,6 +38,7 @@
- 
- #include <asm/page.h>
- #include <linux/bug.h>
-+#include <linux/limits.h>
- #include <linux/log2.h>
- #include <linux/math.h>
- #include <linux/types.h>
 @@ -116,6 +117,11 @@ static inline size_t __idx_to_offset(size_t idx, size_t obj_size)
  
  #define __genradix_cast(_radix)		(typeof((_radix)->type[0]) *)
@@ -96683,7 +96675,7 @@ index 107613f7d..c74b73769 100644
  #define __genradix_idx_to_offset(_radix, _idx)			\
  	__idx_to_offset(_idx, __genradix_obj_size(_radix))
  
-@@ -179,11 +185,35 @@ void *__genradix_iter_peek(struct genradix_iter *, struct __genradix *, size_t);
+@@ -185,7 +185,25 @@
  #define genradix_iter_peek(_iter, _radix)			\
  	(__genradix_cast(_radix)				\
  	 __genradix_iter_peek(_iter, &(_radix)->tree,		\
@@ -96710,16 +96702,6 @@ index 107613f7d..c74b73769 100644
  
  static inline void __genradix_iter_advance(struct genradix_iter *iter,
  					   size_t obj_size)
- {
-+	if (iter->offset + obj_size < iter->offset) {
-+		iter->offset	= SIZE_MAX;
-+		iter->pos	= SIZE_MAX;
-+		return;
-+	}
-+
- 	iter->offset += obj_size;
- 
- 	if (!is_power_of_2(obj_size) &&
 @@ -196,6 +226,25 @@ static inline void __genradix_iter_advance(struct genradix_iter *iter,
  #define genradix_iter_advance(_iter, _radix)			\
  	__genradix_iter_advance(_iter, __genradix_obj_size(_radix))
@@ -97690,38 +97672,6 @@ index f25eb111c..41f1bcdc4 100644
  #include <linux/export.h>
  #include <linux/generic-radix-tree.h>
  #include <linux/gfp.h>
-@@ -166,6 +167,10 @@ void *__genradix_iter_peek(struct genradix_iter *iter,
- 	struct genradix_root *r;
- 	struct genradix_node *n;
- 	unsigned level, i;
-+
-+	if (iter->offset == SIZE_MAX)
-+		return NULL;
-+
- restart:
- 	r = READ_ONCE(radix->root);
- 	if (!r)
-@@ -184,10 +189,17 @@ void *__genradix_iter_peek(struct genradix_iter *iter,
- 			(GENRADIX_ARY - 1);
- 
- 		while (!n->children[i]) {
-+			size_t objs_per_ptr = genradix_depth_size(level);
-+
-+			if (iter->offset + objs_per_ptr < iter->offset) {
-+				iter->offset	= SIZE_MAX;
-+				iter->pos	= SIZE_MAX;
-+				return NULL;
-+			}
-+
- 			i++;
--			iter->offset = round_down(iter->offset +
--					   genradix_depth_size(level),
--					   genradix_depth_size(level));
-+			iter->offset = round_down(iter->offset + objs_per_ptr,
-+						  objs_per_ptr);
- 			iter->pos = (iter->offset >> PAGE_SHIFT) *
- 				objs_per_page;
- 			if (i == GENRADIX_ARY)
 @@ -201,6 +213,64 @@ void *__genradix_iter_peek(struct genradix_iter *iter,
  }
  EXPORT_SYMBOL(__genradix_iter_peek);

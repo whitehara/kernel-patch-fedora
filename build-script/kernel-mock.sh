@@ -43,9 +43,10 @@ function make_srpm () {
 	    $MOCK --shell rpm -Uvh /$SRPM
 	    $MOCK --copyin $PATCHDIR/${VER%.*-*}/* $PATCHDIR/kernel-local/* /builddir/build/SOURCES
 
-	    # Custom files
+	    # Make kernel-local
 	    $MOCK --shell "(cat /builddir/build/SOURCES/kernel-local.general ; echo ) >> /builddir/build/SOURCES/kernel-local; (cd /builddir/build/SOURCES && ./config-patch.sh)"
 
+		# Modify kernel-local for each features
 	    local PARAM=${@:4}
 	    for i in ${PARAM[@]}
 	    do
@@ -53,6 +54,7 @@ function make_srpm () {
 		$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
 		$DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
 
+		# Attach patches to kernel.spec
 		if [ $i = "eevdf" -o $i = "bmq" -o $i = "pds" -o $i = "cfs" ]; then
 		    echo CustomTag: $CUSTOMTAG
 		    echo Scheduler: $i
@@ -123,15 +125,15 @@ do
 	    l) SHOWCOPRBUILDS=true ;;
 	    m) SHOWMESSAGE=true ;;
         h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
-            echo "-c: Build on Copr.\
+            echo "    -c: Build on Copr.\
 		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
 		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
-            echo "-d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
-            echo "-f: Specify Copr config file path. This option also enable '-c' " 
-            echo "-l: Show Copr running builds and exit." 
-            echo "-m: Show mock messages. This is default, unless -d is not used." 
-            echo "-s: Don't build but just make srpms to the results dir." 
-            echo "-h: Show this help." 
+            echo "    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
+            echo "    -f: Specify Copr config file path. This option also enable '-c' " 
+            echo "    -l: Show Copr running builds and exit." 
+            echo "    -m: Show mock messages. This is default, unless -d is not used." 
+            echo "    -s: Don't build rpms but just make srpms to the results dir." 
+            echo "    -h: Show this help." 
             exit 0
             ;;
         s) SRPMONLY=true ;;
