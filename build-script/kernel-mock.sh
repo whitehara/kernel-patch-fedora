@@ -77,11 +77,12 @@ function make_srpm () {
 	    $MOCK --shell "rpmbuild -bs /builddir/build/SPECS/kernel.spec"
 	    # Copy srpm to $RESULTDIR
 	    $MOCK --copyout /builddir/build/SRPMS/$NEWSRPM $RESULTDIR
+    fi
+
+	# If only make SRPM, just return
+    if $SRPMONLY ; then
 	    # Clean chroot environments
 	    $MOCK --scrub=chroot --scrub=bootstrap
-    fi
-# If only make SRPM, just return
-    if $SRPMONLY ; then
 	    return 0
     fi
 
@@ -100,10 +101,9 @@ function make_srpm () {
 		    return 1
 	    else
 		    echo "Local build finished."
-		    $MOCK --scrub=chroot --scrub=bootstrap
 	    fi
     fi
-
+	$MOCK --scrub=chroot --scrub=bootstrap
 }
 export -f make_srpm
 
