@@ -122,15 +122,15 @@ do
 	       DEBUG=true ;;
 		f) USECOPR=true
 		   COPR="copr-cli --config $OPTARG" ;;
-	    l) SHOWCOPRBUILDS=true ;;
-	    m) SHOWMESSAGE=true ;;
+	l) SHOWCOPRBUILDS=true ;;
+	m) SHOWMESSAGE=true ;;
         h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
             echo "    -c: Build on Copr.\
 		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
 		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
-            echo "    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup." 
-            echo "    -f: Specify Copr config file path. This option also enable '-c' " 
-            echo "    -l: Show Copr running builds and exit." 
+            echo "    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup."
+            echo "    -f: Specify Copr config file path. This option also enable '-c' "
+            echo "    -l: Show Copr running builds and exit."
             echo "    -m: Show mock messages. This is default, unless -d is not used." 
             echo "    -s: Don't build rpms but just make srpms to the results dir." 
             echo "    -h: Show this help." 
