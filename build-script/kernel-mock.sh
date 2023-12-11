@@ -7,7 +7,7 @@ export RESULTDIR=../results
 function download_srpm () {
     [[ $@ =~ ^# ]] && return 1
 
-    (cd $RESULTDIR && ionice -c3 koji -q download-build --rpm kernel-$1.src.rpm)
+    (cd $RESULTDIR && koji -q download-build --rpm kernel-$1.src.rpm)
 }
 
 function make_srpm () {
@@ -89,7 +89,7 @@ function make_srpm () {
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-		nice -19 $COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
     else
 	    # Build local without debug packages
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
@@ -122,17 +122,19 @@ do
 	       DEBUG=true ;;
 		f) USECOPR=true
 		   COPR="copr-cli --config $OPTARG" ;;
-	l) SHOWCOPRBUILDS=true ;;
-	m) SHOWMESSAGE=true ;;
+		l) SHOWCOPRBUILDS=true ;;
+		m) SHOWMESSAGE=true ;;
         h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
-            echo "    -c: Build on Copr.\
-		    With this option, build on copr environment. you must make your project 'kernel-tkg', etc. on your Copr account.\
-		    Without this option, rpms are built on this machine and put them into the results dir. This is default."
+            echo "    -c: Build on Copr."
+		    echo "        With this option, build on copr environment."
+			echo "        You must make your project 'kernel-tkg', etc. on your Copr account."
+			echo "        If SRPMs are already in results dir, they are used."
+		    echo "        Without this option, rpms are built on this machine and put them into the results dir. This is default."
             echo "    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup."
             echo "    -f: Specify Copr config file path. This option also enable '-c' "
             echo "    -l: Show Copr running builds and exit."
             echo "    -m: Show mock messages. This is default, unless -d is not used." 
-            echo "    -s: Don't build rpms but just make srpms to the results dir." 
+            echo "    -s: Make SRPMs only to the results dir." 
             echo "    -h: Show this help." 
             exit 0
             ;;
@@ -150,6 +152,7 @@ export SHOWMESSAGE
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
 
+# Show Copr builds and exit
 if $SHOWCOPRBUILDS ; then
 	while read FEAT
 	do
@@ -160,6 +163,7 @@ if $SHOWCOPRBUILDS ; then
 	exit 0
 fi
 
+# Download original srpm and make srpm,build
 while read VER
 do
     echo $VER
@@ -171,7 +175,7 @@ do
     cat support-features | xargs -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 done < support-vers
 
-# Use first version and feature for debug
+# Debug build, Use first version and feature
 if $DEBUG ; then
     while read FEAT
     do
