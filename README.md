@@ -7,7 +7,7 @@
 |[kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/package/kernel/status_image/last_build.png)|
+|[kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/package/kernel/status_image/last_build.png) **Not supported since 6.6**|
 
 ## Overview
 - You can create custom rpm with these patches for the fedora.
@@ -35,15 +35,15 @@ If you want to try other custom kernels, you may also check my other projects.
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
 - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
 - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
-- Tkg patches, Intel IvyBridge+ optimized and pds kernel:  [kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds)
+- Tkg patches, Intel IvyBridge+ optimized and pds kernel:  [kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds) **Not supported since 6.6**
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.6 patches
-  -  [kernel-6.6.3-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2325606) *The CPU Scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
-  -  [kernel-6.6.3-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2325607) *The CPU Scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
+  -  [kernel-6.6.7-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2333291) *The CPU Scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
+  -  [kernel-6.6.7-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2333290) *The CPU Scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
 - 6.5 patches
   -  [kernel-6.5.12-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322803) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.5.12-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322801) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
