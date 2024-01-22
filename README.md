@@ -41,9 +41,11 @@ Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.7 patches
+  -  [kernel-6.7.1-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2352729) *bcachefs is now merged into the kernel mainline. BBRv2 is disabled.*
 - 6.6 patches
-  -  [kernel-6.6.11-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2343539) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
-  -  [kernel-6.6.11-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2343538) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
+  -  [kernel-6.6.13-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2352734) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
+  -  [kernel-6.6.13-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2352733) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
 - 6.5 patches
   -  [kernel-6.5.12-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322803) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
   -  [kernel-6.5.12-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322801) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
