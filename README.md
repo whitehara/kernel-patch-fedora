@@ -42,20 +42,21 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.7 patches
-  -  [kernel-6.7.2-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2385155) *bcachefs is now merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.3-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2396488) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.3-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2396490) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
 - 6.6 patches
-  -  [kernel-6.6.14-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386947) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
-  -  [kernel-6.6.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386940) *The CPU scheduler is changed to EEVDF. BMQ and PDS are not used anymore.*
+  -  [kernel-6.6.14-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386947) *Since this version, The default CPU scheduler is changed to EEVDF.*
+  -  [kernel-6.6.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386940) *Since this version, The default CPU scheduler is changed to EEVDF.*
 - 6.5 patches
-  -  [kernel-6.5.12-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322803) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.12-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322801) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.5.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2325633) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.5.12-300.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322803)
+  -  [kernel-6.5.12-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2322801)
+  -  [kernel-6.5.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2325633)
 - 6.4 patches
-  -  [kernel-6.4.16-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289005) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.4.16-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289004) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.4.16-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289005)
+  -  [kernel-6.4.16-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2289004)
 - 6.3 patches
-  -  [kernel-6.3.13-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231054) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
-  -  [kernel-6.3.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231053) *CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.3.13-200.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231054) *Since this version, CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
+  -  [kernel-6.3.13-100.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2231053) *Since this version, CONFIG_MLX5_CORE is not enabled for preventing a BUG.*
 - 6.2 patches
   -  [kernel-6.2.15-300.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199143)
   -  [kernel-6.2.15-200.fc37](https://koji.fedoraproject.org/koji/buildinfo?buildID=2199132)
