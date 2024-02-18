@@ -45,13 +45,6 @@ jobs:
       - name: Remove Copr config
         run: rm -f $COPR_CONFIG_FILE
 
-      - name: Archive BUILD.md artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: BUILD.md
-          path: |
-            results/BUILD.md
-
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
