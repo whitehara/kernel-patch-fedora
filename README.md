@@ -22,6 +22,9 @@
    - https://github.com/zhmars/cjktty-patches
 
    (Some of them are modified from the original.)
+
+   Note: All the Project C patches (0009-prjc_vx.x-rx.patch) are under the GNU GENERAL PUBLIC LICENSE Version 3
+
 ## How to install patched kernel RPM
 Quick start.
 ```
@@ -42,8 +45,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.7 patches
-  -  [kernel-6.7.4-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2399158) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
-  -  [kernel-6.7.4-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2399156) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.5-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2405078) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.5-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2405079) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
 - 6.6 patches
   -  [kernel-6.6.14-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386947) *Since this version, The default CPU scheduler is changed to EEVDF.*
   -  [kernel-6.6.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386940) *Since this version, The default CPU scheduler is changed to EEVDF.*
