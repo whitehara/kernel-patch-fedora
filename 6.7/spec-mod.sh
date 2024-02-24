@@ -29,7 +29,7 @@ patch_insert () {
 }
 
 # add paches to spec file
-patch_insert "8001" "more-uarches-for-kernel-5.17p.patch"
+patch_insert "8001" "more-uarches-for-kernel-6.1.79-6.8-rc3.patch"
 patch_insert "9000" "0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch"
 patch_insert "9002" "0002-clear-patches.patch"
 patch_insert "9004" "0003-glitched-base.patch"
