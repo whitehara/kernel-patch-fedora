@@ -45,8 +45,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.7 patches
-  -  [kernel-6.7.9-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2416134) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
-  -  [kernel-6.7.9-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2416132) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.10-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2422667) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.10-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2422665) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
 - 6.6 patches
   -  [kernel-6.6.14-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386947) *Since this version, The default CPU scheduler is changed to EEVDF.*
   -  [kernel-6.6.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386940) *Since this version, The default CPU scheduler is changed to EEVDF.*
