@@ -3,7 +3,7 @@
 # Usage:
 # ./spec-mod.sh <CUSTOM TAG> [cfs|eevdf]
 #   CUSTOMTAG: Add CUSTOM TAG for the package
-#  cfs|eevdf: Select CPU scheduler
+#  cfs|eevdf|bmq|pds: Select CPU scheduler
 
 BASEVERSION=6.8
 PRJC_RELEASE=1
@@ -35,7 +35,8 @@ patch_insert "9002" "0002-clear-patches.patch"
 patch_insert "9004" "0003-glitched-base.patch"
 [ $SCHED = "cfs" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
 	patch_insert "9006" "0003-glitched-cfs-additions.patch"
-[ $SCHED = "eevdf" ] && patch_insert "9005" "0003-glitched-eevdf-additions.patch"
+[ $SCHED = "eevdf" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
+    patch_insert "9006" "0003-glitched-eevdf-additions.patch"
 patch_insert "9007" "0006-add-acs-overrides_iommu.patch"
 patch_insert "9009" "0007-v$BASEVERSION-fsync1_via_futex_waitv.patch"
 patch_insert "9010" "0007-v$BASEVERSION-winesync.patch"
