@@ -105,14 +105,14 @@ diff --git a/mm/vmscan.c b/mm/vmscan.c
 index 5b7b8d4f5297..549684b29418 100644
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
-@@ -190,7 +190,7 @@ struct scan_control {
+@@ -185,7 +185,7 @@
  /*
   * From 0 .. 200.  Higher means more swappy.
   */
 -int vm_swappiness = 60;
 +int vm_swappiness = 30;
-
- static void set_task_reclaim_state(struct task_struct *task,
- 				   struct reclaim_state *rs)
+ 
+ #ifdef CONFIG_MEMCG
+ 
 --
 2.39.1
