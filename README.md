@@ -45,11 +45,12 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.8 patches
-  -  [kernel-6.8.2-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2426870)
-  -  [kernel-6.8.2-201.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2426875)
+  -  [kernel-6.8.4-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431768)
+  -  [kernel-6.8.4-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431771)
+  -  [kernel-6.8.4-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431769)
 - 6.7 patches
-  -  [kernel-6.7.10-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2422667) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
-  -  [kernel-6.7.10-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2422665) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.12-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431044) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
+  -  [kernel-6.7.12-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431066) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
 - 6.6 patches
   -  [kernel-6.6.14-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386947) *Since this version, The default CPU scheduler is changed to EEVDF.*
   -  [kernel-6.6.14-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2386940) *Since this version, The default CPU scheduler is changed to EEVDF.*
