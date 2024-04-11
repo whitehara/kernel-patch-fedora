@@ -45,9 +45,9 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.8 patches
-  -  [kernel-6.8.4-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431768)
-  -  [kernel-6.8.4-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431771)
-  -  [kernel-6.8.4-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431769)
+  -  [kernel-6.8.5-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2435097)
+  -  [kernel-6.8.5-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2435099)
+  -  [kernel-6.8.5-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2435100)
 - 6.7 patches
   -  [kernel-6.7.12-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431044) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
   -  [kernel-6.7.12-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431066) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
