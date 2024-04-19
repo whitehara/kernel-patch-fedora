@@ -268,10 +268,10 @@ index df3aca89d4f5..1df1f7635188 100644
  static inline bool dl_time_before(u64 a, u64 b)
  {
 diff --git a/include/linux/sched/prio.h b/include/linux/sched/prio.h
-index ab83d85e1183..a9a1dfa99140 100644
+index ab83d85e1183..e66dfb553bc5 100644
 --- a/include/linux/sched/prio.h
 +++ b/include/linux/sched/prio.h
-@@ -18,6 +18,32 @@
+@@ -18,6 +18,28 @@
  #define MAX_PRIO		(MAX_RT_PRIO + NICE_WIDTH)
  #define DEFAULT_PRIO		(MAX_RT_PRIO + NICE_WIDTH / 2)
  
@@ -284,20 +284,16 @@ index ab83d85e1183..a9a1dfa99140 100644
 +/* +/- priority levels from the base priority */
 +#ifdef CONFIG_SCHED_BMQ
 +#define MAX_PRIORITY_ADJ	(12)
-+
-+#define MIN_NORMAL_PRIO		(MAX_RT_PRIO)
-+#define MAX_PRIO		(MIN_NORMAL_PRIO + NICE_WIDTH)
-+#define DEFAULT_PRIO		(MIN_NORMAL_PRIO + NICE_WIDTH / 2)
 +#endif
 +
 +#ifdef CONFIG_SCHED_PDS
 +#define MAX_PRIORITY_ADJ	(0)
++#endif
 +
 +#define MIN_NORMAL_PRIO		(128)
 +#define NORMAL_PRIO_NUM		(64)
 +#define MAX_PRIO		(MIN_NORMAL_PRIO + NORMAL_PRIO_NUM)
-+#define DEFAULT_PRIO		(MAX_PRIO - NICE_WIDTH / 2)
-+#endif
++#define DEFAULT_PRIO		(MAX_PRIO - MAX_PRIORITY_ADJ - NICE_WIDTH / 2)
 +
 +#endif /* CONFIG_SCHED_ALT */
 +
@@ -422,7 +418,7 @@ index bee58f7468c3..81f568107a6b 100644
  	select CGROUP_SCHED
  	select FAIR_GROUP_SCHED
 diff --git a/init/init_task.c b/init/init_task.c
-index 7ecb458eb3da..40d2e86da6f9 100644
+index 7ecb458eb3da..e8f8be4f23ba 100644
 --- a/init/init_task.c
 +++ b/init/init_task.c
 @@ -70,9 +70,15 @@ struct task_struct init_task __aligned(L1_CACHE_BYTES) = {
@@ -430,9 +426,9 @@ index 7ecb458eb3da..40d2e86da6f9 100644
  	.usage		= REFCOUNT_INIT(2),
  	.flags		= PF_KTHREAD,
 +#ifdef CONFIG_SCHED_ALT
-+	.prio		= DEFAULT_PRIO + MAX_PRIORITY_ADJ,
++	.prio		= DEFAULT_PRIO,
 +	.static_prio	= DEFAULT_PRIO,
-+	.normal_prio	= DEFAULT_PRIO + MAX_PRIORITY_ADJ,
++	.normal_prio	= DEFAULT_PRIO,
 +#else
  	.prio		= MAX_PRIO - 20,
  	.static_prio	= MAX_PRIO - 20,
@@ -663,10 +659,10 @@ index 976092b7bd45..31d587c16ec1 100644
  obj-y += build_utility.o
 diff --git a/kernel/sched/alt_core.c b/kernel/sched/alt_core.c
 new file mode 100644
-index 000000000000..1044207ba0ad
+index 000000000000..2f280340d55f
 --- /dev/null
 +++ b/kernel/sched/alt_core.c
-@@ -0,0 +1,8945 @@
+@@ -0,0 +1,8941 @@
 +/*
 + *  kernel/sched/alt_core.c
 + *
@@ -745,7 +741,7 @@ index 000000000000..1044207ba0ad
 +#define sched_feat(x)	(0)
 +#endif /* CONFIG_SCHED_DEBUG */
 +
-+#define ALT_SCHED_VERSION "v6.8-r4"
++#define ALT_SCHED_VERSION "v6.8-r5"
 +
 +/*
 + * Compile time debug macro
@@ -2117,8 +2113,7 @@ index 000000000000..1044207ba0ad
 +
 +static inline int __normal_prio(int policy, int rt_prio, int static_prio)
 +{
-+	return rt_policy(policy) ? (MAX_RT_PRIO - 1 - rt_prio) :
-+		static_prio + MAX_PRIORITY_ADJ;
++	return rt_policy(policy) ? (MAX_RT_PRIO - 1 - rt_prio) : static_prio;
 +}
 +
 +/*
@@ -5544,9 +5539,6 @@ index 000000000000..1044207ba0ad
 +#endif
 +
 +	if (likely(prev != next)) {
-+#ifdef CONFIG_SCHED_BMQ
-+		rq->last_ts_switch = rq->clock;
-+#endif
 +		next->last_ran = rq->clock_task;
 +
 +		/*printk(KERN_INFO "sched: %px -> %px\n", prev, next);*/
@@ -9652,10 +9644,10 @@ index 000000000000..1dbd7eb6a434
 +{}
 diff --git a/kernel/sched/alt_sched.h b/kernel/sched/alt_sched.h
 new file mode 100644
-index 000000000000..ba1b7b805f1a
+index 000000000000..81c3ed9ebb7d
 --- /dev/null
 +++ b/kernel/sched/alt_sched.h
-@@ -0,0 +1,975 @@
+@@ -0,0 +1,972 @@
 +#ifndef ALT_SCHED_H
 +#define ALT_SCHED_H
 +
@@ -9893,9 +9885,6 @@ index 000000000000..ba1b7b805f1a
 +	/* Ensure that all clocks are in the same cache line */
 +	u64			clock ____cacheline_aligned;
 +	u64			clock_task;
-+#ifdef CONFIG_SCHED_BMQ
-+	u64			last_ts_switch;
-+#endif
 +
 +	unsigned int  nr_running;
 +	unsigned long nr_uninterruptible;
@@ -10633,19 +10622,16 @@ index 000000000000..ba1b7b805f1a
 +#endif /* ALT_SCHED_H */
 diff --git a/kernel/sched/bmq.h b/kernel/sched/bmq.h
 new file mode 100644
-index 000000000000..b7c9813f6fa7
+index 000000000000..bdc34ad3cc8c
 --- /dev/null
 +++ b/kernel/sched/bmq.h
-@@ -0,0 +1,101 @@
+@@ -0,0 +1,98 @@
 +#define ALT_SCHED_NAME "BMQ"
 +
 +/*
 + * BMQ only routines
 + */
-+#define rq_switch_time(rq)	((rq)->clock - (rq)->last_ts_switch)
-+#define boost_threshold(p)	(sysctl_sched_base_slice >> ((20 - (p)->boost_prio) / 2))
-+
-+static inline void boost_task(struct task_struct *p)
++static inline void boost_task(struct task_struct *p, int n)
 +{
 +	int limit;
 +
@@ -10660,8 +10646,7 @@ index 000000000000..b7c9813f6fa7
 +		return;
 +	}
 +
-+	if (p->boost_prio > limit)
-+		p->boost_prio--;
++	p->boost_prio = max(limit, p->boost_prio - n);
 +}
 +
 +static inline void deboost_task(struct task_struct *p)
@@ -10679,13 +10664,13 @@ index 000000000000..b7c9813f6fa7
 +static inline int
 +task_sched_prio_normal(const struct task_struct *p, const struct rq *rq)
 +{
-+	return p->prio + p->boost_prio - MAX_RT_PRIO;
++	return p->prio + p->boost_prio - MIN_NORMAL_PRIO;
 +}
 +
 +static inline int task_sched_prio(const struct task_struct *p)
 +{
-+	return (p->prio < MAX_RT_PRIO)? (p->prio >> 2) :
-+		MIN_SCHED_NORMAL_PRIO + (p->prio + p->boost_prio - MAX_RT_PRIO) / 2;
++	return (p->prio < MIN_NORMAL_PRIO)? (p->prio >> 2) :
++		MIN_SCHED_NORMAL_PRIO + (p->prio + p->boost_prio - MIN_NORMAL_PRIO) / 2;
 +}
 +
 +#define TASK_SCHED_PRIO_IDX(p, rq, idx, prio)	\
@@ -10709,7 +10694,7 @@ index 000000000000..b7c9813f6fa7
 +
 +inline int task_running_nice(struct task_struct *p)
 +{
-+	return (p->prio + p->boost_prio > DEFAULT_PRIO + MAX_PRIORITY_ADJ);
++	return (p->prio + p->boost_prio > DEFAULT_PRIO);
 +}
 +
 +static inline void sched_update_rq_clock(struct rq *rq) {}
@@ -10729,14 +10714,15 @@ index 000000000000..b7c9813f6fa7
 +
 +static inline void sched_task_ttwu(struct task_struct *p)
 +{
-+	if(this_rq()->clock_task - p->last_ran > sysctl_sched_base_slice)
-+		boost_task(p);
++	s64 delta = this_rq()->clock_task > p->last_ran;
++
++	if (likely(delta > 0))
++		boost_task(p, delta  >> 22);
 +}
 +
 +static inline void sched_task_deactivate(struct task_struct *p, struct rq *rq)
 +{
-+	if (rq_switch_time(rq) < boost_threshold(p))
-+		boost_task(p);
++	boost_task(p, 1);
 +}
 diff --git a/kernel/sched/build_policy.c b/kernel/sched/build_policy.c
 index d9dc9ab3773f..71a25540d65e 100644
