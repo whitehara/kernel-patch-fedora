@@ -45,10 +45,10 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.9 patches
-  -  [kernel-6.9.2-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2457165)
+  -  [kernel-6.9.3-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458949)
 - 6.8 patches
-  -  [kernel-6.8.10-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2453007) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
-  -  [kernel-6.8.11-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2457167) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
+  -  [kernel-6.8.12-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458998) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
+  -  [kernel-6.8.12-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458999) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
   -  [kernel-6.8.10-100.fc38](https://koji.fedoraproject.org/koji/buildinfo?buildID=2453005) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
 - 6.7 patches
   -  [kernel-6.7.12-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2431044) *Since this version, bcachefs is merged into the kernel mainline. BBRv2 is removed.*
