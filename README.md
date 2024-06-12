@@ -45,7 +45,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Newest version only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.9 patches
-  -  [kernel-6.9.3-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458949)
+  -  [kernel-6.9.4-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2468984)
+  -  [kernel-6.9.4-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2468986)
 - 6.8 patches
   -  [kernel-6.8.12-300.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458998) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
   -  [kernel-6.8.12-200.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2458999) *Since 6.8.10, WINSYNC is replaced to NTSYNC.*
