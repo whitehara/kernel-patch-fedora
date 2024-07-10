@@ -35,6 +35,7 @@ sudo dnf install kernel-6.4.14-200_tkg.fc38
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
 If you want to try other custom kernels, you may also check my other projects.
+- Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-prempt)
 - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
 - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
 - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
@@ -43,7 +44,7 @@ If you want to try other custom kernels, you may also check my other projects.
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
-## Tested version (Newest version only)
+## Tested version (Newest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.9 patches
   -  [kernel-6.9.8-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2482795)
