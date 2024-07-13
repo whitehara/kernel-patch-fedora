@@ -1,5 +1,28 @@
 #!/bin/sh
 
+"""
+This script is used to create kernel SRPMs and build them locally or on Copr.
+It uses Koji, Mock, and Copr-cli commands to manage the build process.
+
+The script takes in a list of kernel versions and features, and then iterates over 
+this list, creating a new SRPM for each version. It also handles patches and 
+custom tags based on the features specified.
+
+Options:
+    -c: Build on Copr.
+    -f: Specify Copr config file path. This option also enables '-c'.
+    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup.
+    -l: Show Copr running builds and exit.
+    -m: Show mock messages. This is default, unless '-d' is not used.
+    -s: Make SRPMs only to the results dir.
+    -h: Show this help.
+
+Environment variables:
+    NUM_PARALLEL: The number of parallel processes to use.
+    PATCHDIR: Directory containing patches.
+    RESULTDIR: Directory for storing build results.
+"""
+
 export NUM_PARALLEL=8
 export PATCHDIR=../
 export RESULTDIR=../results
