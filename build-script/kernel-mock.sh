@@ -1,6 +1,6 @@
 #!/bin/sh
 
-"""
+: << COMMENT
 This script is used to create kernel SRPMs and build them locally or on Copr.
 It uses Koji, Mock, and Copr-cli commands to manage the build process.
 
@@ -21,7 +21,7 @@ Environment variables:
     NUM_PARALLEL: The number of parallel processes to use.
     PATCHDIR: Directory containing patches.
     RESULTDIR: Directory for storing build results.
-"""
+COMMENT
 
 export NUM_PARALLEL=8
 export PATCHDIR=../
