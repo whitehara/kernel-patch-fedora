@@ -141,21 +141,6 @@ index 901d1961b73927..05c49141f5802f 100644
 +	  This option extends the KMS color management API with AMD driver-specific properties to enhance the color management support on AMD Steam Deck.
 +
  endmenu
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index 59d2eee72a3297..0a4e75de95c257 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-@@ -4078,7 +4078,7 @@ static int amdgpu_dm_mode_config_init(struct amdgpu_device *adev)
- 		return r;
- 	}
-
--#ifdef AMD_PRIVATE_COLOR
-+#ifdef CONFIG_AMD_PRIVATE_COLOR
- 	if (amdgpu_dm_create_color_properties(adev)) {
-                dc_state_release(state->context);
-                kfree(state);
- 		return -ENOMEM;
- #endif
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
 index c87b64e464ed5c..6fe07243adc3d5 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
