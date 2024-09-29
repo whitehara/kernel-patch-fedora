@@ -339,7 +339,7 @@ index c0cd1b9..af1e2fb 100644
  obj-$(CONFIG_PARPORT)		+= parport/
  obj-y				+= base/ block/ misc/ mfd/ nfc/
  obj-$(CONFIG_LIBNVDIMM)		+= nvdimm/
-@@ -80,6 +73,14 @@ obj-$(CONFIG_IDE)		+= ide/
+@@ -80,6 +73,13 @@ obj-$(CONFIG_IDE)		+= ide/
  obj-y				+= scsi/
  obj-y				+= nvme/
  obj-$(CONFIG_ATA)		+= ata/
@@ -347,9 +347,8 @@ index c0cd1b9..af1e2fb 100644
 +# gpu/ comes after char for AGP vs DRM startup and after iommu
 +obj-y				+= gpu/
 +
-+# i810fb and intelfb depend on char/agp/
++# i810fb depend on char/agp/
 +obj-$(CONFIG_FB_I810)           += video/fbdev/i810/
-+obj-$(CONFIG_FB_INTEL)          += video/fbdev/intelfb/
 +
  obj-$(CONFIG_TARGET_CORE)	+= target/
  obj-$(CONFIG_MTD)		+= mtd/
