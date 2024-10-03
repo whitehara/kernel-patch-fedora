@@ -40,7 +40,7 @@ function make_srpm () {
     local VER=$1  # 6.3.4-200.fc38
     local PROJECTID=$2 # -tkg
     local CUSTOMTAG=$3 # _tkg
-    local BUILDTIMEOUT=25200
+    local BUILDTIMEOUT=36000
 
     local OS="fedora-${VER##*fc}-x86_64"
     local SRPM=kernel-$VER.src.rpm
