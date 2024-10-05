@@ -50,8 +50,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
   -  [kernel-6.11.2-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2560807)
   -  [kernel-6.11.2-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2561062)
 - 6.10 patches
-  -  [kernel-6.10.12-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2558354)
-  -  [kernel-6.10.12-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2558353)
+  -  [kernel-6.10.13-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2560935)
+  -  [kernel-6.10.13-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2560936)
 - 6.9 patches
   -  [kernel-6.9.12-200.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2517792)
   -  [kernel-6.9.12-100.fc39](https://koji.fedoraproject.org/koji/buildinfo?buildID=2517794)
