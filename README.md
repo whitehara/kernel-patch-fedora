@@ -14,7 +14,7 @@
 - You can create custom rpm with these patches for the fedora.
   - Download srpm from fedora repository and apply patches to the kernel source.
     - https://koji.fedoraproject.org/koji/packageinfo?packageID=8
-  - RPM is available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
+  - Patched RPMs are available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
 - Most of these patches are suitable for gaming on Linux.
   - These patches are from:
    - https://github.com/graysky2/kernel_compiler_patch
@@ -100,7 +100,10 @@ There are 2 ways. One is build with the script in "build-script" dir, another is
 In build-script dir, you see "kernel-mock.sh". This script is used for building my projects, you can use and modify as you like.
 
 #### Preparation
-- Install mock, copr-cli.
+- Install mock, copr-cli, koji.
+
+      dnf install mock copr-cli koji
+
 - Modify "support-vers". It contains Original fedora project kernel versions for building.
 If you want to build new versions, you need to add it to this file. 
 - Modify "support-features". It contains Project ID for copr, Custom tag for the package name, Features like bmq,pds,cpu-arch which are used in spec-mod.sh
@@ -115,7 +118,7 @@ In build-script dir, you can run like below:
 
      ./kernel-mock.sh
 
-It builds rpms on your local machine, then copy results to "../results" dir.
+It builds rpms on your local machine's [mock](https://github.com/rpm-software-management/mock) environment, then copy results from the mock environment to "../results" dir.
 
 If you want to see detail messages and run rpmbuild commands by yourself in the mock environment,
 
