@@ -62,12 +62,10 @@ cat << EOF >> $i
 # CONFIG_MALDERLAKE is not set
 # CONFIG_MNATIVE_INTEL is not set
 # CONFIG_MNATIVE_AMD is not set
-# CONFIG_GENERIC_CPU2 is not set
-# CONFIG_GENERIC_CPU3 is not set
-# CONFIG_GENERIC_CPU4 is not set
 # CONFIG_MRAPTORLAKE is not set
 # CONFIG_MMETEORLAKE is not set
 # CONFIG_MEMERALDRAPIDS is not set
+CONFIG_X86_64_VERSION=1
 EOF
 
 done
