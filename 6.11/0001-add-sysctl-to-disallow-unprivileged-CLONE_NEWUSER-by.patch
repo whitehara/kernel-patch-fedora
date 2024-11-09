@@ -66,9 +66,9 @@ diff --git a/kernel/fork.c b/kernel/fork.c
 index 08969f5aa38d59..ff601cb7a1fae0 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
-@@ -104,6 +104,10 @@
- #include <uapi/linux/pidfd.h>
+@@ -106,6 +106,10 @@
  #include <linux/pidfs.h>
+ #include <linux/tick.h>
  
 +#ifdef CONFIG_USER_NS
 +#include <linux/user_namespace.h>
