@@ -6,7 +6,7 @@
 #  cfs|eevdf|bmq|pds: Select CPU scheduler
 
 BASEVERSION=6.11
-PRJC_RELEASE=0
+PRJC_RELEASE=1
 SPEC=kernel.spec
 CUSTOMTAG=$1
 SCHED=$2
