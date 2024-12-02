@@ -74,7 +74,14 @@ function make_srpm () {
 	    for i in ${PARAM[@]}
 	    do
 		echo Feature: $i
-		$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
+		
+		# If there is a realtime config, modify configs directly.
+		if [ $i = "preempt" ]; then
+			$MOCK --shell -- "test -f /builddir/build/SOURCES/config-patch-preempt.sh && (cd /builddir/build/SOURCES && ./config-patch-preempt.sh)"
+		else
+			$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
+		fi
+
 		$DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
 
 		# Attach patches to kernel.spec
