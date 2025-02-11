@@ -53,7 +53,8 @@ cat << EOF >> $i
 # CONFIG_MSKYLAKE is not set
 # CONFIG_MSKYLAKEX is not set
 # CONFIG_MCANNONLAKE is not set
-# CONFIG_MICELAKE is not set
+# CONFIG_MICELAKE_CLIENT is not set
+# CONFIG_MICELAKE_SERVER is not set
 # CONFIG_MCASCADELAKE is not set
 # CONFIG_MCOOPERLAKE is not set
 # CONFIG_MTIGERLAKE is not set
