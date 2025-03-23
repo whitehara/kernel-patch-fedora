@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Usage:
 # ./spec-mod.sh <CUSTOM TAG> [cfs|eevdf]
@@ -29,23 +29,27 @@ patch_insert () {
 }
 
 # add paches to spec file
-patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.1.79p.patch"
-patch_insert "9000" "0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch"
-patch_insert "9002" "0002-clear-patches.patch"
-patch_insert "9004" "0003-glitched-base.patch"
-[ $SCHED = "cfs" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
-	patch_insert "9006" "0003-glitched-cfs-additions.patch"
-[ $SCHED = "eevdf" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
-    patch_insert "9006" "0003-glitched-eevdf-additions.patch"
-patch_insert "9007" "0006-add-acs-overrides_iommu.patch"
-#patch_insert "9009" "0007-v$BASEVERSION-fsync1_via_futex_waitv.patch"
-patch_insert "9010" "0007-v$BASEVERSION-ntsync.patch"
-[ $SCHED != "eevdf" ] && patch_insert "9012" "0009-prjc_v$BASEVERSION-r$PRJC_RELEASE.patch"
-patch_insert "9014" "0012-misc-additions.patch"
-patch_insert "9015" "0013-fedora-rpm.patch"
-patch_insert "9016" "0013-optimize_harder_O3.patch"
-patch_insert "9051" "0014-OpenRGB.patch"
+if [[ $CUSTOMTAG =~ ^_cachyos ]]; then
+	patch_insert "8000" "0001-cachyos-base-all.patch"
+else
+	patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.1.79p.patch"
+	patch_insert "9000" "0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch"
+	patch_insert "9002" "0002-clear-patches.patch"
+	patch_insert "9004" "0003-glitched-base.patch"
+	[ $SCHED = "cfs" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
+		patch_insert "9006" "0003-glitched-cfs-additions.patch"
+	[ $SCHED = "eevdf" ] && patch_insert "9005" "0003-glitched-cfs.patch" && \
+		patch_insert "9006" "0003-glitched-eevdf-additions.patch"
+	patch_insert "9007" "0006-add-acs-overrides_iommu.patch"
+	#patch_insert "9009" "0007-v$BASEVERSION-fsync1_via_futex_waitv.patch"
+	patch_insert "9010" "0007-v$BASEVERSION-ntsync.patch"
+	[ $SCHED != "eevdf" ] && patch_insert "9012" "0009-prjc_v$BASEVERSION-r$PRJC_RELEASE.patch"
+	patch_insert "9014" "0012-misc-additions.patch"
+	patch_insert "9015" "0013-fedora-rpm.patch"
+	patch_insert "9016" "0013-optimize_harder_O3.patch"
+	patch_insert "9051" "0014-OpenRGB.patch"
+	patch_insert "9054" "amdgpu-ignore-min-pcap.patch"
+fi
 patch_insert "9052" "cjktty-$BASEVERSION.patch"
 patch_insert "9053" "cjktty-add-cjk32x32-font-data.patch"
-patch_insert "9054" "amdgpu-ignore-min-pcap.patch"
 patch_insert "9099" "0099-fix-confdata.patch"
