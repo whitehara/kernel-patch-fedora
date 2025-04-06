@@ -9,7 +9,6 @@
 |[kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds/package/kernel/status_image/last_build.png) **Not supported since 6.6**|
 
 ## Overview
 - You can create custom rpm with these patches for the fedora.
@@ -17,7 +16,8 @@
     - https://koji.fedoraproject.org/koji/packageinfo?packageID=8
   - Patched RPMs are available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
 - Most of these patches are suitable for gaming on Linux.
-  - These patches are from:
+
+  These patches are from:
    - https://github.com/graysky2/kernel_compiler_patch
    - https://github.com/Frogging-Family/community-patches
    - https://github.com/Frogging-Family/linux-tkg
@@ -31,24 +31,30 @@
 ## How to install patched kernel RPM
 Quick start.
 ```
-sudo dnf copr whitehara/kernel-tkg
+sudo dnf copr enable whitehara/kernel-tkg
 sudo dnf install kernel-6.4.14-200_tkg.fc38
 ```
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
 If you want to try other custom kernels, you may also check my other projects.
-- Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-prempt)
-- Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
-- Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
-- CachyOS patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt)
-- Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
-- Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
-- Tkg patches, Intel IvyBridge+ optimized and pds kernel:  [kernel-tkg-ivybridge-pds](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-ivybridge-pds) **Not supported since 6.6**
+- Based on [TKg paches](https://github.com/Frogging-Family/linux-tkg)
+  - Tkg patches kernel: [kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg)
+  - Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-prempt)
+  - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
+  - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
+  - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
+  - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
+- Based on [CachyOS paches](https://github.com/CachyOS/kernel-patches)
+  - CachyOS patches and preemptive kernel:  [kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt)
+  - CachyOS patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt)
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
-## Tested version (Newest versions only)
+## Tested version (Latest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.14 patches
+  -  [kernel-6.14.0-63.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2685011)
+  -  [kernel-6.14.0-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2691669)
 - 6.13 patches
   -  [kernel-6.13.9-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2687822)
   -  [kernel-6.13.9-100.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2687821)
