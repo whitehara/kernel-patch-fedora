@@ -6,6 +6,7 @@
 |[kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png)|
+|[kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
@@ -53,11 +54,11 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Latest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.14 patches
-  -  [kernel-6.14.0-63.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2685011)
-  -  [kernel-6.14.0-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2691669)
+  -  [kernel-6.14.1-300.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2693809)
+  -  [kernel-6.14.1-100.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2693823)
 - 6.13 patches
-  -  [kernel-6.13.9-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2687822)
-  -  [kernel-6.13.9-100.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2687821)
+  -  [kernel-6.13.10-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2694358)
+  -  [kernel-6.13.10-100.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2694356)
 - 6.12 patches
   -  [kernel-6.12.15-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2661636)
   -  [kernel-6.12.15-100.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2661635)
