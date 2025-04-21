@@ -33,7 +33,7 @@ jobs:
           options: -v ${{ github.workspace }}:/build --privileged
           run: |
             echo "Install packages"
-            dnf -q -y install koji copr-cli mock
+            dnf -q -y install koji copr-cli mock gawk
             echo "Run build"
             cd /build/build-script
             ./kernel-mock.sh -c -f /build/copr
