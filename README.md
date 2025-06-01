@@ -54,8 +54,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 ## Tested version (Latest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.14 patches
-  -  [kernel-6.14.8-300.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2718587)
-  -  [kernel-6.14.8-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2718586)
+  -  [kernel-6.14.9-300.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2720763)
+  -  [kernel-6.14.9-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2720764)
   -  [kernel-6.14.6-100.fc40](https://koji.fedoraproject.org/koji/buildinfo?buildID=2711919)
 - 6.13 patches
   -  [kernel-6.13.12-200.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2702627)

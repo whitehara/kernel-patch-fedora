@@ -207,10 +207,10 @@ index 8a4c40b4c27e4f..779880c6457553 100644
  	.atomic_set_property = dm_atomic_plane_set_property,
  	.atomic_get_property = dm_atomic_plane_get_property,
  #endif
-@@ -1885,7 +1885,7 @@ int amdgpu_dm_plane_init(struct amdgpu_display_manager *dm,
+@@ -1885,7 +1885,7 @@
  	else
  		drm_plane_helper_add(plane, &dm_plane_helper_funcs);
-
+ 
 -#ifdef AMD_PRIVATE_COLOR
 +#ifdef CONFIG_AMD_PRIVATE_COLOR
  	dm_atomic_plane_attach_color_mgmt_properties(dm, plane);
@@ -230,11 +230,11 @@ diff --git a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c b/drivers/gpu/drm/amd/pm/
 index a54663f2e2ab9f..7ffad3eb0a0150 100644
 --- a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
 +++ b/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
-@@ -2703,7 +2703,6 @@ int smu_get_power_limit(void *handle,
+@@ -2801,7 +2801,6 @@
  		case SMU_PPT_LIMIT_CURRENT:
  			switch (amdgpu_ip_version(adev, MP1_HWIP, 0)) {
  			case IP_VERSION(13, 0, 2):
 -			case IP_VERSION(13, 0, 6):
+ 			case IP_VERSION(13, 0, 12):
  			case IP_VERSION(13, 0, 14):
  			case IP_VERSION(11, 0, 7):
- 			case IP_VERSION(11, 0, 11):

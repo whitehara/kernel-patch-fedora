@@ -56,9 +56,12 @@ diff --git a/kernel/sched/rt.c b/kernel/sched/rt.c
 index f788cd61df21..2bfbb4213707 100644
 --- a/kernel/sched/rt.c
 +++ b/kernel/sched/rt.c
-@@ -22,7 +22,7 @@
+@@ -16,9 +16,9 @@
+ 
+ /*
   * part of the period that we allow rt tasks to run in us.
-  * default: 0.95s
+- * default: 0.95s
++ * XanMod default: 0.98s
   */
 -int sysctl_sched_rt_runtime = 950000;
 +int sysctl_sched_rt_runtime = 980000;
@@ -83,7 +86,7 @@ diff --git a/scripts/setlocalversion b/scripts/setlocalversion
 index 20f2efd57b11..0552d8b9f582 100755
 --- a/scripts/setlocalversion
 +++ b/scripts/setlocalversion
-@@ -113,7 +113,7 @@
+@@ -117,7 +117,7 @@
  		# If only the short version is requested, don't bother
  		# running further git commands
  		if $short; then
@@ -388,7 +391,7 @@ index 4eab3d70e880..79669aa39d79 100644
   */
  static struct elevator_type *elevator_get_default(struct request_queue *q)
  {
-@@ -568,7 +568,7 @@
+@@ -560,7 +560,7 @@
  	    !blk_mq_is_shared_tags(q->tag_set->flags))
  		return NULL;
  
@@ -415,7 +418,7 @@ diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
 index cf2468da68e9..007dea784451 100644
 --- a/include/linux/pagemap.h
 +++ b/include/linux/pagemap.h
-@@ -1281,7 +1281,7 @@
+@@ -1373,7 +1373,7 @@
  		._index = i,						\
  	}
  
@@ -462,7 +465,7 @@ diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/adm
 index fb95fad81c79..3e92fee81e33 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2229,6 +2229,9 @@
+@@ -2294,6 +2294,9 @@
  			disable
  			  Do not enable intel_pstate as the default
  			  scaling driver for the supported processors
@@ -476,7 +479,7 @@ diff --git a/drivers/cpufreq/intel_pstate.c b/drivers/cpufreq/intel_pstate.c
 index 36a469150ff9..aee891c9b78a 100644
 --- a/drivers/cpufreq/intel_pstate.c
 +++ b/drivers/cpufreq/intel_pstate.c
-@@ -3558,6 +3558,8 @@
+@@ -3838,6 +3838,8 @@
  	if (!strcmp(str, "no_hwp"))
  		no_hwp = 1;
  
@@ -655,9 +658,9 @@ diff --git a/Makefile b/Makefile
 index 3f6628780eb2..35a5ae1ede42 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1011,6 +1011,9 @@
- KBUILD_CFLAGS-$(CONFIG_CC_NO_STRINGOP_OVERFLOW) += $(call cc-option, -Wno-stringop-overflow)
- KBUILD_CFLAGS-$(CONFIG_CC_STRINGOP_OVERFLOW) += $(call cc-option, -Wstringop-overflow)
+@@ -1072,6 +1072,9 @@
+ # perform bounds checking.
+ KBUILD_CFLAGS += $(call cc-option, -fstrict-flex-arrays=3)
  
 +# disable GCC vectorization on trees
 +KBUILD_CFLAGS	+= $(call cc-option, -fno-tree-vectorize)
