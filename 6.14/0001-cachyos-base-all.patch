@@ -2526,6 +2526,18 @@ index 7a422a6c5983..3be9b3342c67 100644
  		pr_info("KVM setup pv remote TLB flush\n");
  	}
  
+diff --git a/arch/x86/kernel/paravit.c b/arch/x86/kernel/paravirt.c
+index c5bb980b8a67..3f4864501d9e 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -182,7 +182,6 @@
+ 	.mmu.flush_tlb_kernel	= native_flush_tlb_global,
+ 	.mmu.flush_tlb_one_user	= native_flush_tlb_one_user,
+ 	.mmu.flush_tlb_multi	= native_flush_tlb_multi,
+-	.mmu.tlb_remove_table	= tlb_remove_table,
+ 
+ 	.mmu.exit_mmap		= paravirt_nop,
+ 	.mmu.notify_page_enc_status_changed	= paravirt_nop,
 diff --git a/arch/x86/mm/tlb.c b/arch/x86/mm/tlb.c
 index 3c81edd54c5c..d4ea9d4f7879 100644
 --- a/arch/x86/mm/tlb.c
