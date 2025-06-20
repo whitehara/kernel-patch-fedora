@@ -31,8 +31,7 @@ patch_insert () {
 if [[ $CUSTOMTAG =~ ^_cachyos ]]; then
 	patch_insert "8000" "0001-cachyos-base-all.patch"
 else
-	#patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.1.79p.patch"
-	patch_insert "8001" "0001-cachyos-march.patch"
+	patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.15-rc1p.patch"
 	patch_insert "9000" "0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch"
 	patch_insert "9002" "0002-clear-patches.patch"
 	patch_insert "9004" "0003-glitched-base.patch"
