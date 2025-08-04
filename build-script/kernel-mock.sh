@@ -30,7 +30,11 @@ export RESULTDIR=../results
 function download_srpm () {
     [[ $@ =~ ^# ]] && return 1
 
-    (cd $RESULTDIR && koji -q download-build --rpm kernel-$1.src.rpm)
+    KOJIOPT="-q"
+	$DEBUG && KOJIOPT="" # Show koji messages when debug mode is on
+
+	[ $# -ne 1 ] && return 1
+    (cd $RESULTDIR && koji $KOJIOPT download-build --rpm kernel-$1.src.rpm)
 }
 
 function make_srpm () {
