@@ -22,7 +22,7 @@
    - https://github.com/graysky2/kernel_compiler_patch
    - https://github.com/Frogging-Family/community-patches
    - https://github.com/Frogging-Family/linux-tkg
-   - https://github.com/zhmars/cjktty-patches
+   - https://github.com/bigshans/cjktty-patches
    - https://github.com/CachyOS/kernel-patches
 
    (Some of them are modified from the original.)
@@ -53,6 +53,8 @@ Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Latest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
+- 6.16 patches
+  -  [kernel-6.16.0-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2787300)
 - 6.15 patches
   -  [kernel-6.15.9-201.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2784629)
   -  [kernel-6.15.9-101.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2784630)
