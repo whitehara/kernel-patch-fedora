@@ -28561,7 +28561,7 @@ index ff07ee2940f5..a495aa76e5ee 100644
  	kfree(info);
  	return ret;
  }
-@@ -1435,15 +1386,14 @@ void domain_detach_iommu(struct dmar_domain *domain, struct intel_iommu *iommu)
+@@ -1386,10 +1386,10 @@
  	if (domain->domain.type == IOMMU_DOMAIN_SVA)
  		return;
  
@@ -28572,13 +28572,8 @@ index ff07ee2940f5..a495aa76e5ee 100644
 -		clear_bit(info->did, iommu->domain_ids);
 +		ida_free(&iommu->domain_ida, info->did);
  		xa_erase(&domain->iommu_array, iommu->seq_id);
- 		domain->nid = NUMA_NO_NODE;
  		kfree(info);
  	}
--	spin_unlock(&iommu->lock);
- }
- 
- static void domain_exit(struct dmar_domain *domain)
 @@ -1681,9 +1631,8 @@ __domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
  	}
  
