@@ -1,4 +1,4 @@
-# Linux kernel patches (compilable with the fedora kernel)
+# Linux kernel patches (compilable with the Fedora kernel)
 ## Latest Build Status
 |Copr Project Name|Copr Build Status|
 |---|---|
@@ -12,11 +12,11 @@
 |[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
 
 ## Overview
-- You can create custom rpm with these patches for the fedora.
-  - Download srpm from fedora repository and apply patches to the kernel source.
+- You can create custom RPMs with these patches for the Fedora.
+  - Download SRPM from fedora repository and apply patches to the kernel source.
     - https://koji.fedoraproject.org/koji/packageinfo?packageID=8
-  - Patched RPMs are available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install by dnf.
-- Most of these patches are suitable for gaming on Linux.
+  - Patched RPMs are available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install them using dnf.
+- Most of these patches are optimized for gaming on Linux.
 
   These patches are from:
    - https://github.com/graysky2/kernel_compiler_patch
@@ -38,14 +38,14 @@ sudo dnf install kernel-6.4.14-200_tkg.fc38
 See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
 If you want to try other custom kernels, you may also check my other projects.
-- Based on [TKg paches](https://github.com/Frogging-Family/linux-tkg)
+- Based on [TKg patches](https://github.com/Frogging-Family/linux-tkg)
   - Tkg patches kernel: [kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg)
-  - Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-prempt)
+  - Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt)
   - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
   - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
   - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
   - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
-- Based on [CachyOS paches](https://github.com/CachyOS/kernel-patches)
+- Based on [CachyOS patches](https://github.com/CachyOS/kernel-patches)
   - CachyOS patches and preemptive kernel:  [kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt)
   - CachyOS patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt)
 
@@ -132,7 +132,7 @@ If you want to build new versions, you need to add it to this file.
 - Modify "support-features". It contains Project ID for copr, Custom tag for the package name, Features like bmq,pds,cpu-arch which are used in spec-mod.sh
 
 
-**Each features are built with all versions. E.g. If you have 3 features and 2 versions, Results wll be 3 projects and each projects have 2 versions.**
+**Each feature is built with all versions. E.g. If you have 3 features and 2 versions, The results will be 3 projects and each project will have 2 versions.**
 
 **If you want to add CPU-arch, you also need to add kernel-local.CPU-arch files.**
 
@@ -141,35 +141,35 @@ In build-script dir, you can run like below:
 
      ./kernel-mock.sh
 
-It builds rpms on your local machine's [mock](https://github.com/rpm-software-management/mock) environment, then copy results from the mock environment to "../results" dir.
+It builds RPMs on your local machine's [mock](https://github.com/rpm-software-management/mock) environment, then copies results from the mock environment to "../results" dir.
 
-If you want to see detail messages and run rpmbuild commands by yourself in the mock environment,
+If you want to see detailed messages and run rpmbuild commands by yourself in the mock environment,
 
-     ./kernel-moch.sh -d
+     ./kernel-mock.sh -d
 
-This will extract your package and stop when patches are applied, then open the mock's shell. So you can check the patches are applied correctly or not, modify patches if you need, then run "rpmbuild" manually. In this mode, only first line of support-vers, support-features are used. And **Your results are not moved to reults dir. Please move it manually before you exit this mode's shell.**
+This will extract your package and stop when patches are applied, then open the mock's shell. So you can check whether the patches are applied correctly or not, modify patches if you need, then run "rpmbuild" manually. In this mode, only first line of support-vers, support-features are used. And **Your results are not moved to results dir. Please move them manually before exiting the shell in this mode.**
 
 If you want to build on Copr,
 
     ./kernel-mock.sh -c
 
-You must setup your copr account and make projects before you run.
+You must set up your Copr account and create projects before you run.
 
 ### Build without the script
 #### Setup rpm build tree
-If you aleady have one, you can skip this step.
+If you already have one, you can skip this step.
 
       dnf install rpmdevtools
       rpmdev-setuptree
-The rpmdev-setuptree command creates build tree automaticaly.
-You can check where it is like this.
+The rpmdev-setuptree command automatically creates the build tree.
+You can check its location like this:
 
       rpmbuild --showrc | grep _topdir
 In this document, the _topdir is just "rpm".
 #### Download source kernel-*.fc*.srpm
 
       dnf download --source kernel
-If you want to use the newest developing kernel, you can use koji.
+If you want to use the latest development kernel, you can use Koji.
 
       koji download-build -a src kernel-*
 
@@ -187,12 +187,12 @@ If you want to use the newest developing kernel, you can use koji.
       cp kernel-patch-fedora/5.16/* rpm/SOURCES/
 
 #### Modify kernel config
-The config-path.sh adds minimal config into .config files.
-If you want to custom your kernel, you can add kerne-local file in SOURCES directory.
+The config-path.sh script adds minimal config into .config files.
+If you want to customize your kernel, you can add a kernel-local file to the SOURCES directory.
 
       cd rpm/SOURCES &&  ./config-patch.sh
 #### Modify kernel.spec(add these patch lines like below)
-The _custom_kernel_tag is suffix for kernel package name. It looks like "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
+The _custom_kernel_tag is a suffix for the kernel package name. Such as "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
 
       cd rpm/SOURCES && ./spec-mod.sh _custom_kernel_tag
 
@@ -202,18 +202,18 @@ You can use other options like below:
       CUSTOMTAG: Add CUSTOM TAG for the package
       cfs|pds|bmq: Select scheduler for Project-C patch
 
-#### Check if paches are appliciable.
+#### Check if patches are applicable.
 
       rpmbuild -bp kernel.spec
 
-"-bp" option means doing until applying patches(does not doing compile).
+"-bp" option means applies patches only (does not compile).
 
 #### Compile
 
-      rpmbild -bb kernel.spec
-"-bb" is just compile binary only. If you want the srpm, use "-ba"(with binary) or "-bs"(without binary) option. See manpages of rpmbuild to find the other rpmbuild option.
+      rpmbuild -bb kernel.spec
+"-bb" compiles only the binary. If you want the SRPM, use "-ba"(with binary) or "-bs"(without binary) option. See the rpmbuild manpages for other options.
 
-You can also use options like "--without debug --without debuginfo". Creating debug rpms needs the longer time to compile. So if you don't need them, I recommend to set these options. See kernel.spec file to find the other "--without" option. **You may need to add "--without configchecks" to avoid config check errors since 6.0.**
+You can also use options like "--without debug --without debuginfo". Creating debug RPMs takes longer to compile, so if you don't need them, I recommend setting these options. See the kernel.spec file for other "--without" options. **You may need to add "--without configchecks" to avoid config check errors since version 6.0.**
 #### Install
       cd rpm/RPMS/
       dnf install kernel-*
