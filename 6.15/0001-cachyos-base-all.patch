@@ -21728,19 +21728,6 @@ index 6f9a6185df7f..5e14474a0698 100644
 +	return 0;
 +}
 +late_initcall(print_s5_reset_status_mmio);
-diff --git a/drivers/bluetooth/btusb.c b/drivers/bluetooth/btusb.c
-index 6f2fd043fd3f..0da7dc0cf8b0 100644
---- a/drivers/bluetooth/btusb.c
-+++ b/drivers/bluetooth/btusb.c
-@@ -705,6 +705,8 @@ static const struct usb_device_id quirks_table[] = {
- 						     BTUSB_WIDEBAND_SPEECH },
- 	{ USB_DEVICE(0x0489, 0xe139), .driver_info = BTUSB_MEDIATEK |
- 						     BTUSB_WIDEBAND_SPEECH },
-+	{ USB_DEVICE(0x0489, 0xe14e), .driver_info = BTUSB_MEDIATEK |
-+						     BTUSB_WIDEBAND_SPEECH },
- 	{ USB_DEVICE(0x0489, 0xe14f), .driver_info = BTUSB_MEDIATEK |
- 						     BTUSB_WIDEBAND_SPEECH },
- 	{ USB_DEVICE(0x0489, 0xe150), .driver_info = BTUSB_MEDIATEK |
 diff --git a/drivers/gpu/drm/i915/display/intel_dsb.c b/drivers/gpu/drm/i915/display/intel_dsb.c
 index 9fc4003d1579..e5ece83a1df1 100644
 --- a/drivers/gpu/drm/i915/display/intel_dsb.c
@@ -24534,7 +24521,7 @@ index adfa329e917b..0787581a25cc 100644
  	return 0;
  }
  
-@@ -730,55 +1402,6 @@ static int magicmouse_input_configured(struct hid_device *hdev,
+@@ -1402,55 +1402,6 @@
  	return 0;
  }
  
@@ -24587,9 +24574,9 @@ index adfa329e917b..0787581a25cc 100644
 -		hid_err(msc->hdev, "unable to request touch data (%d)\n", ret);
 -}
 -
- static int magicmouse_fetch_battery(struct hid_device *hdev)
+ static bool is_usb_magicmouse2(__u32 vendor, __u32 product)
  {
- #ifdef CONFIG_HID_BATTERY_STRENGTH
+ 	if (vendor != USB_VENDOR_ID_APPLE)
 @@ -825,12 +1448,62 @@ static int magicmouse_probe(struct hid_device *hdev,
  	struct hid_report *report;
  	int ret;
