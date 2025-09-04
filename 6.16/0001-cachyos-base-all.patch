@@ -3397,7 +3397,7 @@ index 4b45e31f0bab..38bc8e2effda 100644
  	/*
  	 * T90CHI's keyboard dock returns same ID values as T100CHI's dock.
  	 * Thus, identify T90CHI dock with product name string.
-@@ -1207,12 +1349,41 @@ static int asus_probe(struct hid_device *hdev, const struct hid_device_id *id)
+@@ -1349,12 +1349,41 @@
  		return ret;
  	}
  
@@ -3436,9 +3436,9 @@ index 4b45e31f0bab..38bc8e2effda 100644
 +	if (drvdata->quirks & QUIRK_ROG_NKEY_KEYBOARD)
 +		return 0;
 +
- 	if (!drvdata->input) {
- 		hid_err(hdev, "Asus input not registered\n");
- 		ret = -ENOMEM;
+ 	/*
+ 	 * Check that input registration succeeded. Checking that
+ 	 * HID_CLAIMED_INPUT is set prevents a UAF when all input devices
 @@ -1243,6 +1414,8 @@ static void asus_remove(struct hid_device *hdev)
  	unsigned long flags;
  
