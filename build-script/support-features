@@ -1,4 +1,5 @@
 # <ProjectID suffix> <CustomTag> [Features...]
+-cachyos-zen3-preempt _cachyos_zen3_preempt zen3 preempt eevdf
 -cachyos-zen2-preempt _cachyos_zen2_preempt zen2 preempt eevdf
 -cachyos-preempt _cachyos_preempt preempt eevdf
 -tkg-zen2-preempt _tkg_zen2_preempt zen2 preempt eevdf

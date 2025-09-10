@@ -8,6 +8,7 @@
 |[kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/package/kernel/status_image/last_build.png)|
+|[kernel-cachyos-zen3-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
 |[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
 
@@ -48,14 +49,15 @@ If you want to try other custom kernels, you may also check my other projects.
 - Based on [CachyOS patches](https://github.com/CachyOS/kernel-patches)
   - CachyOS patches and preemptive kernel:  [kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt)
   - CachyOS patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt)
+  - CachyOS patches, AMD Zen3+ optimized and preemptive kernel:  [kernel-cachyos-zen3-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt)
 
 Files in the kernel-local folder are used in these custom kernel projects.
 
 ## Tested version (Latest versions only)
 **BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
 - 6.16 patches
-  -  [kernel-6.16.5-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2810885)
-  -  [kernel-6.16.5-100.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2810891)
+  -  [kernel-6.16.6-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2813148)
+  -  [kernel-6.16.6-100.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2813145)
 - 6.15 patches
   -  [kernel-6.15.11-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2804148)
   -  [kernel-6.15.11-100.fc41](https://koji.fedoraproject.org/koji/buildinfo?buildID=2804149)
