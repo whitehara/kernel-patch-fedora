@@ -37,6 +37,10 @@ jobs:
             echo "Run build"
             cd /build/build-script
             ./kernel-mock.sh -c -f /build/copr
+            if [ $? -ne 0 ]; then
+              echo "ERROR: Some builds failed"
+              exit 1
+            fi
             echo "Wait 180s for starting the builds in copr"
             sleep 180s
             echo "Write BUILD.md"
@@ -47,5 +51,6 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
+        if: ${{ ! failure() && github.step('Run kernel-mock.sh in docker').outputs.exitcode == '0' }}
         with:
           body_path: results/BUILD.md

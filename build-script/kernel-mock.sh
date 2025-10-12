@@ -28,17 +28,19 @@ export PATCHDIR=../
 export RESULTDIR=../results
 
 function download_srpm () {
-    [[ $@ =~ ^# ]] && return 1
+	# If the line is a comment or doesn't have exactly 1 argument, just return
+    [[ $@ =~ ^# ]] && return 0
+	[ $# -ne 1 ] && return 1
 
     KOJIOPT="-q"
 	$DEBUG && KOJIOPT="" # Show koji messages when debug mode is on
 
-	[ $# -ne 1 ] && return 1
     (cd $RESULTDIR && koji $KOJIOPT download-build --rpm kernel-$1.src.rpm)
 }
 
 function make_srpm () {
-    [[ $@ =~ ^# ]] && return 1
+	# If the line is a comment or has less than 4 arguments, just return
+    [[ $@ =~ ^# ]] && return 0
     [ $# -le 3 ] && return 1
 
     local VER=$1  # 6.3.4-200.fc38
@@ -199,15 +201,20 @@ if $SHOWCOPRBUILDS ; then
 fi
 
 # Download original srpm and make srpm,build
+RET=0
 while read VER
 do
     echo $VER
-    download_srpm $VER || continue
+    download_srpm $VER || (
+		RET=$((RET + $?))
+		continue
+		)
 
     # Use first version for debug
     $DEBUG && break
 
     cat support-features | xargs -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
+	RET=$((RET + $?))
 done < support-vers
 
 # Debug build, Use first version and feature
@@ -221,3 +228,5 @@ if $DEBUG ; then
     echo Feature: $FEAT
     make_srpm $VER $FEAT
 fi
+
+exit $RET
