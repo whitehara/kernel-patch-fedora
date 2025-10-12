@@ -124,6 +124,7 @@ function make_srpm () {
     if $USECOPR ; then
 	    # Run copr build
 		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		$MOCK --scrub=chroot
     else
 	    # Build local without debug packages
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
@@ -135,9 +136,9 @@ function make_srpm () {
 		    return 1
 	    else
 		    echo "Local build finished."
+			$MOCK --scrub=chroot --scrub=bootstrap
 	    fi
     fi
-	$MOCK --scrub=chroot
 }
 export -f make_srpm
 
