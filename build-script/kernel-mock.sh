@@ -23,7 +23,7 @@ Environment variables:
     RESULTDIR: Directory for storing build results.
 COMMENT
 
-export NUM_PARALLEL=8
+export NUM_PARALLEL=4
 export PATCHDIR=../
 export RESULTDIR=../results
 
