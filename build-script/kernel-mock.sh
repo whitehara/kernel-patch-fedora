@@ -23,7 +23,7 @@ Environment variables:
     RESULTDIR: Directory for storing build results.
 COMMENT
 
-export NUM_PARALLEL=4
+export NUM_PARALLEL=8
 export PATCHDIR=../
 export RESULTDIR=../results
 
@@ -137,7 +137,7 @@ function make_srpm () {
 		    echo "Local build finished."
 	    fi
     fi
-	$MOCK --scrub=chroot --scrub=bootstrap
+	$MOCK --scrub=chroot
 }
 export -f make_srpm
 
