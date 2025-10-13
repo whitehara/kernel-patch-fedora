@@ -40,8 +40,14 @@ function download_srpm () {
 
 function make_srpm () {
 	# If the line is a comment or has less than 4 arguments, just return
-    [[ $2 =~ ^# ]] && ( echo Skip comment: $@; return 0 )
-    [ $# -le 3 ] && ( echo Skip too short PARAM: $@; return 0 )
+    if [[ $2 =~ ^# ]]; then
+		echo Skip comment: $@
+		return 0
+	fi
+    if [ $# -le 3 ]; then
+		echo Skip too short PARAM: $@
+		return 0
+	fi
 
     local VER=$1  # 6.3.4-200.fc38
     local PROJECTID=$2 # -tkg
