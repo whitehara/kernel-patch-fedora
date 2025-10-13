@@ -35,13 +35,13 @@ function download_srpm () {
     KOJIOPT="-q"
 	$DEBUG && KOJIOPT="" # Show koji messages when debug mode is on
 
-    (cd $RESULTDIR && koji $KOJIOPT download-build --rpm kernel-$1.src.rpm)
+    (cd $RESULTDIR && koji $KOJIOPT download-build --rpm kernel-$1.src.rpm ; return $?)
 }
 
 function make_srpm () {
 	# If the line is a comment or has less than 4 arguments, just return
-    [[ $@ =~ ^# ]] && return 0
-    [ $# -le 3 ] && return 1
+    [[ $@ =~ ^# ]] && ( echo Skip comment: $@; return 0 )
+    [ $# -le 3 ] && ( echo Skip too short PARAM: $@; return 0 )
 
     local VER=$1  # 6.3.4-200.fc38
     local PROJECTID=$2 # -tkg
@@ -88,6 +88,7 @@ function make_srpm () {
 			$MOCK --shell -- "test -f /builddir/build/SOURCES/kernel-local.$i && (cat /builddir/build/SOURCES/kernel-local.$i ; echo ) >> /builddir/build/SOURCES/kernel-local"
 		fi
 
+		# Debug shell to check kernel-local
 		$DEBUG && $MOCK --shell -- "cat /builddir/build/SOURCES/kernel-local"
 
 		# Attach patches to kernel.spec
@@ -100,13 +101,13 @@ function make_srpm () {
 	    
 	    # Debug shell
 	    if $DEBUG ; then
-		$MOCK --installdeps $RESULTDIR/$SRPM
-		$MOCK --install pxz vi less
-		$MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
-		$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
-		echo "$MOCK --shell"
-		$MOCK --shell
-		exit 0
+			$MOCK --installdeps $RESULTDIR/$SRPM
+			$MOCK --install pxz vi less
+			$MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
+			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
+			echo "$MOCK --shell"
+			$MOCK --shell
+			exit 0
 	    fi
 	    
 	    # Make srpm
@@ -118,15 +119,16 @@ function make_srpm () {
 	# If only make SRPM, just return
     if $SRPMONLY ; then
 	    # Clean chroot environments
-	    $MOCK --scrub=chroot --scrub=bootstrap
+	    $MOCK --scrub=chroot
 	    return 0
     fi
 
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		#$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
 		$MOCK --scrub=chroot
+		return 0
     else
 	    # Build local without debug packages
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
@@ -138,7 +140,8 @@ function make_srpm () {
 		    return 1
 	    else
 		    echo "Local build finished."
-			$MOCK --scrub=chroot --scrub=bootstrap
+			$MOCK --scrub=chroot
+			return 0
 	    fi
     fi
 }
@@ -205,16 +208,22 @@ RET=0
 while read VER
 do
     echo $VER
+	# Skip comments
+    [[ $VER =~ ^# ]] && continue
+
+	# Download original srpm
     download_srpm $VER || (
 		RET=$((RET + $?))
 		continue
 		)
 
+	echo Download SRPM RET: $RET
     # Use first version for debug
     $DEBUG && break
 
-    cat support-features | xargs -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
+    xargs -a support-features -r -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 	RET=$((RET + $?))
+	echo Make SRPM RET: $RET
 done < support-vers
 
 # Debug build, Use first version and feature
@@ -229,4 +238,5 @@ if $DEBUG ; then
     make_srpm $VER $FEAT
 fi
 
+echo Final RET: $RET
 exit $RET
