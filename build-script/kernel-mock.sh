@@ -160,8 +160,9 @@ DEBUG=false
 SHOWCOPRBUILDS=false
 SHOWMESSAGE=false
 USECOPR=false
+CANCELBUILD=false
 SRPMONLY=false
-while getopts cdf:hlms OPT
+while getopts cdf:hlmns OPT
 do
     case $OPT in
         c) USECOPR=true ;;
@@ -171,6 +172,7 @@ do
 		   COPR="copr-cli --config $OPTARG" ;;
 		l) SHOWCOPRBUILDS=true ;;
 		m) SHOWMESSAGE=true ;;
+		n) CANCELBUILD=true ;;
         h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
             echo "    -c: Build on Copr."
 		    echo "        With this option, build on copr environment."
@@ -180,7 +182,8 @@ do
             echo "    -d: DEBUG mode. Enter the shell after the first kernel version/feature setup."
             echo "    -f: Specify Copr config file path. This option also enable '-c' "
             echo "    -l: Show Copr running builds and exit."
-            echo "    -m: Show mock messages. This is default, unless -d is not used." 
+            echo "    -m: Show mock messages. This is not default, unless -d is used." 
+            echo "    -n: Cancel all running Copr builds and exit."
             echo "    -s: Make SRPMs only to the results dir." 
             echo "    -h: Show this help." 
             exit 0
@@ -195,9 +198,21 @@ export COPR
 export SRPMONLY
 export SHOWCOPRBUILDS
 export SHOWMESSAGE
+export CANCELBUILD
 
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
+
+# Cancel All Copr running builds and exit
+if $CANCELBUILD ; then
+	while read FEAT
+	do
+        [[ $FEAT =~ ^# ]] && continue
+		PRJ=`echo $FEAT | awk '{ print $1 }'`
+		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "running" { print $1 }' | xargs -r -P${NUM_PARALLEL} $COPR cancel
+	done < support-features
+	exit 0
+fi
 
 # Show Copr builds and exit
 if $SHOWCOPRBUILDS ; then
