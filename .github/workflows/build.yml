@@ -38,11 +38,16 @@ jobs:
             echo "Run build"
             cd /build/build-script
             ./kernel-mock.sh -c -f /build/copr
-            if [ $? -ne 0 ]; then exit 1; fi
-            echo "Wait 180s for starting the builds in copr"
-            sleep 180s
-            echo "Write BUILD.md"
-            ./build-status.sh -f /build/copr > /build/results/BUILD.md
+            if [ $? -ne 0 ]; then
+              echo "Build failed, Cancel all running builds on copr"
+              ./kernel-mock.sh -n
+              exit 1
+            else
+              echo "Wait 180s for starting the builds on copr"
+              sleep 180s
+              echo "Write BUILD.md"
+              ./build-status.sh -f /build/copr > /build/results/BUILD.md
+            fi
       
       - name: Remove Copr config
         run: rm -f $COPR_CONFIG_FILE
