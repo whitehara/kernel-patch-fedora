@@ -50,6 +50,7 @@ jobs:
             fi
       
       - name: Remove Copr config
+        if: ${{ always() }}
         run: rm -f $COPR_CONFIG_FILE
 
       - name: Release
