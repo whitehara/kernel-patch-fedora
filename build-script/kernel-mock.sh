@@ -161,8 +161,9 @@ SHOWCOPRBUILDS=false
 SHOWMESSAGE=false
 USECOPR=false
 CANCELBUILD=false
+DELETEBUILD=false
 SRPMONLY=false
-while getopts cdf:hlmns OPT
+while getopts cdf:hlmnrs OPT
 do
     case $OPT in
         c) USECOPR=true ;;
@@ -173,7 +174,8 @@ do
 		l) SHOWCOPRBUILDS=true ;;
 		m) SHOWMESSAGE=true ;;
 		n) CANCELBUILD=true ;;
-        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-s] [-h]"
+		r) DELETEBUILD=true ;;
+        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-n] [-r] [-s] [-h]"
             echo "    -c: Build on Copr."
 		    echo "        With this option, build on copr environment."
 			echo "        You must make your project 'kernel-tkg', etc. on your Copr account."
@@ -184,6 +186,7 @@ do
             echo "    -l: Show Copr running builds and exit."
             echo "    -m: Show mock messages. This is not default, unless -d is used." 
             echo "    -n: Cancel all running Copr builds and exit."
+            echo "    -r: Delete all canceled Copr builds and exit."
             echo "    -s: Make SRPMs only to the results dir." 
             echo "    -h: Show this help." 
             exit 0
@@ -199,6 +202,7 @@ export SRPMONLY
 export SHOWCOPRBUILDS
 export SHOWMESSAGE
 export CANCELBUILD
+export DELETEBUILD
 
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
@@ -210,6 +214,17 @@ if $CANCELBUILD ; then
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
 		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "running" { print $1 }' | xargs -r -P${NUM_PARALLEL} $COPR cancel
+	done < support-features
+	exit 0
+fi
+
+# Delete All Copr canceled builds and exit
+if $DELETEBUILD ; then
+	while read FEAT
+	do
+        [[ $FEAT =~ ^# ]] && continue
+		PRJ=`echo $FEAT | awk '{ print $1 }'`
+		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "canceled" { print $1 }' | xargs -r -P${NUM_PARALLEL} $COPR delete-build
 	done < support-features
 	exit 0
 fi
