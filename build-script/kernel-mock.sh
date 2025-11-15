@@ -261,6 +261,8 @@ do
     xargs -a support-features -r -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 	RET=$((RET + $?))
 	echo Make SRPM RET: $RET
+	# Clean mock bootstrap environments for disk space
+	mock -r fedora-${VER##*fc}-x86_64 --scrub=bootstrap
 done < support-vers
 
 # Debug build, Use first version and feature
