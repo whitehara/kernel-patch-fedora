@@ -134,6 +134,8 @@ function make_srpm () {
 	    # Run copr build
 		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
 		RETVAL=$?
+		# Remove local srpm to save disk space
+		rm -f $RESULTDIR/$NEWSRPM
 		$MOCK --scrub=chroot
 		return $RETVAL
     else
@@ -213,7 +215,7 @@ if $CANCELBUILD ; then
 	do
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
-		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "running" { print $1 }' | xargs -r -P${NUM_PARALLEL} $COPR cancel
+		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "running" { print $1 }' | xargs -n 1 -r -P${NUM_PARALLEL} $COPR cancel
 	done < support-features
 	exit 0
 fi
@@ -224,7 +226,7 @@ if $DELETEBUILD ; then
 	do
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
-		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "canceled" { print $1 }' | xargs -r -P${NUM_PARALLEL} $COPR delete-build
+		$COPR list-builds --output-format text-row kernel$PRJ | awk '$3 == "canceled" { print $1 }' | xargs -n 1 -r -P${NUM_PARALLEL} $COPR delete-build
 	done < support-features
 	exit 0
 fi
