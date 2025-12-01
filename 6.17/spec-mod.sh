@@ -48,4 +48,5 @@ fi
 patch_insert "9052" "cjktty-$BASEVERSION.patch"
 patch_insert "9053" "cjktty-add-cjk32x32-font-data.patch"
 patch_insert "9060" "bigscreen-beyond-kernel-$BASEVERSION.patch"
+patch_insert "9061" "add-gamesir-cyclone2.patch"
 patch_insert "9099" "0099-fix-confdata.patch"
