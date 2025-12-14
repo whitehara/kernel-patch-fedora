@@ -19,6 +19,7 @@ cp -v ../$1/*.sh ../$2
 cp -v ../$1/more-ISA-levels-and-uarches-for-kernel-*.patch ../$2
 cp -v ../$1/0099-fix-confdata.patch ../$2
 #cp -v ../$1/amdgpu-ignore-min-pcap.patch ../$2
+cp -v ../$1/add-gamesir-cyclone2.patch ../$2
 
 # Copy cjktty patches
 cp -v ../$1/cjktty-*.patch ../$2
