@@ -401,8 +401,8 @@ index 4eab3d70e880..79669aa39d79 100644
 +	 * For single queue devices, default to using bfq. If we have multiple
 + 	 * queues or bfq is not available, default to "none".
  	 */
- 	e = elevator_find_get(ctx.name);
- 	if (!e)
+ 	ctx.type = elevator_find_get(ctx.name);
+ 	if (!ctx.type)
 -- 
 2.28.0
 
