@@ -30,6 +30,7 @@ patch_insert () {
 # add paches to spec file
 if [[ $CUSTOMTAG =~ ^_cachyos ]]; then
 	patch_insert "8000" "0001-cachyos-base-all.patch"
+	patch_insert "9060" "bigscreen-beyond-kernel-${BASEVERSION}-cachyos.patch"
 else
 	patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.16p.patch"
 	patch_insert "9000" "0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch"
@@ -44,9 +45,9 @@ else
 	patch_insert "9014" "0012-misc-additions.patch"
 	patch_insert "9016" "0013-optimize_harder_O3.patch"
 	patch_insert "9051" "0014-OpenRGB.patch"
+	patch_insert "9060" "bigscreen-beyond-kernel-${BASEVERSION}.patch"
 fi
 patch_insert "9052" "cjktty-$BASEVERSION.patch"
 patch_insert "9053" "cjktty-add-cjk32x32-font-data.patch"
-patch_insert "9060" "bigscreen-beyond-kernel-$BASEVERSION.patch"
 patch_insert "9061" "add-gamesir-cyclone2.patch"
 patch_insert "9099" "0099-fix-confdata.patch"
