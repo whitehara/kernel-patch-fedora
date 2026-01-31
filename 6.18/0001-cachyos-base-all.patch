@@ -24689,7 +24689,7 @@ index c54f401d261a..1eed4fe2c987 100644
  }
  
  /**
-@@ -12942,16 +13030,20 @@ static int parse_hdmi_amd_vsdb(struct amdgpu_dm_connector *aconnector,
+@@ -12942,16 +13030,19 @@ static int parse_hdmi_amd_vsdb(struct amdgpu_dm_connector *aconnector,
  void amdgpu_dm_update_freesync_caps(struct drm_connector *connector,
  				    const struct drm_edid *drm_edid)
  {
@@ -24706,7 +24706,6 @@ index c54f401d261a..1eed4fe2c987 100644
  	const struct edid *edid;
  	bool freesync_capable = false;
 -	enum adaptive_sync_type as_type = ADAPTIVE_SYNC_TYPE_NONE;
-+	bool valid_vsdb_cea = false;
 +	bool pcon_allowed = false;
 +	bool is_pcon = false;
  
