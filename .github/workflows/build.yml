@@ -28,7 +28,7 @@ jobs:
 
       - name: Run kernel-mock.sh in docker
         id: kbuild
-        uses: addnab/docker-run-action@v3
+        uses: maus007/docker-run-action-fork@v1
         with:
           image: fedora:latest
           options: -v ${{ github.workspace }}:/build --privileged
