@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script is used to run the kernel-mock.sh script inside a Fedora docker container expecially for Github Actions.
+# This script is used to run the kernel-mock.sh script inside a Fedora docker container especially for Github Actions.
 # It installs necessary packages, runs the build, and handles the results.
 
 # Usage: ./docker-run.sh
