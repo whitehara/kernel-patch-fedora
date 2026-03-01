@@ -7073,16 +7073,16 @@ index ab20f549b8f9..e3bcdc0be05e 100644
  };
  
  /* Information about inbound ACK, passed to cong_ops->in_ack_event() */
-@@ -1190,7 +1212,11 @@ enum tcp_ca_ack_event_flags {
- #define TCP_CONG_NON_RESTRICTED		BIT(0)
- /* Requires ECN/ECT set on all packets */
- #define TCP_CONG_NEEDS_ECN		BIT(1)
--#define TCP_CONG_MASK	(TCP_CONG_NON_RESTRICTED | TCP_CONG_NEEDS_ECN)
+@@ -1218,9 +1218,11 @@
+ #define TCP_CONG_ECT_1_NEGOTIATION	BIT(3)
+ /* Cannot fallback to RFC3168 during AccECN negotiation */
+ #define TCP_CONG_NO_FALLBACK_RFC3168	BIT(4)
 +/* Wants notification of CE events (CA_EVENT_ECN_IS_CE, CA_EVENT_ECN_NO_CE). */
-+#define TCP_CONG_WANTS_CE_EVENTS	BIT(2)
-+#define TCP_CONG_MASK	(TCP_CONG_NON_RESTRICTED | \
-+			 TCP_CONG_NEEDS_ECN | \
-+			 TCP_CONG_WANTS_CE_EVENTS)
++#define TCP_CONG_WANTS_CE_EVENTS	BIT(5)
+ #define TCP_CONG_MASK  (TCP_CONG_NON_RESTRICTED | TCP_CONG_NEEDS_ECN | \
+ 			TCP_CONG_NEEDS_ACCECN | TCP_CONG_ECT_1_NEGOTIATION | \
+-			TCP_CONG_NO_FALLBACK_RFC3168)
++			TCP_CONG_NO_FALLBACK_RFC3168 | TCP_CONG_WANTS_CE_EVENTS)
  
  union tcp_cc_info;
  
@@ -24191,31 +24191,32 @@ diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu.h b/drivers/gpu/drm/amd/amdgpu/am
 index 56c1140a6a4a..266d9111e20b 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu.h
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu.h
-@@ -274,6 +274,8 @@ extern int amdgpu_rebar;
+@@ -277,6 +277,9 @@
  
- extern int amdgpu_wbrf;
- extern int amdgpu_user_queue;
+ extern uint amdgpu_hdmi_hpd_debounce_delay_ms;
+ 
 +extern int amdgpu_allm_mode;
 +extern bool amdgpu_hdmi_vrr_desktop_mode;
- 
++
  #define AMDGPU_VM_MAX_NUM_CTX			4096
  #define AMDGPU_SG_THRESHOLD			(256*1024*1024)
+ #define AMDGPU_WAIT_IDLE_TIMEOUT_IN_MS	        3000
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 index 7d5317c0778b..04e6839758cc 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-@@ -247,6 +247,8 @@ int amdgpu_damage_clips = -1; /* auto */
- int amdgpu_umsch_mm_fwlog;
+@@ -248,6 +248,8 @@
  int amdgpu_rebar = -1; /* auto */
  int amdgpu_user_queue = -1;
+ uint amdgpu_hdmi_hpd_debounce_delay_ms;
 +int amdgpu_allm_mode = 1;
 +bool amdgpu_hdmi_vrr_desktop_mode = true;
  
  DECLARE_DYNDBG_CLASSMAP(drm_debug_classes, DD_CLASS_TYPE_DISJOINT_BITS, 0,
  			"DRM_UT_CORE",
-@@ -1138,6 +1140,29 @@ module_param_named(rebar, amdgpu_rebar, int, 0444);
- MODULE_PARM_DESC(user_queue, "Enable user queues (-1 = auto (default), 0 = disable, 1 = enable, 2 = enable UQs and disable KQs)");
- module_param_named(user_queue, amdgpu_user_queue, int, 0444);
+@@ -1149,6 +1151,30 @@
+ MODULE_PARM_DESC(hdmi_hpd_debounce_delay_ms, "HDMI HPD disconnect debounce delay in milliseconds (0 to disable (by default), 1500 is common)");
+ module_param_named(hdmi_hpd_debounce_delay_ms, amdgpu_hdmi_hpd_debounce_delay_ms, uint, 0644);
  
 +/**
 + * DOC: allm_mode (int)
@@ -24239,6 +24240,7 @@ index 7d5317c0778b..04e6839758cc 100644
 + */
 +MODULE_PARM_DESC(hdmi_vrr_desktop_mode, "Changes HDMI VRR desktop mode (false = disable, true = enable (default))");
 +module_param_named(hdmi_vrr_desktop_mode, amdgpu_hdmi_vrr_desktop_mode, bool, 0644);
++
 +
  /* These devices are not supported by amdgpu.
   * They are supported by the mach64, r128, radeon drivers
