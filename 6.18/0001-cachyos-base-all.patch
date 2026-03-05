@@ -17761,7 +17761,7 @@ diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
 index b9c252aa6fe0..abb9ac410176 100644
 --- a/drivers/pci/quirks.c
 +++ b/drivers/pci/quirks.c
-@@ -3748,6 +3748,106 @@ static void quirk_no_bus_reset(struct pci_dev *dev)
+@@ -3758,6 +3758,106 @@
  	dev->dev_flags |= PCI_DEV_FLAGS_NO_BUS_RESET;
  }
  
@@ -17866,8 +17866,8 @@ index b9c252aa6fe0..abb9ac410176 100644
 +	return -ENOTTY;
 +}
  /*
-  * Some NVIDIA GPU devices do not work with bus reset, SBR needs to be
-  * prevented for those affected devices.
+  * After asserting Secondary Bus Reset to downstream devices via a GB10
+  * Root Port, the link may not retrain correctly.
 @@ -5195,6 +5295,7 @@ static const struct pci_dev_acs_enabled {
  	{ PCI_VENDOR_ID_ZHAOXIN, PCI_ANY_ID, pci_quirk_zhaoxin_pcie_ports_acs },
  	/* Wangxun nics */
@@ -23645,19 +23645,6 @@ index 5d221709353e..cb715e8e75e4 100644
  /*
   * Using a temporary mm allows to set temporary mappings that are not accessible
   * by other CPUs. Such mappings are needed to perform sensitive memory writes
-diff --git a/drivers/bluetooth/btusb.c b/drivers/bluetooth/btusb.c
-index 3420f711f0f0..41445e328cce 100644
---- a/drivers/bluetooth/btusb.c
-+++ b/drivers/bluetooth/btusb.c
-@@ -557,6 +557,8 @@ static const struct usb_device_id quirks_table[] = {
- 						     BTUSB_WIDEBAND_SPEECH },
- 	{ USB_DEVICE(0x13d3, 0x3592), .driver_info = BTUSB_REALTEK |
- 						     BTUSB_WIDEBAND_SPEECH },
-+	{ USB_DEVICE(0x0489, 0xe112), .driver_info = BTUSB_REALTEK |
-+						     BTUSB_WIDEBAND_SPEECH },
- 	{ USB_DEVICE(0x0489, 0xe122), .driver_info = BTUSB_REALTEK |
- 						     BTUSB_WIDEBAND_SPEECH },
- 
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ids.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ids.c
 index 3ef5bc95642c..9cab36322c16 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ids.c
@@ -26362,10 +26349,10 @@ index d2e16b79d6be..85f26517771a 100644
  static void quirk_no_pps_backlight_power_hook(struct intel_display *display)
  {
  	intel_set_quirk(display, QUIRK_NO_PPS_BACKLIGHT_POWER_HOOK);
-@@ -240,6 +252,9 @@ static struct intel_quirk intel_quirks[] = {
+@@ -252,6 +252,9 @@
  
  	/* Dell XPS 13 7390 2-in-1 */
- 	{ 0x8a12, 0x1028, 0x08b0, quirk_edp_limit_rate_hbr2 },
+ 	{ 0x8a52, 0x1028, 0x08b0, quirk_edp_limit_rate_hbr2 },
 +
 +	/* Apple MacBookPro15,1 */
 +	{ 0x3e9b, 0x106b, 0x0176, quirk_ddi_a_force_4_lanes },
