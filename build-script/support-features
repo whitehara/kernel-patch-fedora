@@ -1,8 +1,8 @@
 # <ProjectID suffix> <CustomTag> [Features...]
--tkg-zen2-preempt _tkg_zen2_preempt zen2 preempt eevdf
 -cachyos-zen3-preempt _cachyos_zen3_preempt zen3 preempt eevdf
 -cachyos-zen2-preempt _cachyos_zen2_preempt zen2 preempt eevdf
 -cachyos-preempt _cachyos_preempt preempt eevdf
+-tkg-zen2-preempt _tkg_zen2_preempt zen2 preempt eevdf
 -tkg-alderlake-preempt _tkg_alderlake_preempt alderlake preempt eevdf
 -tkg-icelake-preempt _tkg_icelake_preempt icelake preempt eevdf
 -tkg _tkg eevdf
