@@ -1,67 +1,76 @@
 # Linux kernel patches (compilable with the Fedora kernel)
-## Latest Build Status
-|Copr Project Name|Copr Build Status|
-|---|---|
-|[kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-cachyos-zen3-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png)|
-|[kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/)|![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png)|
 
 ## Overview
-- You can create custom RPMs with these patches for the Fedora.
-  - Download SRPM from fedora repository and apply patches to the kernel source.
-    - https://koji.fedoraproject.org/koji/packageinfo?packageID=8
-  - Patched RPMs are available in [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) You can install them using dnf.
-- Most of these patches are optimized for gaming on Linux.
+You can create custom RPMs with these patches for Fedora Linux. Most of these patches are **optimized for gaming on Linux**. 
+You can install pre-patched RPMs directly from [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) using `dnf`, or download SRPMs from the Fedora repository and apply the patches to the kernel source yourself (e.g., from [Koji](https://koji.fedoraproject.org/koji/packageinfo?packageID=8)).
 
-  These patches are from:
-   - https://github.com/graysky2/kernel_compiler_patch
-   - https://github.com/Frogging-Family/community-patches
-   - https://github.com/Frogging-Family/linux-tkg
-   - https://github.com/bigshans/cjktty-patches
-   - https://github.com/CachyOS/kernel-patches
-   - https://lvra.gitlab.io/docs/hardware/
+These patches are sourced and modified from:
+- https://github.com/graysky2/kernel_compiler_patch
+- https://github.com/Frogging-Family/community-patches
+- https://github.com/Frogging-Family/linux-tkg
+- https://github.com/bigshans/cjktty-patches
+- https://github.com/CachyOS/kernel-patches
+- https://lvra.gitlab.io/docs/hardware/
 
-   (Some of them are modified from the original.)
+*(Note: All Project C patches (`0009-prjc_vx.x-rx.patch`) are under the GNU GENERAL PUBLIC LICENSE Version 3.)*
 
-   Note: All the Project C patches (0009-prjc_vx.x-rx.patch) are under the GNU GENERAL PUBLIC LICENSE Version 3
+## Latest Build Status
+| Copr Project Name | Copr Build Status |
+|---|---|
+| [kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/package/kernel/status_image/last_build.png) |
+| [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2/package/kernel/status_image/last_build.png) |
+| [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-cachyos-zen3-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt/package/kernel/status_image/last_build.png) |
+| [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/) | ![Status](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt/package/kernel/status_image/last_build.png) |
 
 ## How to install patched kernel RPM
-Quick start.
-```
+
+### Quick Start
+You can quickly install the patched kernel via Copr. See the [Copr Project](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for more details.
+
+```bash
 sudo dnf copr enable whitehara/kernel-tkg
 sudo dnf install kernel-6.4.14-200_tkg.fc38
 ```
-See [Copr](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg/) for details.
 
-If you want to try other custom kernels, you may also check my other projects.
-- Based on [TKg patches](https://github.com/Frogging-Family/linux-tkg)
-  - Tkg patches kernel: [kernel-tkg](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg)
-  - Tkg patches and preemptive kernel: [kernel-tkg-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt)
-  - Tkg patches and AMD Zen2+ optimized kernel: [kernel-tkg-zen2](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2)
-  - Tkg patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-tkg-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt)
-  - Tkg patches, Intel Ice Lake+ optimized and preemptive kernel:  [kernel-tkg-icelake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt)
-  - Tkg patches, Intel Alder Lake+ optimized and preemptive kernel:  [kernel-tkg-alderlake-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt)
-- Based on [CachyOS patches](https://github.com/CachyOS/kernel-patches)
-  - CachyOS patches and preemptive kernel:  [kernel-cachyos-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt)
-  - CachyOS patches, AMD Zen2+ optimized and preemptive kernel:  [kernel-cachyos-zen2-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt)
-  - CachyOS patches, AMD Zen3+ optimized and preemptive kernel:  [kernel-cachyos-zen3-preempt](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt)
+### Other Custom Kernels
+If you want to try other customized versions, check the table below and enable the desired Copr repository instead. *(Files in the `kernel-local` folder are used in these custom kernel projects.)*
 
-Files in the kernel-local folder are used in these custom kernel projects.
+#### Based on TKg Patches
+| Project Name | Preemptive | Architecture Optimization | Copr Repository |
+|---|:---:|:---:|---|
+| **kernel-tkg** | - | - | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg) |
+| **kernel-tkg-preempt** | ✅ | - | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-preempt) |
+| **kernel-tkg-zen2** | - | AMD Zen2+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2) |
+| **kernel-tkg-zen2-preempt** | ✅ | AMD Zen2+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-zen2-preempt) |
+| **kernel-tkg-icelake-preempt** | ✅ | Intel Ice Lake+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-icelake-preempt) |
+| **kernel-tkg-alderlake-preempt** | ✅ | Intel Alder Lake+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-tkg-alderlake-preempt) |
+
+#### Based on CachyOS Patches
+| Project Name | Preemptive | Architecture Optimization | Copr Repository |
+|---|:---:|:---:|---|
+| **kernel-cachyos-preempt** | ✅ | - | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-preempt) |
+| **kernel-cachyos-zen2-preempt** | ✅ | AMD Zen2+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen2-preempt) |
+| **kernel-cachyos-zen3-preempt** | ✅ | AMD Zen3+ | [Link](https://copr.fedorainfracloud.org/coprs/whitehara/kernel-cachyos-zen3-preempt) |
 
 ## Tested version (Latest versions only)
-**BEWARE: "tested" means just "compilable", it does not mean "It completely works for your environment". Please use it at your own risk.**
+> **BEWARE:** "tested" means just **"compilable"**, it does not mean "It completely works for your environment". Please use it at your own risk.
+
+- 6.19 patches
   -  [kernel-6.19.9-300.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2963073)
   -  [kernel-6.19.9-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2963109)
   -  [kernel-6.19.9-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2963072)
 - 6.18 patches
   -  [kernel-6.18.16-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2949513)
   -  [kernel-6.18.16-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2951827)
+
+<details>
+<summary><b>Show older tested versions (Click to expand)</b></summary>
+
 - 6.17 patches
   -  [kernel-6.17.13-300.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2881992)
   -  [kernel-6.17.13-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2881993)
@@ -130,104 +139,130 @@ Files in the kernel-local folder are used in these custom kernel projects.
   -  [kernel-5.16.20-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1948783)
 - 5.15 patches
   -  [kernel-5.15.18-200.fc35](https://koji.fedoraproject.org/koji/buildinfo?buildID=1909970)
+
+</details>
+
 ## How to build your custom kernel
 
-There are 2 ways. One is build with the script in "build-script" dir, another is without the script. 
-###  Build with the script
-In build-script dir, you see "kernel-mock.sh". This script is used for building my projects, you can use and modify as you like.
+There are two ways to build custom kernels manually. One is using the included script in the `build-script` directory, and the other is manually executing the build commands.
 
-#### Preparation
-- Install mock, copr-cli, koji.
+### Method 1: Build with the provided script
+In the `build-script` directory, you will find `kernel-mock.sh`. This script is used for building my projects and you can use or modify it as you like.
 
-      dnf install mock copr-cli koji
+#### 1. Preparation
+Install `mock`, `copr-cli`, and `koji`:
+```bash
+sudo dnf install mock copr-cli koji
+```
 
-- Modify "support-vers". It contains Original fedora project kernel versions for building.
-If you want to build new versions, you need to add it to this file. 
-- Modify "support-features". It contains Project ID for copr, Custom tag for the package name, Features like bmq,pds,cpu-arch which are used in spec-mod.sh
+- **`support-vers`:** Modify this file to include the original Fedora project kernel versions you want to build. 
+- **`support-features`:** Modify this file to configure Project ID for Copr, custom tags, and features like `bmq`, `pds`, or CPU architectures.
 
+> **Note:** Each feature is built with all versions. E.g., if you have 3 features and 2 versions, the results will be 3 projects and each project will have 2 versions. If you add a CPU-arch, you also need to add corresponding `kernel-local.<CPU-arch>` files.
 
-**Each feature is built with all versions. E.g. If you have 3 features and 2 versions, The results will be 3 projects and each project will have 2 versions.**
+#### 2. Run the script
+Run it locally:
+```bash
+./kernel-mock.sh
+```
+This builds RPMs on your local machine's `mock` environment, then copies results from the `mock` environment to the `../results` directory.
 
-**If you want to add CPU-arch, you also need to add kernel-local.CPU-arch files.**
+**Advanced Options:**
+- **Debug Mode (Shell):** 
+  ```bash
+  ./kernel-mock.sh -d
+  ```
+  This will extract your package and stop when patches are applied, then open the mock's shell. You can check the patches and run `rpmbuild` manually. In this mode, only the first line of `support-vers` and `support-features` is used. **Your results are not moved to the `results` dir.**
 
-#### Run script
-In build-script dir, you can run like below:
+- **Copr Mode (Build on Copr):**
+  ```bash
+  ./kernel-mock.sh -c
+  ```
+  You must set up your Copr account and create projects before you run this.
 
-     ./kernel-mock.sh
+### Method 2: Build manually without the script
 
-It builds RPMs on your local machine's [mock](https://github.com/rpm-software-management/mock) environment, then copies results from the mock environment to "../results" dir.
+#### 1. Setup RPM build tree
+*(Skip if you already have one)*
+```bash
+sudo dnf install rpmdevtools
+rpmdev-setuptree
+```
+You can verify the directory path like this (we will refer to `_topdir` as `rpm` in this guide):
+```bash
+rpmbuild --showrc | grep _topdir
+```
 
-If you want to see detailed messages and run rpmbuild commands by yourself in the mock environment,
+#### 2. Download the source
+```bash
+dnf download --source kernel
+```
+Or for the latest development kernel via Koji:
+```bash
+koji download-build -a src kernel-*
+```
 
-     ./kernel-mock.sh -d
+#### 3. Extract the source
+```bash
+rpm -Uvh kernel-*.fc*.srpm
+```
 
-This will extract your package and stop when patches are applied, then open the mock's shell. So you can check whether the patches are applied correctly or not, modify patches if you need, then run "rpmbuild" manually. In this mode, only first line of support-vers, support-features are used. And **Your results are not moved to results dir. Please move them manually before exiting the shell in this mode.**
+#### 4. Clone the repository
+```bash
+mkdir kernel-patch-fedora
+cd kernel-patch-fedora
+git clone https://github.com/whitehara/kernel-patch-fedora.git .
+```
 
-If you want to build on Copr,
+#### 5. Apply files to SOURCES directory
+```bash
+cp kernel-patch-fedora/5.16/* ~/rpmbuild/SOURCES/
+```
+*(Replace `5.16` with your target version and `~/rpmbuild` with your actual build tree).*
 
-    ./kernel-mock.sh -c
+#### 6. Modify the kernel config
+The `config-path.sh` script adds minimal config into `.config` files. If you want to customize your kernel further, add a `kernel-local` file to the `SOURCES` directory.
+```bash
+cd ~/rpmbuild/SOURCES
+./config-patch.sh
+```
 
-You must set up your Copr account and create projects before you run.
+#### 7. Update kernel.spec
+Add custom tags to the kernel spec file (e.g., `kernel-version_custom_kernel_tag.fc35.x86_64.rpm`):
+```bash
+cd ~/rpmbuild/SOURCES
+./spec-mod.sh _custom_kernel_tag
+```
+Other options:
+```bash
+./spec-mod.sh <CUSTOM_TAG> [CPU arch] [eevdf|pds|bmq] [preempt]
+```
+- `<CUSTOM_TAG>`: Suffix for the package.
+- `CPU arch`: CPU architecture to build for. Default is `X86_GENERIC`.
+- `eevdf|pds|bmq`: Select scheduler for Project-C patch. Default is `eevdf`.
+- `preempt`: Use preemptive mode. Default is non-preemptive.
 
-### Build without the script
-#### Setup rpm build tree
-If you already have one, you can skip this step.
+See [support-features](build-script/support-features) for available options.
 
-      dnf install rpmdevtools
-      rpmdev-setuptree
-The rpmdev-setuptree command automatically creates the build tree.
-You can check its location like this:
+#### 8. Check if patches are applicable
+```bash
+rpmbuild -bp kernel.spec
+```
+> The `-bp` option applies patches but does not compile.
 
-      rpmbuild --showrc | grep _topdir
-In this document, the _topdir is just "rpm".
-#### Download source kernel-*.fc*.srpm
+#### 9. Compile the RPM
+```bash
+rpmbuild -bb kernel.spec
+```
+> The `-bb` option compiles binary only. Use `-ba` for source + binary, or `-bs` for source SRPM only.
 
-      dnf download --source kernel
-If you want to use the latest development kernel, you can use Koji.
+**Tip:** You can also use options like `--without debug --without debuginfo` to save compilation time. Since kernel *6.0*, you might also need `--without configchecks` to prevent config-check errors:
+```bash
+rpmbuild -bb kernel.spec --without debug --without debuginfo --without configchecks
+```
 
-      koji download-build -a src kernel-*
-
-#### Extract source to rpm build tree
-
-      rpm -Uvh kernel-*.fc*.srpm
-
-#### Clone repository to local folder
-
-      mkdir kernel-patch-fedora && cd kernel-patch-fedora
-      git clone https://github.com/whitehara/kernel-patch-fedora.git .
-
-#### Copy files to SOURCES directory
-
-      cp kernel-patch-fedora/5.16/* rpm/SOURCES/
-
-#### Modify kernel config
-The config-path.sh script adds minimal config into .config files.
-If you want to customize your kernel, you can add a kernel-local file to the SOURCES directory.
-
-      cd rpm/SOURCES &&  ./config-patch.sh
-#### Modify kernel.spec(add these patch lines like below)
-The _custom_kernel_tag is a suffix for the kernel package name. Such as "kernel-version_custom_kernel_tag.fc35.x86_64.rpm"
-
-      cd rpm/SOURCES && ./spec-mod.sh _custom_kernel_tag
-
-You can use other options like below:
-
-      ./spec-mod.sh <CUSTOM TAG> [cfs|pds|bmq]
-      CUSTOMTAG: Add CUSTOM TAG for the package
-      cfs|pds|bmq: Select scheduler for Project-C patch
-
-#### Check if patches are applicable.
-
-      rpmbuild -bp kernel.spec
-
-"-bp" option means applies patches only (does not compile).
-
-#### Compile
-
-      rpmbuild -bb kernel.spec
-"-bb" compiles only the binary. If you want the SRPM, use "-ba"(with binary) or "-bs"(without binary) option. See the rpmbuild manpages for other options.
-
-You can also use options like "--without debug --without debuginfo". Creating debug RPMs takes longer to compile, so if you don't need them, I recommend setting these options. See the kernel.spec file for other "--without" options. **You may need to add "--without configchecks" to avoid config check errors since version 6.0.**
-#### Install
-      cd rpm/RPMS/
-      dnf install kernel-*
+#### 10. Install the compiled kernel
+```bash
+cd ~/rpmbuild/RPMS/x86_64/
+sudo dnf install kernel-*
+```
