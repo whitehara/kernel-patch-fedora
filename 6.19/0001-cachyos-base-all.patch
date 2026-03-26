@@ -17864,28 +17864,6 @@ index 80ccfa8fd982..0d5eae8295d4 100644
  	{ USB_DEVICE(0x13d3, 0x3585), .driver_info = BTUSB_MEDIATEK |
  						     BTUSB_WIDEBAND_SPEECH },
  	{ USB_DEVICE(0x13d3, 0x3610), .driver_info = BTUSB_MEDIATEK |
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-index d2c3885de711..8900e0dc8a61 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-@@ -5068,7 +5068,7 @@ void amdgpu_device_fini_hw(struct amdgpu_device *adev)
- 	 * before ip_fini_early to prevent kfd locking refcount issues by calling
- 	 * amdgpu_amdkfd_suspend()
- 	 */
--	if (drm_dev_is_unplugged(adev_to_drm(adev)))
-+	if (pci_dev_is_disconnected(adev->pdev))
- 		amdgpu_amdkfd_device_fini_sw(adev);
- 
- 	amdgpu_device_ip_fini_early(adev);
-@@ -5080,7 +5080,7 @@ void amdgpu_device_fini_hw(struct amdgpu_device *adev)
- 
- 	amdgpu_gart_dummy_page_fini(adev);
- 
--	if (drm_dev_is_unplugged(adev_to_drm(adev)))
-+	if (pci_dev_is_disconnected(adev->pdev))
- 		amdgpu_device_unmap_mmio(adev);
- 
- }
 diff --git a/drivers/gpu/drm/i915/gt/intel_rc6.c b/drivers/gpu/drm/i915/gt/intel_rc6.c
 index 286d49ecc449..472c68b32516 100644
 --- a/drivers/gpu/drm/i915/gt/intel_rc6.c
