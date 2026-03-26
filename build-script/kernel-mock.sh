@@ -15,6 +15,7 @@ Options:
     -l: Show Copr running builds and exit.
     -m: Show mock messages. This is default, unless '-d' is not used.
     -s: Make SRPMs only to the results dir.
+    -t: Test patches application only without making SRPMs and exit with status.
     -h: Show this help.
 
 Environment variables:
@@ -64,8 +65,8 @@ function make_srpm () {
     $SHOWMESSAGE || MOCK="$MOCK -q "
 
     # If $NEWSRPM is already there, reuse it
-    if [ ! $DEBUG ] && [ -f $RESULTDIR/$NEWSRPM ]; then
-	    echo $NEWSRPM is already there. Reuse it.
+    if ! $DEBUG && ! $TESTPATCH && [ -f $RESULTDIR/$NEWSRPM ]; then
+	    echo "$NEWSRPM is already there. Reuse it."
     else
 
 	    if [ ! -d $PATCHDIR/${VER%.*-*} ]; then
@@ -105,6 +106,19 @@ function make_srpm () {
 		fi
 	    done
 	    
+	    # Test Patch
+	    if $TESTPATCH ; then
+			$MOCK --installdeps $RESULTDIR/$SRPM
+			$MOCK --install pxz
+			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
+			RET_TEST=$?
+			$MOCK --scrub=chroot
+			if [ $RET_TEST -ne 0 ]; then
+			    echo "$VER (Feature: $PROJECTID)" >> $RESULTDIR/failed_tests.log
+			fi
+			return $RET_TEST
+	    fi
+
 	    # Debug shell
 	    if $DEBUG ; then
 			$MOCK --installdeps $RESULTDIR/$SRPM
@@ -165,7 +179,8 @@ USECOPR=false
 CANCELBUILD=false
 DELETEBUILD=false
 SRPMONLY=false
-while getopts cdf:hlmnrs OPT
+TESTPATCH=false
+while getopts cdf:hlmnrst OPT
 do
     case $OPT in
         c) USECOPR=true ;;
@@ -177,7 +192,7 @@ do
 		m) SHOWMESSAGE=true ;;
 		n) CANCELBUILD=true ;;
 		r) DELETEBUILD=true ;;
-        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-n] [-r] [-s] [-h]"
+        h) echo "Usage: $0 [-c] [-f config file path] [-d] [-l] [-m] [-n] [-r] [-s] [-t] [-h]"
             echo "    -c: Build on Copr."
 		    echo "        With this option, build on copr environment."
 			echo "        You must make your project 'kernel-tkg', etc. on your Copr account."
@@ -190,10 +205,13 @@ do
             echo "    -n: Cancel all running Copr builds and exit."
             echo "    -r: Delete all canceled Copr builds and exit."
             echo "    -s: Make SRPMs only to the results dir." 
+            echo "    -t: Test patches application only without making SRPMs and exit." 
             echo "    -h: Show this help." 
             exit 0
             ;;
         s) SRPMONLY=true ;;
+        t) TESTPATCH=true
+           SHOWMESSAGE=true ;;
         *) DEBUG=false ;;
     esac
 done
@@ -205,6 +223,7 @@ export SHOWCOPRBUILDS
 export SHOWMESSAGE
 export CANCELBUILD
 export DELETEBUILD
+export TESTPATCH
 
 # Make $RESULTDIR if it doesn't exist.
 mkdir -p $RESULTDIR
