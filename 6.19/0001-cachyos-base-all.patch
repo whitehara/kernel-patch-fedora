@@ -8037,14 +8037,14 @@ index f486050e0bee..acd713d2bd35 100644
  
  PHONY += vmlinux_o
  vmlinux_o: vmlinux.a $(KBUILD_VMLINUX_LIBS)
-@@ -1619,6 +1623,7 @@ endif # CONFIG_MODULES
+@@ -1637,6 +1637,7 @@
  CLEAN_FILES += vmlinux.symvers modules-only.symvers \
  	       modules.builtin modules.builtin.modinfo modules.nsdeps \
  	       modules.builtin.ranges vmlinux.o.map vmlinux.unstripped \
 +	       vmlinux.thinlto-index builtin.order \
  	       compile_commands.json rust/test \
  	       rust-project.json .vmlinux.objs .vmlinux.export.c \
-                .builtin-dtbs-list .builtin-dtb.S
+                .builtin-dtbs-list .builtin-dtbs.S
 @@ -2072,7 +2077,7 @@ clean: $(clean-dirs)
  	$(call cmd,rmfiles)
  	@find . $(RCS_FIND_IGNORE) \
