@@ -61,9 +61,9 @@ If you want to try other customized versions, check the table below and enable t
 > **BEWARE:** "tested" means just **"compilable"**, it does not mean "It completely works for your environment". Please use it at your own risk.
 
 - 6.19 patches
-  -  [kernel-6.19.11-300.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2972239)
-  -  [kernel-6.19.11-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2972221)
-  -  [kernel-6.19.11-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2972220)
+  -  [kernel-6.19.12-300.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2977755)
+  -  [kernel-6.19.12-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2977820)
+  -  [kernel-6.19.12-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2977821)
 - 6.18 patches
   -  [kernel-6.18.16-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2949513)
   -  [kernel-6.18.16-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2951827)
