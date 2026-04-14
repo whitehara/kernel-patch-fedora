@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 : << COMMENT
 This script is used to create kernel SRPMs and build them locally or on Copr.
@@ -36,7 +36,7 @@ function download_srpm () {
     KOJIOPT="-q"
 	$DEBUG && KOJIOPT="" # Show koji messages when debug mode is on
 
-    (cd $RESULTDIR && koji $KOJIOPT download-build --rpm kernel-$1.src.rpm ; return $?)
+    (cd "$RESULTDIR" && koji $KOJIOPT download-build --rpm "kernel-$1.src.rpm"; return $?)
 }
 
 function make_srpm () {
@@ -56,28 +56,28 @@ function make_srpm () {
     local BUILDTIMEOUT=36000
 
     local OS="fedora-${VER##*fc}-x86_64"
-    local SRPM=kernel-$VER.src.rpm
+    local SRPM="kernel-$VER.src.rpm"
 
     # New SRPM name with custom tags
-    local NEWSRPM=kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm
+    local NEWSRPM="kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm"
 
     local MOCK="mock -r $OS --uniqueext=$PROJECTID "
     $SHOWMESSAGE || MOCK="$MOCK -q "
 
     # If $NEWSRPM is already there, reuse it
-    if ! $DEBUG && ! $TESTPATCH && [ -f $RESULTDIR/$NEWSRPM ]; then
+    if ! $DEBUG && ! $TESTPATCH && [ -f "$RESULTDIR/$NEWSRPM" ]; then
 	    echo "$NEWSRPM is already there. Reuse it."
     else
 
-	    if [ ! -d $PATCHDIR/${VER%.*-*} ]; then
+	    if [ ! -d "$PATCHDIR/${VER%.*-*}" ]; then
 		    echo "ERROR: $PATCHDIR/${VER%.*-*} is not found."
 		    return 1
 	    fi
 	    # Setup an environment
 	    $MOCK --init
-	    $MOCK --copyin $RESULTDIR/$SRPM /
+	    $MOCK --copyin "$RESULTDIR/$SRPM" /
 	    $MOCK --shell rpm -Uvh /$SRPM
-	    $MOCK --copyin $PATCHDIR/${VER%.*-*}/* $PATCHDIR/kernel-local/* /builddir/build/SOURCES
+	    $MOCK --copyin "$PATCHDIR/${VER%.*-*}/"* "$PATCHDIR/kernel-local/"* /builddir/build/SOURCES
 
 	    # Make kernel-local
 	    $MOCK --shell "(cat /builddir/build/SOURCES/kernel-local.general ; echo ) >> /builddir/build/SOURCES/kernel-local; (cd /builddir/build/SOURCES && ./config-patch.sh)"
@@ -133,7 +133,7 @@ function make_srpm () {
 	    # Make srpm
 	    $MOCK --shell "rpmbuild -bs /builddir/build/SPECS/kernel.spec"
 	    # Copy srpm to $RESULTDIR
-	    $MOCK --copyout /builddir/build/SRPMS/$NEWSRPM $RESULTDIR
+	    $MOCK --copyout "/builddir/build/SRPMS/$NEWSRPM" "$RESULTDIR"
     fi
 
 	# If only make SRPM, just return
@@ -146,10 +146,10 @@ function make_srpm () {
     # Upload to Copr or build in the local environemnt
     if $USECOPR ; then
 	    # Run copr build
-		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background kernel$PROJECTID $RESULTDIR/$NEWSRPM
+		$COPR build --bootstrap on --isolation nspawn --timeout $BUILDTIMEOUT --nowait -r $OS --background "kernel$PROJECTID" "$RESULTDIR/$NEWSRPM"
 		RETVAL=$?
 		# Remove local srpm to save disk space
-		rm -f $RESULTDIR/$NEWSRPM
+		rm -f "$RESULTDIR/$NEWSRPM"
 		$MOCK --scrub=chroot
 		return $RETVAL
     else
@@ -157,7 +157,7 @@ function make_srpm () {
 	    #$MOCK --shell "rpmbuild -ba --without debug --without debuginfo /builddir/build/SPECS/kernel.spec"
 	    echo "Start local build."
 	    $MOCK --install pxz
-	    $MOCK --no-clean --resultdir $RESULTDIR --rebuild $RESULTDIR/$NEWSRPM
+	    $MOCK --no-clean --resultdir "$RESULTDIR" --rebuild "$RESULTDIR/$NEWSRPM"
 	    if [ $? -ne 0 ]; then
 		    echo "ERROR: local build."
 		    return 1
@@ -230,7 +230,7 @@ mkdir -p $RESULTDIR
 
 # Cancel All Copr running builds and exit
 if $CANCELBUILD ; then
-	while read FEAT
+	while IFS= read -r FEAT
 	do
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
@@ -241,7 +241,7 @@ fi
 
 # Delete All Copr canceled builds and exit
 if $DELETEBUILD ; then
-	while read FEAT
+	while IFS= read -r FEAT
 	do
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
@@ -252,7 +252,7 @@ fi
 
 # Show Copr builds and exit
 if $SHOWCOPRBUILDS ; then
-	while read FEAT
+	while IFS= read -r FEAT
 	do
         [[ $FEAT =~ ^# ]] && continue
 		PRJ=`echo $FEAT | awk '{ print $1 }'`
@@ -263,17 +263,17 @@ fi
 
 # Download original srpm and make srpm,build
 RET=0
-while read VER
+while IFS= read -r VER
 do
     echo $VER
 	# Skip comments
     [[ $VER =~ ^# ]] && continue
 
 	# Download original srpm
-    download_srpm $VER || (
-		RET=$((RET + $?))
+    if ! download_srpm "$VER"; then
+		RET=$((RET + 1))
 		continue
-		)
+	fi
 
 	echo Download SRPM RET: $RET
     # Use first version for debug
@@ -288,7 +288,7 @@ done < support-vers
 
 # Debug build, Use first version and feature
 if $DEBUG ; then
-    while read FEAT
+    while IFS= read -r FEAT
     do
         [[ $FEAT =~ ^# ]] && continue
         echo $FEAT

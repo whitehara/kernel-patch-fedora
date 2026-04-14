@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 echo This script copies essential files from ../$1 to ../$2
 echo You also need to modify some files in ../$2
 

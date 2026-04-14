@@ -23,7 +23,7 @@ if [ -f "$STATE_FILE" ]; then
     LAST_TESTED=$(cat "$STATE_FILE")
 fi
 
-if [ "$BASE_VER" == "$LAST_TESTED" ]; then
+if [ "$BASE_VER" = "$LAST_TESTED" ]; then
     echo "The latest kernel ($BASE_VER base) has already been tested."
     exit 0
 fi
