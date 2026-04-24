@@ -1,0 +1,56 @@
+name: Weekly Kernel Check and Build
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Every Sunday at 00:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  COPR_CONFIG_FILE: ${{ github.workspace }}/copr
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set Copr config
+        run: |
+          touch $COPR_CONFIG_FILE
+          chmod 600 $COPR_CONFIG_FILE
+          envsubst < build-script/copr-config.template > $COPR_CONFIG_FILE
+        env:
+          COPR_LOGIN: ${{ secrets.COPR_LOGIN }}
+          COPR_USERNAME: ${{ secrets.COPR_USERNAME }}
+          COPR_TOKEN: ${{ secrets.COPR_TOKEN }}
+          COPR_URL: ${{ secrets.COPR_URL }}
+
+      - name: Check for new kernel and start Copr builds
+        uses: maus007/docker-run-action-fork@v1
+        with:
+          image: fedora:latest
+          options: -v ${{ github.workspace }}:/build --privileged
+          run: /build/build-script/docker-check-and-build.sh
+
+      - name: Remove Copr config
+        if: always()
+        run: rm -f $COPR_CONFIG_FILE
+
+      - name: Commit and push if new kernel found
+        if: success() && hashFiles('.new_kernel_found') != ''
+        run: |
+          NEW_VER=$(cat .new_kernel_found)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add build-script/support-vers README.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "$NEW_VER"
+            git push
+          fi
+          rm -f .new_kernel_found
