@@ -1,0 +1,5 @@
+misc/0001-acpi-call.patch
+misc/0001-cgroup-vram.patch
+misc/0001-handheld.patch
+sched/0001-bore-cachy.patch
+sched/0001-bore.patch

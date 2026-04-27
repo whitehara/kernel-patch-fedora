@@ -60,17 +60,20 @@ If you want to try other customized versions, check the table below and enable t
 ## Tested version (Latest versions only)
 > **BEWARE:** "tested" means just **"compilable"**, it does not mean "It completely works for your environment". Please use it at your own risk.
 
+- 7.0 patches
+  -  [kernel-7.0.1-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2985740)
+  -  [kernel-7.0.1-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2985771)
 - 6.19 patches
   -  [kernel-6.19.14-300.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2985672)
   -  [kernel-6.19.14-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2985726)
   -  [kernel-6.19.14-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2985718)
-- 6.18 patches
-  -  [kernel-6.18.16-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2949513)
-  -  [kernel-6.18.16-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2951827)
 
 <details>
 <summary><b>Show older tested versions (Click to expand)</b></summary>
 
+- 6.18 patches
+  -  [kernel-6.18.16-200.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2949513)
+  -  [kernel-6.18.16-100.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2951827)
 - 6.17 patches
   -  [kernel-6.17.13-300.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2881992)
   -  [kernel-6.17.13-200.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2881993)
