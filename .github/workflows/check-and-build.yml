@@ -1,8 +1,6 @@
-name: Weekly Kernel Check and Build
+name: Kernel Check and Build
 
 on:
-  schedule:
-    - cron: '0 0 * * 0'  # Every Sunday at 00:00 UTC
   workflow_dispatch:
 
 permissions:
