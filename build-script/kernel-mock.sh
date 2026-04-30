@@ -279,6 +279,10 @@ do
     # Use first version for debug
     $DEBUG && break
 
+    # Pre-create bootstrap chroot to avoid race condition during parallel --init
+    mock -r fedora-${VER##*fc}-x86_64 --init
+    mock -r fedora-${VER##*fc}-x86_64 --scrub=chroot
+
     xargs -a support-features -r -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 	RET=$((RET + $?))
 	echo Make SRPM RET: $RET
