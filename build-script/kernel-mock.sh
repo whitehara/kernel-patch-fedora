@@ -33,6 +33,12 @@ function download_srpm () {
     [[ $@ =~ ^# ]] && return 0
 	[ $# -ne 1 ] && return 1
 
+	# Skip download if SRPM already exists (manually placed or previously downloaded)
+	if [ -f "$RESULTDIR/kernel-$1.src.rpm" ]; then
+		echo "SRPM kernel-$1.src.rpm already exists. Skip download."
+		return 0
+	fi
+
     KOJIOPT="-q"
 	$DEBUG && KOJIOPT="" # Show koji messages when debug mode is on
 
@@ -61,7 +67,7 @@ function make_srpm () {
     # New SRPM name with custom tags
     local NEWSRPM="kernel-${VER%.*}${CUSTOMTAG}.${VER##*.}.src.rpm"
 
-    local MOCK="mock -r $OS --uniqueext=$PROJECTID "
+    local MOCK="mock -r $OS --uniqueext=$PROJECTID"
     $SHOWMESSAGE || MOCK="$MOCK -q "
 
     # If $NEWSRPM is already there, reuse it
@@ -108,7 +114,7 @@ function make_srpm () {
 	    
 	    # Test Patch
 	    if $TESTPATCH ; then
-			$MOCK --installdeps $RESULTDIR/$SRPM
+			$MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
 			$MOCK --install pxz
 			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
 			RET_TEST=$?
@@ -121,7 +127,7 @@ function make_srpm () {
 
 	    # Debug shell
 	    if $DEBUG ; then
-			$MOCK --installdeps $RESULTDIR/$SRPM
+			$MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
 			$MOCK --install pxz vi less
 			$MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
 			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
@@ -278,10 +284,6 @@ do
 	echo Download SRPM RET: $RET
     # Use first version for debug
     $DEBUG && break
-
-    # Pre-create bootstrap chroot to avoid race condition during parallel --init
-    mock -r fedora-${VER##*fc}-x86_64 --init
-    mock -r fedora-${VER##*fc}-x86_64 --scrub=chroot
 
     xargs -a support-features -r -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 	RET=$((RET + $?))
