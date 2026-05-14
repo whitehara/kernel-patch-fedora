@@ -83,6 +83,16 @@ function make_srpm () {
 	    $MOCK --init
 	    $MOCK --copyin "$RESULTDIR/$SRPM" /
 	    $MOCK --shell rpm -Uvh /$SRPM
+
+	    # Install build dependencies BEFORE spec-mod.sh edits kernel.spec.
+	    # --calculate-build-dependencies re-extracts kernel.spec from the SRPM,
+	    # overwriting any modifications, so it must run prior to spec editing.
+	    if $TESTPATCH || $DEBUG ; then
+		    $MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
+		    $MOCK --install pxz
+		    $DEBUG && $MOCK --install vi less
+	    fi
+
 	    $MOCK --copyin "$PATCHDIR/${VER%.*-*}/"* "$PATCHDIR/kernel-local/"* /builddir/build/SOURCES
 
 	    # Make kernel-local
@@ -114,8 +124,6 @@ function make_srpm () {
 	    
 	    # Test Patch
 	    if $TESTPATCH ; then
-			$MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
-			$MOCK --install pxz
 			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
 			RET_TEST=$?
 			$MOCK --scrub=chroot
@@ -127,8 +135,6 @@ function make_srpm () {
 
 	    # Debug shell
 	    if $DEBUG ; then
-			$MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
-			$MOCK --install pxz vi less
 			$MOCK --shell "sed -i -e 's/\(git --work-tree=. apply\)/\1 --reject/g' /builddir/build/SPECS/kernel.spec "
 			$MOCK --shell "rpmbuild -bp /builddir/build/SPECS/kernel.spec"
 			echo "$MOCK --shell"

@@ -2201,10 +2201,9 @@ index e11f37548285..0583621bf536 100644
  endmenu
  
  source "drivers/hid/bpf/Kconfig"
-@@ -1461,4 +1498,6 @@ source "drivers/hid/spi-hid/Kconfig"
- 
- source "drivers/hid/dockchannel-hid/Kconfig"
- 
+@@ -1452,3 +1452,5 @@
+ source "drivers/hid/usbhid/Kconfig"
+
 +source "drivers/hid/zotac-zone-hid/Kconfig"
 +
  endif # HID_SUPPORT
@@ -2229,15 +2228,12 @@ index 947942cec9a7..2a42a9f443eb 100644
  obj-$(CONFIG_HID_LETSKETCH)	+= hid-letsketch.o
  obj-$(CONFIG_HID_LOGITECH)	+= hid-logitech.o
  obj-$(CONFIG_HID_LOGITECH)	+= hid-lg-g15.o
-@@ -180,6 +183,10 @@ obj-$(CONFIG_SPI_HID_APPLE_CORE)	+= spi-hid/
- 
- obj-$(CONFIG_HID_DOCKCHANNEL)   += dockchannel-hid/
- 
-+obj-$(CONFIG_ZOTAC_ZONE_HID)  += zotac-zone-hid/
-+
+@@ -177,3 +177,7 @@
  obj-$(CONFIG_SURFACE_HID_CORE)  += surface-hid/
- 
+
  obj-$(CONFIG_INTEL_THC_HID)     += intel-thc-hid/
++
++obj-$(CONFIG_ZOTAC_ZONE_HID)  += zotac-zone-hid/
 +
 +obj-$(CONFIG_HID_MSI_CLAW)      += hid-msi-claw.o
 diff --git a/drivers/hid/hid-asus-ally.c b/drivers/hid/hid-asus-ally.c
@@ -19044,8 +19040,8 @@ index 6ff22efa0c45..05bbff877a0a 100644
  	ALC269_FIXUP_LIMIT_INT_MIC_BOOST_MUTE_LED,
  	ALC269VB_FIXUP_ORDISSIMO_EVE2,
  	ALC283_FIXUP_CHROME_BOOK,
-@@ -4162,6 +4179,30 @@ enum {
- 	ALC287_FIXUP_LENOVO_LEGION_AW88399,
+@@ -4127,6 +4127,30 @@ enum {
+ 	ALC236_FIXUP_HP_DMIC,
  };
  
 +/* A special fixup for AYN and AYANEO handhelds as both
