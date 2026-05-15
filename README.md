@@ -61,10 +61,10 @@ If you want to try other customized versions, check the table below and enable t
 > **BEWARE:** "tested" means just **"compilable"**, it does not mean "It completely works for your environment". Please use it at your own risk.
 
 - 7.0 patches
-  -  [kernel-7.0.7-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2996392)
-  -  [kernel-7.0.7-100.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2996402)
+  -  [kernel-7.0.8-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=2997108)
+  -  [kernel-7.0.8-100.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=2997126)
 - 6.19 patches
-  -  [kernel-6.19.14-103.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2996420)
+  -  [kernel-6.19.14-104.fc42](https://koji.fedoraproject.org/koji/buildinfo?buildID=2997130)
 
 <details>
 <summary><b>Show older tested versions (Click to expand)</b></summary>
