@@ -324,7 +324,7 @@ diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm_resour
 index 192fca24f37e..a8a836f6e376 100644
 --- a/drivers/gpu/drm/ttm/ttm_resource.c
 +++ b/drivers/gpu/drm/ttm/ttm_resource.c
-@@ -373,33 +373,52 @@ void ttm_resource_fini(struct ttm_resource_manager *man,
+@@ -386,33 +386,52 @@ void ttm_resource_fini(struct ttm_resource_manager *man,
  }
  EXPORT_SYMBOL(ttm_resource_fini);
  

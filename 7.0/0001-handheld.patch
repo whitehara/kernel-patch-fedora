@@ -85,6 +85,7 @@ Signed-off-by: Peter Jung <admin@ptr1337.dev>
  net/bluetooth/hci_core.c                      |   10 +-
  net/bluetooth/hci_sync.c                      |   12 +-
  net/bluetooth/mgmt.c                          |    4 +-
+ sound/hda/codecs/realtek/alc269.c             |   59 +
  sound/soc/codecs/Kconfig                      |    2 +
  sound/soc/codecs/Makefile                     |    1 +
  sound/soc/codecs/aw87xxx/Kconfig              |    5 +
@@ -2151,26 +2152,114 @@ diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
 index e11f37548285..0f03060edc56 100644
 --- a/drivers/hid/Kconfig
 +++ b/drivers/hid/Kconfig
-@@ -1493,5 +1493,7 @@ source "drivers/hid/amd-sfh-hid/Kconfig"
- source "drivers/hid/surface-hid/Kconfig"
+@@ -202,6 +202,15 @@ config HID_ASUS
+ 	- GL553V series
+ 	- GL753V series
  
- source "drivers/hid/intel-thc-hid/Kconfig"
++config HID_ASUS_ALLY
++    tristate "Asus Ally gamepad configuration support"
++    depends on USB_HID
++    depends on LEDS_CLASS
++    depends on LEDS_CLASS_MULTICOLOR
++    select POWER_SUPPLY
++    help
++    Support for configuring the Asus ROG Ally gamepad using attributes.
++
+ config HID_AUREAL
+ 	tristate "Aureal"
+ 	help
+@@ -492,6 +501,18 @@ config HID_GT683R
+ 	Currently the following devices are know to be supported:
+ 	  - MSI GT683R
  
++config HID_MSI
++	tristate "MSI Claw Gamepad Support"
++	depends on USB_HID
++	select LEDS_CLASS
++	select LEDS_CLASS_MULTICOLOR
++	help
++	Support for the MSI Claw RGB and controller configuration
++
++	Say Y here to include configuration interface support for the MSI Claw Line
++	of Handheld Console Controllers. Say M here to compile this driver as a
++	module. The module will be called hid-msi.
++
+ config HID_KEYTOUCH
+ 	tristate "Keytouch HID devices"
+ 	help
+@@ -623,6 +644,30 @@ config HID_LENOVO
+ 	- ThinkPad Compact Bluetooth Keyboard with TrackPoint (supports Fn keys)
+ 	- ThinkPad Compact USB Keyboard with TrackPoint (supports Fn keys)
+ 
++config HID_LENOVO_GO
++	tristate "HID Driver for Lenovo Legion Go Series Controllers"
++	depends on USB_HID
++	select LEDS_CLASS
++	select LEDS_CLASS_MULTICOLOR
++	help
++	Support for Lenovo Legion Go devices with detachable controllers.
++
++	Say Y here to include configuration interface support for the Lenovo Legion Go
++	and Legion Go 2 Handheld Console Controllers. Say M here to compile this
++	driver as a module. The module will be called hid-lenovo-go.
++
++config HID_LENOVO_GO_S
++	tristate "HID Driver for Lenovo Legion Go S Controller"
++	depends on USB_HID
++	select LEDS_CLASS
++	select LEDS_CLASS_MULTICOLOR
++	help
++	Support for Lenovo Legion Go S Handheld Console Controller.
++
++	Say Y here to include configuration interface support for the Lenovo Legion Go
++	S. Say M here to compile this driver as a module. The module will be called
++	hid-lenovo-go-s.
++
+ config HID_LETSKETCH
+ 	tristate "Letsketch WP9620N tablets"
+ 	depends on USB_HID
+@@ -1456,3 +1456,5 @@ source "drivers/hid/usbhid/Kconfig"
+ source "drivers/hid/usbhid/Kconfig"
+
 +source "drivers/hid/zotac-zone-hid/Kconfig"
 +
- endif # HID
+ endif # HID_SUPPORT
 diff --git a/drivers/hid/Makefile b/drivers/hid/Makefile
 index 947942cec9a7..6b5cfc8cfb61 100644
 --- a/drivers/hid/Makefile
 +++ b/drivers/hid/Makefile
-@@ -181,3 +181,6 @@ obj-$(CONFIG_AMD_SFH_HID)       += amd-sfh-hid/
+@@ -34,6 +34,7 @@ obj-$(CONFIG_HID_APPLETB_BL)	+= hid-appletb-bl.o
+ obj-$(CONFIG_HID_APPLETB_KBD)	+= hid-appletb-kbd.o
+ obj-$(CONFIG_HID_CREATIVE_SB0540)	+= hid-creative-sb0540.o
+ obj-$(CONFIG_HID_ASUS)		+= hid-asus.o
++obj-$(CONFIG_HID_ASUS_ALLY)	+= hid-asus-ally.o
+ obj-$(CONFIG_HID_AUREAL)	+= hid-aureal.o
+ obj-$(CONFIG_HID_BELKIN)	+= hid-belkin.o
+ obj-$(CONFIG_HID_BETOP_FF)	+= hid-betopff.o
+@@ -76,6 +77,8 @@ obj-$(CONFIG_HID_KYE)		+= hid-kye.o
+ obj-$(CONFIG_HID_KYSONA)	+= hid-kysona.o
+ obj-$(CONFIG_HID_LCPOWER)	+= hid-lcpower.o
+ obj-$(CONFIG_HID_LENOVO)	+= hid-lenovo.o
++obj-$(CONFIG_HID_LENOVO_GO)	+= hid-lenovo-go.o
++obj-$(CONFIG_HID_LENOVO_GO_S)	+= hid-lenovo-go-s.o
+ obj-$(CONFIG_HID_LETSKETCH)	+= hid-letsketch.o
+ obj-$(CONFIG_HID_LOGITECH)	+= hid-logitech.o
+ obj-$(CONFIG_HID_LOGITECH)	+= hid-lg-g15.o
+@@ -90,6 +93,7 @@ obj-$(CONFIG_HID_MAYFLASH)	+= hid-mf.o
+ obj-$(CONFIG_HID_MEGAWORLD_FF)	+= hid-megaworld.o
+ obj-$(CONFIG_HID_MICROSOFT)	+= hid-microsoft.o
+ obj-$(CONFIG_HID_MONTEREY)	+= hid-monterey.o
++obj-$(CONFIG_HID_MSI)		+= hid-msi.o
+ obj-$(CONFIG_HID_MULTITOUCH)	+= hid-multitouch.o
+ obj-$(CONFIG_HID_NINTENDO)	+= hid-nintendo.o
+ obj-$(CONFIG_HID_NTI)			+= hid-nti.o
+@@ -177,3 +181,5 @@ obj-$(CONFIG_SURFACE_HID_CORE)  += surface-hid/
  obj-$(CONFIG_SURFACE_HID_CORE)  += surface-hid/
- 
+
  obj-$(CONFIG_INTEL_THC_HID)     += intel-thc-hid/
 +
 +obj-$(CONFIG_ZOTAC_ZONE_HID)  += zotac-zone-hid/
-+
-
+ 
 diff --git a/drivers/hid/hid-asus-ally.c b/drivers/hid/hid-asus-ally.c
 new file mode 100644
 index 000000000000..8b51560fdbcf
@@ -19843,6 +19932,125 @@ index b05bb380e5f8..5cee8965d64e 100644
  	}
  
  unlock:
+diff --git a/sound/hda/codecs/realtek/alc269.c b/sound/hda/codecs/realtek/alc269.c
+index 3cc6137d7ee0..b3eeda1d9b7a 100644
+--- a/sound/hda/codecs/realtek/alc269.c
++++ b/sound/hda/codecs/realtek/alc269.c
+@@ -2833,6 +2833,20 @@ static void alc294_gx502_toggle_output(struct hda_codec *codec,
+ 		alc_write_coef_idx(codec, 0x10, 0x0a20);
+ }
+ 
++static void alc269_fixup_headphone_volume(struct hda_codec *codec,
++					const struct hda_fixup *fix, int action)
++{
++	/* Pin 0x21: Some devices share 0x14 for headphones and speakers.
++	 * This will fix ensure these devices have volume controls. */
++	if (!is_jack_detectable(codec, 0x21))
++		return;
++
++	if (action == HDA_FIXUP_ACT_PRE_PROBE) {
++		static const hda_nid_t conn1[] = { 0x02 };
++		snd_hda_override_conn_list(codec, 0x14, ARRAY_SIZE(conn1), conn1);
++	}
++}
++
+ static void alc294_fixup_gx502_hp(struct hda_codec *codec,
+ 					const struct hda_fixup *fix, int action)
+ {
+@@ -3875,6 +3889,8 @@ enum {
+ 	ALC269_FIXUP_DELL4_MIC_NO_PRESENCE,
+ 	ALC269_FIXUP_DELL4_MIC_NO_PRESENCE_QUIET,
+ 	ALC269_FIXUP_HEADSET_MODE,
++	ALC269_FIXUP_DMI_MATCH,
++	ALC269_FIXUP_AYA_HEADSET_VOLUME,
+ 	ALC269_FIXUP_HEADSET_MODE_NO_HP_MIC,
+ 	ALC269_FIXUP_ASPIRE_HEADSET_MIC,
+ 	ALC269_FIXUP_ASUS_X101_FUNC,
+@@ -3888,6 +3904,7 @@ enum {
+ 	ALC269VB_FIXUP_ASUS_ZENBOOK,
+ 	ALC269VB_FIXUP_ASUS_ZENBOOK_UX31A,
+ 	ALC269VB_FIXUP_ASUS_MIC_NO_PRESENCE,
++	ALC269VB_FIXUP_AYANEO_SPKR_PIN_FIX,
+ 	ALC269_FIXUP_LIMIT_INT_MIC_BOOST_MUTE_LED,
+ 	ALC269VB_FIXUP_ORDISSIMO_EVE2,
+ 	ALC283_FIXUP_CHROME_BOOK,
+@@ -4134,6 +4151,30 @@ enum {
+ 	ALC236_FIXUP_HP_DMIC,
+ };
+ 
++/* A special fixup for AYN and AYANEO handhelds as both
++*  have the same PCI SSID as well as the same codec, but
++*  require different quirks, falling back to DMI matching.
++*/
++static void alc269_fixup_match_via_dmi(struct hda_codec *codec,
++                                        const struct hda_fixup *fix, int action)
++{
++	int alc269_fix_id;
++	const char *board_name = dmi_get_system_info(DMI_BOARD_NAME);
++
++	if (dmi_name_in_vendors("AYANEO") || dmi_name_in_vendors("AYADEVICE") || dmi_name_in_vendors("AYA DEVICE")) {
++		if (board_name && (strcmp(board_name, "AYANEO 2") || strcmp(board_name, "AYANEO 2S") || strcmp(board_name, "GEEK") || strcmp(board_name, "GEEK 1S"))) {
++			alc269_fix_id = ALC269_FIXUP_AYA_HEADSET_VOLUME;
++		} else {
++			return;
++		}
++	} else if (dmi_name_in_vendors("ayn") && strcmp(board_name, "Loki MiniPro")) {
++		alc269_fix_id = ALC269VB_FIXUP_AYANEO_SPKR_PIN_FIX;
++	} else {
++		return;
++	}
++	__snd_hda_apply_fixup(codec, alc269_fix_id, action, 0);
++}
++
+ /* A special fixup for Lenovo C940 and Yoga Duet 7;
+  * both have the very same PCI SSID, and we need to apply different fixups
+  * depending on the codec ID
+@@ -4655,6 +4696,13 @@ static const struct hda_fixup alc269_fixups[] = {
+ 		.chained = true,
+ 		.chain_id = ALC269_FIXUP_HEADSET_MIC
+ 	},
++	[ALC269VB_FIXUP_AYANEO_SPKR_PIN_FIX] = {
++		.type = HDA_FIXUP_PINS,
++		.v.pins = (const struct hda_pintbl[]) {
++			{ 0x1a, 0x90170110 },
++			{ }
++		},
++	},
+ 	[ALC269_FIXUP_LIMIT_INT_MIC_BOOST_MUTE_LED] = {
+ 		.type = HDA_FIXUP_FUNC,
+ 		.v.func = alc269_fixup_limit_int_mic_boost,
+@@ -5469,6 +5517,14 @@ static const struct hda_fixup alc269_fixups[] = {
+ 			{ 0x1b, 0x90170152 } /* use as internal speaker (back) */
+ 		}
+ 	},
++	[ALC269_FIXUP_DMI_MATCH] = {
++		.type = HDA_FIXUP_FUNC,
++		.v.func = alc269_fixup_match_via_dmi,
++	},
++	[ALC269_FIXUP_AYA_HEADSET_VOLUME] = {
++		.type = HDA_FIXUP_FUNC,
++		.v.func = alc269_fixup_headphone_volume,
++	},
+ 	[ALC299_FIXUP_PREDATOR_SPK] = {
+ 		.type = HDA_FIXUP_PINS,
+ 		.v.pins = (const struct hda_pintbl[]) {
+@@ -7838,6 +7894,8 @@ static const struct hda_quirk alc269_fixup_tbl[] = {
+ 	SND_PCI_QUIRK(0x1e39, 0xca14, "MEDION NM14LNL", ALC233_FIXUP_MEDION_MTL_SPK),
+ 	SND_PCI_QUIRK(0x1ee7, 0x2078, "HONOR BRB-X M1010", ALC2XX_FIXUP_HEADSET_MIC),
+ 	SND_PCI_QUIRK(0x1f4c, 0xe001, "Minisforum V3 (SE)", ALC245_FIXUP_BASS_HP_DAC),
++	SND_PCI_QUIRK(0x1f66, 0x0101, "AYANEO 2/GEEK/Ayn MiniPro", ALC269_FIXUP_DMI_MATCH),
++	SND_PCI_QUIRK(0x1f66, 0x0103, "AYANEO AIR 1S", ALC269VB_FIXUP_AYANEO_SPKR_PIN_FIX),
+ 	SND_PCI_QUIRK(0x1f66, 0x0105, "Ayaneo Portable Game Player", ALC287_FIXUP_CS35L41_I2C_2),
+ 	SND_PCI_QUIRK(0x2014, 0x800a, "Positivo ARN50", ALC269_FIXUP_LIMIT_INT_MIC_BOOST),
+ 	SND_PCI_QUIRK(0x2039, 0x0001, "Inspur S14-G1", ALC295_FIXUP_CHROME_BOOK),
+@@ -7979,6 +8037,7 @@ static const struct hda_model_fixup alc269_fixup_models[] = {
+ 	{.id = ALC269VB_FIXUP_ASUS_ZENBOOK, .name = "asus-zenbook"},
+ 	{.id = ALC269VB_FIXUP_ASUS_ZENBOOK_UX31A, .name = "asus-zenbook-ux31a"},
+ 	{.id = ALC269VB_FIXUP_ORDISSIMO_EVE2, .name = "ordissimo"},
++	{.id = ALC269VB_FIXUP_AYANEO_SPKR_PIN_FIX, .name = "ayaneo-speaker-pin-fix"},
+ 	{.id = ALC282_FIXUP_ASUS_TX300, .name = "asus-tx300"},
+ 	{.id = ALC283_FIXUP_INT_MIC, .name = "alc283-int-mic"},
+ 	{.id = ALC290_FIXUP_MONO_SPEAKERS_HSJACK, .name = "mono-speakers"},
 diff --git a/sound/soc/codecs/Kconfig b/sound/soc/codecs/Kconfig
 index adb3fb923be3..3648f44f50f7 100644
 --- a/sound/soc/codecs/Kconfig
