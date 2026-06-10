@@ -19974,10 +19974,11 @@ index 3cc6137d7ee0..b3eeda1d9b7a 100644
  	ALC269_FIXUP_LIMIT_INT_MIC_BOOST_MUTE_LED,
  	ALC269VB_FIXUP_ORDISSIMO_EVE2,
  	ALC283_FIXUP_CHROME_BOOK,
-@@ -4134,6 +4151,30 @@ enum {
+@@ -4134,7 +4151,31 @@ enum {
  	ALC236_FIXUP_HP_DMIC,
+ 	ALC245_FIXUP_HP_ENVY_X360_15_FH0XXX,
  };
- 
+
 +/* A special fixup for AYN and AYANEO handhelds as both
 +*  have the same PCI SSID as well as the same codec, but
 +*  require different quirks, falling back to DMI matching.
