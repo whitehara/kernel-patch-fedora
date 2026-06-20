@@ -63,8 +63,8 @@ If you want to try other customized versions, check the table below and enable t
 - 7.1 patches
   -  [kernel-7.1.0-55.fc45](https://koji.fedoraproject.org/koji/buildinfo?buildID=3017903)
 - 7.0 patches
-  -  [kernel-7.0.12-201.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=3015091)
-  -  [kernel-7.0.12-101.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=3015092)
+  -  [kernel-7.0.13-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=3020110)
+  -  [kernel-7.0.13-100.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=3020109)
 
 <details>
 <summary><b>Show older tested versions (Click to expand)</b></summary>
