@@ -55,14 +55,16 @@ index 53378d2dcbec..3c89b9452863 100644
  }
  
  #if IS_ENABLED(CONFIG_DRM_I915_DEBUG_VBLANK_EVADE)
-@@ -750,7 +752,8 @@ void intel_pipe_update_end(struct intel_atomic_state *state,
- 	if (!state->base.legacy_cursor_update)
+@@ -795,9 +795,10 @@ void intel_pipe_update_end(struct intel_atomic_state *state,
+ 	if (!state->base.legacy_cursor_update ||
+ 	    (intel_psr_use_trans_push(new_crtc_state) &&
+ 	     !new_crtc_state->vrr.enable))
  		intel_vrr_send_push(NULL, new_crtc_state);
- 
+
 -	local_irq_enable();
 +	if (!IS_ENABLED(CONFIG_PREEMPT_RT))
 +		local_irq_enable();
- 
+
  	if (intel_parent_vgpu_active(display))
  		goto out;
 diff --git a/drivers/gpu/drm/i915/display/intel_cursor.c b/drivers/gpu/drm/i915/display/intel_cursor.c

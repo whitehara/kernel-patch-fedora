@@ -1120,13 +1120,15 @@ index 4eed57ed23df..81dfc4f63b0f 100644
  config HID_KEYTOUCH
  	tristate "Keytouch HID devices"
  	help
-@@ -1479,4 +1501,6 @@ source "drivers/hid/spi-hid/Kconfig"
- 
- source "drivers/hid/dockchannel-hid/Kconfig"
- 
+@@ -1466,6 +1466,8 @@ source "drivers/hid/surface-hid/Kconfig"
+
+ source "drivers/hid/intel-thc-hid/Kconfig"
+
 +source "drivers/hid/zotac-zone-hid/Kconfig"
 +
- endif # HID_SUPPORT
+ endif # HID
+
+ # USB support may be used with HID disabled
 diff --git a/drivers/hid/Makefile b/drivers/hid/Makefile
 index d2579e299b5e..6a2739c01f2b 100644
 --- a/drivers/hid/Makefile
@@ -1147,14 +1149,14 @@ index d2579e299b5e..6a2739c01f2b 100644
  obj-$(CONFIG_HID_MULTITOUCH)	+= hid-multitouch.o
  obj-$(CONFIG_HID_NINTENDO)	+= hid-nintendo.o
  obj-$(CONFIG_HID_NTI)			+= hid-nti.o
-@@ -183,6 +185,8 @@ obj-$(CONFIG_SPI_HID_APPLE_CORE)	+= spi-hid/
- 
- obj-$(CONFIG_HID_DOCKCHANNEL)   += dockchannel-hid/
- 
+@@ -177,6 +177,8 @@ obj-$(CONFIG_INTEL_ISH_HID)	+= intel-ish-hid/
+
+ obj-$(CONFIG_AMD_SFH_HID)       += amd-sfh-hid/
+
 +obj-$(CONFIG_ZOTAC_ZONE_HID)  += zotac-zone-hid/
 +
  obj-$(CONFIG_SURFACE_HID_CORE)  += surface-hid/
- 
+
  obj-$(CONFIG_INTEL_THC_HID)     += intel-thc-hid/
 diff --git a/drivers/hid/hid-asus-ally.c b/drivers/hid/hid-asus-ally.c
 new file mode 100644
@@ -15055,8 +15057,8 @@ index 943394cbec25..b5c351ce6065 100644
  	ALC269_FIXUP_LIMIT_INT_MIC_BOOST_MUTE_LED,
  	ALC269VB_FIXUP_ORDISSIMO_EVE2,
  	ALC283_FIXUP_CHROME_BOOK,
-@@ -4194,6 +4211,30 @@ enum {
- 	ALC287_FIXUP_LENOVO_LEGION_AW88399,
+@@ -4156,6 +4156,30 @@ enum {
+ 	ALC245_FIXUP_HP_ENVY_X360_15_FH0XXX,
  };
  
 +/* A special fixup for AYN and AYANEO handhelds as both
