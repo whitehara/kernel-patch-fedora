@@ -33,7 +33,7 @@ if [[ $CUSTOMTAG =~ ^_cachyos ]]; then
 	patch_insert "8001" "more-ISA-levels-and-uarches-for-kernel-6.16p.patch"
 	patch_insert "8002" "0001-acpi-call.patch"
 	patch_insert "8003" "0001-aufs-7.1-merge-v20260621.patch"
-	[[ ! $CUSTOMTAG =~ zen2 ]] && patch_insert "8004" "0001-handheld.patch"
+	[[ ! $CUSTOMTAG =~ zen2|zen3 ]] && patch_insert "8004" "0001-handheld.patch"
 	patch_insert "8005" "0001-rt-i915.patch"
 	patch_insert "8006" "0001-clang-polly.patch"
 	patch_insert "8007" "dkms-clang.patch"
