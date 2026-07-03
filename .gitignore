@@ -1,3 +1,6 @@
 /results/
 support-vers.bak
 .claude/
+# Spills from patch validation work (canonical workdir is /tmp/kpatch-src/)
+/linux-*/
+/sound/
