@@ -14954,8 +14954,8 @@ index 28d7929dc593..30b82120e2d5 100644
 -	disable_work_sync(&hdev->power_on);
 +	disable_delayed_work(&hdev->power_on);
  	disable_work_sync(&hdev->error_reset);
- 
- 	hci_cmd_sync_clear(hdev);
+ 	disable_delayed_work_sync(&hdev->cmd_timer);
+ 	disable_delayed_work_sync(&hdev->ncmd_timer);
 diff --git a/net/bluetooth/hci_sync.c b/net/bluetooth/hci_sync.c
 index df23245d6ccd..9975ec746bc6 100644
 --- a/net/bluetooth/hci_sync.c

@@ -1081,10 +1081,10 @@ index 728965851..6e4e718a7 100644
  			break;
  		}
  		cfs_rq = cfs_rq_of(se);
-@@ -7410,6 +7470,15 @@ static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
+@@ -7435,6 +7495,15 @@ static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
+ 	if (!p->se.sched_delayed)
  		util_est_dequeue(&rq->cfs, p);
  
- 	util_est_update(&rq->cfs, p, flags & DEQUEUE_SLEEP);
 +#ifdef CONFIG_SCHED_BORE
 +	struct cfs_rq *cfs_rq = cfs_rq_of(&p->se);
 +	struct sched_entity *se = &p->se;
