@@ -45,7 +45,7 @@ for SERIES in $ACTIVE_SERIES; do
                  | grep -v '\.rc')
     [ -z "$ALL_BUILDS" ] && continue
 
-    for FC in fc42 fc43 fc44; do
+    for FC in fc42 fc43 fc44 fc45 fc46; do
         LATEST=$(echo "$ALL_BUILDS" | grep "\.${FC}\$" | tail -n 1)
         [ -z "$LATEST" ] && continue
         if ! echo "$TESTED_NVRS" | grep -qFx "$LATEST"; then
