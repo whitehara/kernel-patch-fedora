@@ -3832,7 +3832,7 @@ index 3f5e96900b67..23061a1339ec 100644
  	}
  
 +	#if !IS_REACHABLE(CONFIG_HID_ASUS_ALLY)
- 	if (drvdata->quirks & QUIRK_ROG_ALLY_XPAD) {
+ 	if ((drvdata->quirks & QUIRK_ROG_ALLY_XPAD) && hid_is_usb(hdev)) {
 -		intf = to_usb_interface(hdev->dev.parent);
 -		udev = interface_to_usbdev(intf);
 +		struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
