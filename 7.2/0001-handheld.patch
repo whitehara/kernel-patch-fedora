@@ -3841,9 +3841,9 @@ index 3f5e96900b67..23061a1339ec 100644
  			le16_to_cpu(udev->descriptor.idProduct));
  	}
 +	#endif
- 
- 	drvdata->kbd_backlight = devm_kzalloc(&hdev->dev,
- 					      sizeof(struct asus_kbd_leds),
+
+ 	drvdata->listener.brightness_set = asus_kbd_backlight_set;
+ 	ret = asus_hid_register_listener(&drvdata->listener);
 @@ -1209,6 +1212,18 @@ static int asus_probe(struct hid_device *hdev, const struct hid_device_id *id)
  
  	drvdata->quirks = id->driver_data;
