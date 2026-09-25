@@ -1,6 +1,6 @@
 # Tested Kernel NVR History
 
-新しいものを上に追記。`check-new-kernel.sh` が未テスト NVR の判定に利用する。
+新しいものを上に追記。`check-new-kernel.sh` と `build-script/koji-candidates.sh` が未テスト NVR の判定に利用する。
 日付はそのバージョン群のテストが通って commit / tag を打った日。
 
 形式:
