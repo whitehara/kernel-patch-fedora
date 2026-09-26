@@ -615,8 +615,7 @@ diff --git a/arch/x86/Makefile b/arch/x86/Makefile
 index 1913d342969b..6c165daccb3d 100644
 --- a/arch/x86/Makefile
 +++ b/arch/x86/Makefile
-@@ -177,10 +177,221 @@ ifdef CONFIG_X86_NATIVE_CPU
-         KBUILD_CFLAGS += -march=native
+@@ -177,9 +177,220 @@ ifdef CONFIG_X86_NATIVE_CPU
          KBUILD_RUSTFLAGS += -Ctarget-cpu=native
  else
 +ifdef CONFIG_MK8
