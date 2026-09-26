@@ -167,9 +167,16 @@ manual_mock_running() {
     pgrep -f '^(/bin/bash |/usr/bin/bash |bash )?[^ ]*kernel-mock\.sh( |$)' >/dev/null
 }
 
+# root 所有の mock 本体は、ユーザー側の mock ラッパー(comm=mock)が TERM で死んだ後も数秒残る。
+# コマンドライン先頭が「<...>/python3 -tt <...>/libexec/mock/mock 」のものだけ(文字列を含むだけの別プロセスは除く)
+mock_backend_running() {
+    pgrep -f '^[^ ]*/python3 -tt [^ ]*/libexec/mock/mock ' >/dev/null
+}
+
 is_busy() {
     manual_mock_running && return 0
     pgrep -x mock >/dev/null && return 0
+    mock_backend_running && return 0
     return 1
 }
 
