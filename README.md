@@ -272,3 +272,70 @@ rpmbuild -bb kernel.spec --without debug --without debuginfo --without configche
 cd ~/rpmbuild/RPMS/x86_64/
 sudo dnf install kernel-*
 ```
+
+## Automatic check for new Fedora kernels (optional)
+`build-script/auto-check.sh` watches Fedora Koji for new kernel builds and tests whether the patches still apply to them. It only **tests and reports**: it never edits `HISTORY.md`, commits, tags or pushes. Releasing stays a manual decision.
+
+How it works:
+1. `build-script/koji-candidates.sh` asks Koji once for the latest builds of each series directory (e.g. `7.2/`) and lists the NVRs that are not yet in `HISTORY.md`. Old builds that only happen to match a series prefix are excluded.
+2. Each new NVR is tested with `kernel-mock.sh -t` (patch application only) in a **separate git worktree** created from your local `main`, so your working tree and `HEAD` are never touched. Only committed content is tested.
+3. Results are appended to `results/autocheck/state.tsv` (one line per event: `testing` / `passed` / `failed` / `error` / `aborted` / `reset`), and a summary is written to `results/autocheck/last-run.txt`. Logs are kept in `results/autocheck/runs/<RUNID>/` (the latest 30 runs).
+4. A `passed` NVR is not tested again. A `failed` NVR is tested again only after `main` changes (e.g. after you fix a patch).
+
+```bash
+./build-script/auto-check.sh --dry-run        # show what would be tested, without running mock
+./build-script/auto-check.sh                  # check Koji and test new NVRs
+./build-script/auto-check.sh --only 7.2.7-300.fc45   # test one NVR, ignoring the state
+./build-script/auto-check.sh --forget 7.2.7-300.fc45 # treat one NVR as untested again
+```
+
+Exit codes: `0` nothing new / all passed, `1` some patches failed, `2` Koji or infrastructure error, `3` busy (another run or a manual `mock` is running) or deferred.
+
+**Warning:** a test takes hours (about 2 hours per NVR) and puts heavy load on the disk (8 parallel `mock` chroots). It refuses to run (exit code `3`) while another `kernel-mock.sh`, `mock`, `auto-check.sh` or `check-new-kernel.sh` is running, because `mock` chroots are shared. Do not start `kernel-mock.sh` by hand while it is running.
+
+### Run it once a day with a systemd user timer
+Create these two files in `~/.config/systemd/user/` (replace `<repo>` with your clone's path):
+
+`kernel-autocheck.service`
+```ini
+[Service]
+Type=oneshot
+ExecStart=<repo>/build-script/auto-check.sh
+Nice=19
+IOSchedulingClass=idle
+TimeoutStartSec=12h
+KillMode=mixed
+SuccessExitStatus=1 3
+```
+
+`kernel-autocheck.timer`
+```ini
+[Timer]
+OnCalendar=*-*-* 03:30:00
+RandomizedDelaySec=30min
+Persistent=false
+
+[Install]
+WantedBy=timers.target
+```
+
+```bash
+systemd-analyze --user verify kernel-autocheck.service kernel-autocheck.timer
+systemctl --user enable --now kernel-autocheck.timer
+```
+
+- `SuccessExitStatus=1 3` keeps "patches failed" and "busy" from marking the unit as failed; only exit code `2` does.
+- A user timer only fires while you are logged in. To run it while logged out, run `sudo loginctl enable-linger $USER` once.
+- `mock` must run without a terminal. The user needs to be in the `mock` group; check with a manual `systemctl --user start kernel-autocheck.service`.
+- `Persistent=false` avoids starting a multi-hour test right after logging in when a run was missed.
+- If a run is killed (e.g. by the 12 hour timeout), leftover `mock` chroots can remain. `kernel-mock.sh` creates one chroot per feature with `--uniqueext=<Project ID>` (the first column of `support-features`, e.g. `-tkg`), so the chroot names look like `fedora-<N>-x86_64--tkg`. List them in mock's base directory (`/var/lib/mock` by default) and clean each one, including the same `--uniqueext`:
+  ```bash
+  mock -r fedora-<N>-x86_64 --uniqueext=-tkg --scrub=all
+  ```
+
+### Notifications (optional)
+`results/autocheck/last-run.txt` is always updated. To also get a Discord message, put the webhook URL in `~/.config/kernel-autocheck/env` (`chmod 600`):
+```bash
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+```
+It is only read by `auto-check.sh` and is never printed or passed on a command line. Messages are sent when a test starts and when it ends (passed / failed / error / aborted / deferred / Koji error), and when an NVR was aborted twice in a row and needs your attention. Nothing is sent when nothing is new.
