@@ -591,8 +591,7 @@ diff --git a/arch/x86/Kconfig.cpu b/arch/x86/Kconfig.cpu
  
  config X86_HAVE_PAE
  	def_bool y
--	depends on MCRUSOE || MEFFICEON || MCYRIXIII || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || MVIAC7 || MATOM || X86_64
-+	depends on MCRUSOE || MEFFICEON || MCYRIXIII || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || MVIAC7 || MATOM || MK8 || MCORE2 || X86_64
+ 	depends on MCRUSOE || MEFFICEON || MCYRIXIII || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || MVIAC7 || MATOM || X86_64
  
  config X86_CX8
  	def_bool y
