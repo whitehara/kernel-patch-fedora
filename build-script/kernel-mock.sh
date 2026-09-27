@@ -45,6 +45,41 @@ function download_srpm () {
     (cd "$RESULTDIR" && koji $KOJIOPT download-build --rpm "kernel-$1.src.rpm"; return $?)
 }
 
+function warm_cache () {
+	# All features share the same BuildRequires (same SRPM), but mock
+	# serializes access to the shared cache_topdir (dnf/yum package
+	# cache) across concurrent chroots. Under -t, calculate-build-
+	# dependencies + install therefore become a de-facto single point
+	# even with NUM_PARALLEL>1. Run one throwaway chroot first to
+	# populate the shared cache, so the real parallel batch mostly
+	# hits cache (brief lock holds) instead of re-downloading per
+	# feature. This chroot is scrubbed immediately and is not one of
+	# the real features in support-features.
+	#
+	# Note: this only pre-populates the package *download* cache. The
+	# shared cache lock (mockbuild's yum_cache plugin) wraps each
+	# chroot's whole dnf/rpm transaction, including install and
+	# post-install scriptlets, so per-feature install/scriptlet time
+	# is not reduced by this warm-up (see phase9 addendum for the
+	# measured effect).
+    local VER=$1
+    local OS="fedora-${VER##*fc}-x86_64"
+    local SRPM="kernel-$VER.src.rpm"
+    local MOCK="mock -r $OS --uniqueext=-cachewarm"
+    $SHOWMESSAGE || MOCK="$MOCK -q "
+
+    $MOCK --init
+    $MOCK --copyin "$RESULTDIR/$SRPM" /
+    $MOCK --shell rpm -Uvh /$SRPM
+    $MOCK --calculate-build-dependencies $RESULTDIR/$SRPM
+    if [ $? -ne 0 ]; then
+	    echo "WARNING: cache warm-up (calculate-build-dependencies) failed for $VER; parallel batch will proceed without a pre-warmed cache."
+    fi
+    $MOCK --install pxz
+    $MOCK --scrub=chroot
+}
+export -f warm_cache
+
 function make_srpm () {
 	# If the line is a comment or has less than 4 arguments, just return
     if [[ $2 =~ ^# ]]; then
@@ -290,6 +325,16 @@ do
 	echo Download SRPM RET: $RET
     # Use first version for debug
     $DEBUG && break
+
+    # Pre-warm the shared package cache before the parallel batch
+    # (see warm_cache comment). Only relevant for -t, where
+    # calculate-build-dependencies is used inside make_srpm under
+    # NUM_PARALLEL>1. -d (DEBUG) always breaks out of this loop above
+    # before reaching here (single-feature, no parallel contention),
+    # so it does not need warming.
+    if $TESTPATCH ; then
+	    warm_cache "$VER"
+    fi
 
     xargs -a support-features -r -I% -P${NUM_PARALLEL} sh -c  "make_srpm $VER %"
 	RET=$((RET + $?))
