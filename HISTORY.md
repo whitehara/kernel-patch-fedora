@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-10-04 (7.2.9: パッチ変更なしで適用テスト全3NVR×9フィーチャー成功 / mock lvm_root_pv の postinit_updated スナップショット名衝突をプラグイン側で修正)
+kernel-7.2.9-100.fc43
+kernel-7.2.9-200.fc44
+kernel-7.2.9-300.fc45
+
 ## 2026-09-27 (more-ISA-levels fix: X86_HAVE_PAE の Kconfig 循環依存を修正 / Copr %build 失敗の根本原因対応 / 全3NVR×9フィーチャー完走・失敗ゼロ確認)
 kernel-7.2.8-100.fc43
 kernel-7.2.8-200.fc44
