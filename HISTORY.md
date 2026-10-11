@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-10-12 (7.2.10: 上流パッチ再同期(CachyOS handheld/rt-i915/muqss-cachy/aufs v20260914、linux-tkg misc-additions)。handheld(hid/Makefile・alc269.c・amdgpu_dm.c)と rt-i915(intel_crtc.c)を 7.2.10 に合わせて修正 / 全3NVR×9フィーチャー成功)
+kernel-7.2.10-100.fc43
+kernel-7.2.10-200.fc44
+kernel-7.2.10-300.fc45
+
 ## 2026-10-10 (7.2.9 の Fedora 再ビルド -101/-201/-301 に追従: パッチ変更なし。自動チェック(auto-check.sh)で fc43/fc45 passed、fc44 は 1 フィーチャーが一過性で failed → 手動再実行で成功)
 kernel-7.2.9-101.fc43
 kernel-7.2.9-201.fc44
