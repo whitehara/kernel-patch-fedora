@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-10-16 (7.2.11: 上流 stable が hid-steam.c を再構成・wireguard tstamp_type 修正を取り込んだため追従。handheld の hid-steam.c を mainline 版に置換、xpad.c の context 修正、misc-additions から wireguard コミットを除去 / 全3NVR×9フィーチャー成功)
+kernel-7.2.11-100.fc43
+kernel-7.2.11-200.fc44
+kernel-7.2.11-300.fc45
+
 ## 2026-10-12 (7.2.10: 上流パッチ再同期(CachyOS handheld/rt-i915/muqss-cachy/aufs v20260914、linux-tkg misc-additions)。handheld(hid/Makefile・alc269.c・amdgpu_dm.c)と rt-i915(intel_crtc.c)を 7.2.10 に合わせて修正 / 全3NVR×9フィーチャー成功)
 kernel-7.2.10-100.fc43
 kernel-7.2.10-200.fc44
