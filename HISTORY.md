@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-10-22 (7.2.12: パッチ変更なし。自動チェックで fc43/fc45 passed、fc44 は Koji 登録が自動チェック後だったため手動で成功 / 全3NVR×9フィーチャー成功)
+kernel-7.2.12-100.fc43
+kernel-7.2.12-200.fc44
+kernel-7.2.12-300.fc45
+
 ## 2026-10-16 (7.2.11: 上流 stable が hid-steam.c を再構成・wireguard tstamp_type 修正を取り込んだため追従。handheld の hid-steam.c を mainline 版に置換、xpad.c の context 修正、misc-additions から wireguard コミットを除去 / 全3NVR×9フィーチャー成功)
 kernel-7.2.11-100.fc43
 kernel-7.2.11-200.fc44
