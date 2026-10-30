@@ -61,11 +61,12 @@ If you want to try other customized versions, check the table below and enable t
 > **BEWARE:** "tested" means just **"compilable"**, it does not mean "It completely works for your environment". Please use it at your own risk.
 
 - 7.3 patches
-  -  [kernel-7.3.0-200.fc45](https://koji.fedoraproject.org/koji/buildinfo?buildID=3130774)
+  -  [kernel-7.3.1-200.fc45](https://koji.fedoraproject.org/koji/buildinfo?buildID=3131119)
+  -  [kernel-7.3.1-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=3131240)
 - 7.2 patches
+  -  [kernel-7.2.14-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=3131295)
+  -  [kernel-7.2.14-100.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=3131275)
   -  [kernel-7.2.13-300.fc45](https://koji.fedoraproject.org/koji/buildinfo?buildID=3128386)
-  -  [kernel-7.2.13-200.fc44](https://koji.fedoraproject.org/koji/buildinfo?buildID=3128387)
-  -  [kernel-7.2.13-100.fc43](https://koji.fedoraproject.org/koji/buildinfo?buildID=3128436)
 
 <details>
 <summary><b>Show older tested versions (Click to expand)</b></summary>
