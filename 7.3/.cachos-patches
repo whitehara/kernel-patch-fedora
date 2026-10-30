@@ -1,0 +1,7 @@
+sched/0001-bore-cachy.patch
+sched/0001-prjc-cachy.patch
+misc/0001-acpi-call.patch
+misc/0001-aufs-7.3-merge-v20260914.patch
+misc/0001-handheld.patch
+misc/0001-rt-i915.patch
+misc/dkms-clang.patch

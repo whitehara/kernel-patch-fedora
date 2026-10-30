@@ -10,6 +10,9 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-10-30 (7.3.0: 新系列 7.3 の初期対応。tkg 7.3 / CachyOS 7.3 を取得。sysctl(fork.c・user_namespace.c)・rt-i915(intel_crtc.c)・handheld(hid/Makefile)・clear-patches/glitched-cfs/acs-overrides/OpenRGB(7.2版を流用)・glitched-base(bus_lock.c・sync_core.h)・bigscreen-beyond(amdgpu_dm_connector.c へ移動)を 7.3 に合わせて修正。config-patch.sh は変更なし、HID_MSI は Fedora 設定に取り込まれたため削除 / 7.3.0-200.fc45 のみ(fc43/fc44 は 7.2 系のまま) 9フィーチャー成功)
+kernel-7.3.0-200.fc45
+
 ## 2026-10-27 (7.2.13: パッチ変更なし。自動チェック(03:42)の後に Koji 登録されたため手動で kernel-mock.sh -t 実行 / 全3NVR×9フィーチャー成功)
 kernel-7.2.13-100.fc43
 kernel-7.2.13-200.fc44
