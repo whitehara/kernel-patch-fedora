@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-11-12 (7.3.4: CachyOS 7.3 パッチを再取得。handheld は hid/Makefile ハンク、rt-i915 は intel_crtc.c ハンクを手修正のまま維持。cjktty は fbcon.h/bitblit.c を 7.3.4 に合わせ修正、add-gamesir-cyclone2 は xpad.c を再生成。kernel-mock.sh に LVM pool 掃除(prune_lvm_pool)と NUM_PARALLEL 環境変数対応を追加。pool 90% 超過を避けるため NUM_PARALLEL=5 で実行 / 全3NVR×9フィーチャー成功)
+kernel-7.3.4-100.fc43
+kernel-7.3.4-200.fc44
+kernel-7.3.4-300.fc45
+
 ## 2026-11-07 (7.3.3: linux-tkg の BORE 7.0.1 に更新(7.3/0001-bore.patch、get-tkg-patch.sh -d は CachyOS 版扱いで skip するため手動コピー)。他パッチ変更なし。fc43/fc44/fc45 は自動チェック(03:36)の後に Koji 登録されたため手動で kernel-mock.sh -t / 全3NVR×9フィーチャー成功(BORE更新前後とも))
 kernel-7.3.3-100.fc43
 kernel-7.3.3-200.fc44

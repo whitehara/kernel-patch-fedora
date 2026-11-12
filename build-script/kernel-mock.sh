@@ -24,7 +24,7 @@ Environment variables:
     RESULTDIR: Directory for storing build results.
 COMMENT
 
-export NUM_PARALLEL=8
+export NUM_PARALLEL=${NUM_PARALLEL:-8}
 export PATCHDIR=../
 export RESULTDIR=../results
 
@@ -307,6 +307,53 @@ if $SHOWCOPRBUILDS ; then
 	done < support-features
 	exit 0
 fi
+
+function prune_lvm_pool () {
+	# Reclaim LVM thin pool space left behind by earlier runs. The pool
+	# (lvm_root_pv, vgstorage/mockbuild) is fixed-size and mock refuses to
+	# start a chroot once it is over 90%, so leftovers from killed or failed
+	# runs and from ad-hoc test roots eventually make every feature fail
+	# before %prep. Two kinds of leftovers are removed:
+	#   1. head LVs of this script's own feature roots (--scrub=chroot keeps
+	#      the cached postinit snapshots, so the next init stays fast)
+	#   2. roots named <os>--<ext> whose ext is not a feature of this script
+	#      (old fixtest*/paratest* etc.): --scrub=lvm drops all their LVs.
+	#      Roots with a single dash (e.g. hengband) are never touched.
+	# Set SKIP_PRUNE=1 to disable. Skipped when another mock is running,
+	# because scrubbing under it (auto-check timer, other session) would
+	# destroy its chroot.
+	[ -n "$SKIP_PRUNE" ] && return 0
+	if pgrep -f '(^|/)mock -r ' > /dev/null ; then
+		echo "prune_lvm_pool: another mock process is running; skip pruning."
+		return 0
+	fi
+
+	local BASEDIR=/mnt/files/active/mock/mock
+	local OSES EXTS d name os ext
+	OSES=$(sed -n 's/^[0-9].*\.fc\([0-9]*\)$/fedora-\1-x86_64/p' support-vers | sort -u)
+	EXTS=$(awk '!/^#/ && NF { print $1 }' support-features)
+
+	echo "prune_lvm_pool: scrub leftover feature roots"
+	for os in $OSES ; do
+		for ext in $EXTS ; do
+			echo "$os $ext"
+		done
+	done | xargs -r -P${NUM_PARALLEL} -L1 sh -c 'mock -q -r "$0" --uniqueext="$1" --scrub=chroot > /dev/null 2>&1'
+
+	for d in "$BASEDIR"/fedora-*-x86_64--*/ ; do
+		[ -d "$d" ] || continue
+		name=$(basename "$d")
+		os=${name%%--*}
+		ext=-${name#*--}
+		[ "$ext" = "-cachewarm" ] && continue
+		grep -qxF -- "$ext" <<< "$EXTS" && continue
+		echo "prune_lvm_pool: scrub stale root $name"
+		mock -q -r "$os" --uniqueext="$ext" --scrub=lvm > /dev/null 2>&1
+	done
+}
+
+# Reclaim leftover LVM thin pool space before starting
+prune_lvm_pool
 
 # Download original srpm and make srpm,build
 RET=0

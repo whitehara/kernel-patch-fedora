@@ -215,7 +215,7 @@ index 65681dcc5..d3c3a8c93 100644
 +#include <linux/font.h>
  #include <asm/types.h>
  #include "fbcon.h"
- 
+ #include "fbcon_rotate.h"
 @@ -42,6 +43,56 @@ static void update_attr(u8 *dst, const u8 *src, int attribute, struct vc_data *v
  	}
  }
@@ -423,16 +423,16 @@ diff --git a/drivers/video/fbdev/core/fbcon.h b/drivers/video/fbdev/core/fbcon.h
 index 321cc7f44..694ed7f1d 100644
 --- a/drivers/video/fbdev/core/fbcon.h
 +++ b/drivers/video/fbdev/core/fbcon.h
-@@ -87,6 +87,9 @@ struct fbcon_par {
- 		u8 *buf;                /* rotated glyphs */
- 		size_t bufsize;
- 		int buf_rotate;         /* rotation of buf */
-+		font_data_t *fontdata_utf; /* CJK font source */
-+		u8 *buf_utf;               /* rotated CJK glyphs */
-+		size_t bufsize_utf;
- 	} rotated;
- #endif
- 	u8    *cursor_src;
+@@ -78,6 +78,9 @@ struct fbcon_rotated {
+ 	u8 *buf;                     /* rotated glyphs */
+ 	size_t bufsize;
+ 	int buf_rotate;              /* rotation of buf */
++	font_data_t *fontdata_utf;   /* CJK font source */
++	u8 *buf_utf;                 /* rotated CJK glyphs */
++	size_t bufsize_utf;
+ 	unsigned int buf_width;      /* geometry of source font */
+ 	unsigned int buf_height;
+ 	unsigned int buf_charcount;
 @@ -195,6 +198,8 @@ extern void fbcon_set_tileops(struct vc_data *vc, struct fb_info *info);
  #endif
  extern void fbcon_set_bitops_ur(struct fbcon_par *par);
