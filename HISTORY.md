@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-11-19 (7.3.5: glitched-base の mm/page_alloc.c ハンク(__alloc_pages_slowpath の文脈変更)と handheld の alc269.c 2ハンク(enum 末尾・Minisforum V3 quirk)を 7.3.5 に合わせ修正。auto-check.sh を NUM_PARALLEL=5 に変更。mock の LVM pool を 50G→100G(メタデータ300M)に拡張。自動チェックは 8 並列で pool 90% 超過により fc43/fc44 が基盤エラー、手動で再テスト / 全3NVR×9フィーチャー成功)
+kernel-7.3.5-100.fc43
+kernel-7.3.5-200.fc44
+kernel-7.3.5-300.fc45
+
 ## 2026-11-12 (7.3.4: CachyOS 7.3 パッチを再取得。handheld は hid/Makefile ハンク、rt-i915 は intel_crtc.c ハンクを手修正のまま維持。cjktty は fbcon.h/bitblit.c を 7.3.4 に合わせ修正、add-gamesir-cyclone2 は xpad.c を再生成。kernel-mock.sh に LVM pool 掃除(prune_lvm_pool)と NUM_PARALLEL 環境変数対応を追加。pool 90% 超過を避けるため NUM_PARALLEL=5 で実行 / 全3NVR×9フィーチャー成功)
 kernel-7.3.4-100.fc43
 kernel-7.3.4-200.fc44

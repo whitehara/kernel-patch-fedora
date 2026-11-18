@@ -421,7 +421,7 @@ index ee902a468..742c0117d 100644
 +	bool woke_kswapd = false;
  	unsigned long alloc_start_time = jiffies;
  
- 	if (unlikely(nofail)) {
+ 	/*
 @@ -4811,8 +4814,13 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
  
  retry:
