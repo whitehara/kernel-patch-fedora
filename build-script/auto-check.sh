@@ -279,8 +279,8 @@ run_one() {
     # 出力は run.log にだけ残す(全量を journal に流さない)
     setsid -w bash -c 'cd "$1/build-script" || exit 1
                        set -o pipefail
-                       # 8 並列だと mock の LVM pool(50G)が 90% を超えて基盤エラーになるため 5 並列に抑える
-                       NUM_PARALLEL=5 nice -n 19 ionice -c3 ./kernel-mock.sh -t 2>&1 | tee -a "$2" >/dev/null' _ "$WT" "$RUN_LOG" &
+                       # mock の LVM pool は 100G(メタデータ 300M)に拡張済み。旧 50G では 8 並列で 90% を超えたため 5 並列にしていたが 8 に戻した
+                       NUM_PARALLEL=8 nice -n 19 ionice -c3 ./kernel-mock.sh -t 2>&1 | tee -a "$2" >/dev/null' _ "$WT" "$RUN_LOG" &
     TEST_PID=$!
     wait "$TEST_PID"
     rc=$?

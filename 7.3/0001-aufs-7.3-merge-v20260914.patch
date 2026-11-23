@@ -38608,7 +38608,7 @@ index ecd96aeb1..181a42ebc 100644
 +#endif
  };
  
- struct super_block {
+ /* A superblock's claim on a device, see fs/super.c. */
 diff --git a/include/linux/lockdep.h b/include/linux/lockdep.h
 index a6451ecbb..3653295b0 100644
 --- a/include/linux/lockdep.h

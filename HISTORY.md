@@ -10,6 +10,11 @@
 判定ロジック:
 - セクションのテキスト行(`##`/コメント/空行)以外、行頭 `kernel-` で始まる行を NVR とみなす。
 
+## 2026-11-24 (7.3.6: aufs の include/linux/fs/super_types.h ハンク(struct super_dev 追加で末尾文脈変更)と handheld の btusb.c→btusb_main.c(ファイル名変更)・dcn32_hwseq.c(dpp_base→dpp)を 7.3.6 に合わせ修正。auto-check.sh を NUM_PARALLEL=8 に戻し(pool 100G 拡張済み、8並列で pool 最大約58%)、コメント更新。自動チェック(03:35)は Koji 登録前で「新規なし」だったため手動で kernel-mock.sh -t / 全3NVR×9フィーチャー成功)
+kernel-7.3.6-100.fc43
+kernel-7.3.6-200.fc44
+kernel-7.3.6-300.fc45
+
 ## 2026-11-19 (7.3.5: glitched-base の mm/page_alloc.c ハンク(__alloc_pages_slowpath の文脈変更)と handheld の alc269.c 2ハンク(enum 末尾・Minisforum V3 quirk)を 7.3.5 に合わせ修正。auto-check.sh を NUM_PARALLEL=5 に変更。mock の LVM pool を 50G→100G(メタデータ300M)に拡張。自動チェックは 8 並列で pool 90% 超過により fc43/fc44 が基盤エラー、手動で再テスト / 全3NVR×9フィーチャー成功)
 kernel-7.3.5-100.fc43
 kernel-7.3.5-200.fc44
